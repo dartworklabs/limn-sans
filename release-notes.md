@@ -47,5 +47,10 @@ Font Book/Office installation are untested.
 
 Download `LimnSans-1.002.zip`. Verify it and `LimnSans-1.002-provenance.json`
 against the outer `SHA256SUMS`; the ZIP includes its own per-file `SHA256SUMS`.
-The provenance binds the clean source commit, all eleven inputs and actual frozen
-runtime files/hashes.
+The provenance binds the clean source commit, every input by SHA-256 and the
+export runtime. Ten of the eleven inputs are the ones 1.001 accepted; the Latin
+producer `limn-font-play.js` is rebuilt, because admitting a codepoint re-opens it.
+
+This repository is published as a single squashed commit. Revisions and issue
+numbers cited in its documents identify the private development history, not
+links a reader can follow; the provenance manifest is what a reader can check.
