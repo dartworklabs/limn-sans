@@ -1,0 +1,267 @@
+# Real strings for the collision gate (tools/audit.py): every pair of neighbours inside a word is set with the engine's
+# kerning and must keep 0.1 S of white. One string per line; "#" lines are notes. Hangul pairs are skipped there.
+# Latin: pangrams and words in the languages of GF Latin Core
+The quick brown fox jumps over the lazy dog. Sphinx of black quartz, judge my vow!
+Pack my box with five dozen liquor jugs; how vexingly quick daft zebras jump.
+AVATAR WAVY TYPO LATTE SALT HALT FJORD KAYAK Vienna Wolfgang Tokyo Yvonne Lyft Tryst
+"Quoted," she said. 'Single'? (Parenthesised) [bracketed] {braced} «guillemets» ‹single›
+Voilà l'été : naïve façade, cœur, œuvre, Ærø, Œdipe, À bientôt ! Où ça ? Déjà vu.
+Über Größe, Straße, Fußgänger, ÄÖÜ äöü ẞ Maß — Löwenzahn, Müsli, Käse.
+Zażółć gęślą jaźń. Łódź, Źrebię, Ścieżka, Żółw, Ąę Ćń.
+Příliš žluťoučký kůň úpěl ďábelské ódy. Ťava, Ďábel, Ůl, Ěšťě.
+Pijamalı hasta yağız şoföre çabucak güvendi. İstanbul, Iğdır, ŞÇĞÜÖ.
+Înțelepciunea, Șarpe, Țară, șțîăâ. Ålesund, Øresund, æøå ÆØÅ.
+Ísland, Þórður, Ðórr, þýðing, Eyjafjallajökull. Élan, Ñandú, ¡Hola!, ¿Qué?
+Kŭpŭ ĉiuĵaŭde ŝĝĥĵ ĈĜĤĴŜŬ. Ħal Ġħar, Żebbuġ, ċċ ġġ ħħ.
+Ĳsselmeer, ĳs, Ŀ·l, l·l, Đakovo, đak, Ŧ ŧ, ŉ, ſ, ĸ, Ŋŋ, ı ȷ.
+Āā Ēē Īī Ōō Ūū Ăă Ĕĕ Ĭĭ Ŏŏ Ŭŭ Ėė Ġġ İ Ĩĩ Ũũ Ŀŀ Ŏő Űű Ŵŵ Ŷŷ Ÿ ẀẁẂẃẄẅ Ỳỳ
+ďáblík, ľadový, ťahák, Ľubica, Ďurica, ĽÚ, Ťo, ďo, ťa
+ģērbonis, ķēde, ļoti, ņems, Ģirts, Ķēniņš, Ļaudona, Ņina, Ŗ ŗ
+# figures, quotes and primes after figures
+12' 5" 12’ 5” 1990s — '90s, “1984”, ‘2’, 5′ 11″, 3° 45′ 10″, 20 %, 50%, 1,024.5
+(1) [2] {3} 1/2 3/4 12:30 08.00 #1 №5 5th 1st 2nd x2 x10 10x
+$12.50 €9,99 £8 ¥300 ₩1,000 ¢50 ₹50 ₽100 ₫10 ₱5 ₦7 ₴9 ₭3 ₺20 ₿0.5 ¤
+T² V² Y² f² W² P² F² 7² r² n² x² m² km² m³ kg/m³ E = mc² T₁ Y₁ V₁ x₁ x₂ x₁₀ H₂O CO₂ ¹⁄₂ ³⁄₄ ¹⁄₁₀
+f(x) g(y) (f) [j] {j} (j) fj f) f] f} f' f" f* f? f! Ty Tζ Tξ Tδ Tθ Yζ Yξ Yδ Yθ
+# Vietnamese, the Greek symbol forms, ǰ
+Tiếng Việt: Việt Nam, người, được, những, trường, ở đây, thủy, ạ, ỵ, Hà Nội, Đà Nẵng, Huế, phở, Nguyễn, Trần, Lê, Ơn, Ưu
+VIỆT NAM, NGƯỜI, ĐƯỢC, PHỞ, ƯỚC, ỔN, ẤN ĐỘ, ẶC, ẪN, Ỹ, (Ỹ) [ỵ] "ở"
+sin ϑ, ϖ = 2π/T, ϱ(x), ϰ = 0.4, ϑϖϱϰ, ǰ ǰa
+# Greek words and maths
+Τζένη Τζίνα Ξέρξης Δέλτα Θέμα Γεια σας Γλώσσα Γάτα Πόλη Ύδρα Ίδρυμα Έλα Ήλιος Όμως Ώρα
+Ψηλά (Ίδρυμα) (Έλα) «Ύδρα» [Ώρα] πv πr πρ πα πv, ζωή ξένος
+x ↦ f(x) ℕ ℤ ℚ ℝ ℂ ⟨a, b⟩ ⌈x⌉ ⌊x⌋ ℏω a ≔ b a ≝ b A ∌ x xˣ aⱼ Aᵀ bʲ ⋮ ⋱
+½ ⅓ ⅔ ¼ ¾ ⅕ ⅖ ⅗ ⅘ ⅙ ⅚ ⅐ ⅛ ⅜ ⅝ ⅞ ⅑ ⅒ ⅟ ↉
+1⅓ 2½ 3¾ 4⅛ 5⅞ 1⅒
+℀ ℁ ℅
+½컵 ⅓쯤 ¾ 정도
+₩1,000
+€12
+$5
+¥300
+£8
+₹50
+₽100
+₺20
+₿0.5
+₫10
+₱5
+₦7
+₴9
+₪4
+₭3
+₮2
+₸6
+₼8
+₾1
+₡5
+₵3
+₲7
+₣2
+₤9
+₥4
+₧1
+₨2
+₳3
+￦1,000
+₩500원
+€와 $
+1,000₩
+12€
+가격 ₩1,000
+a ± b
+x ≤ y
+x ≥ y
+f(x) → y
+∑ᵢ xᵢ²
+a≠b
+x≈y
+A ⊂ B
+x ∈ S
+∀x ∃y
+√2
+∂f/∂x
+∫f(x)dx
+E = mc²
+a² + b² = c²
+x₁, x₂
+x₁₀
+10⁻³
+5 × 10⁻⁶
+H₂O
+CO₂
+mᵢ
+xᵢ
+x²
+y³
+f²
+T²
+V²
+Y²
+W₂
+r²
+n²
+x⁽²⁾
+e⁻ˣ
+x⁻¹
+x⁺
+2ⁿ
+Aᵢⱼ
+∆T
+∇f
+p < 0.05
+R² = 0.98
+m³/s
+m²
+kg·m²
+−3
+x ⋅ y
+a ∘ b
+A ∩ B
+A ∪ B
+∅
+∞
+n!
+x ∼ y
+a ≡ b
+x ∝ y
+∠A
+a ⊥ b
+p ∧ q
+p ∨ q
+∴ x
+⇒ y
+x ↦ y
+A⊆B
+1 − x
+4 ÷ 2
+3 × 4
+αβγ
+Ωmega
+π r²
+λόγος
+Ελληνικά
+ΑΒΓΔ
+φύσις
+ψυχή
+Σίσυφος
+μ-law
+β-test
+γ-ray
+ΔE
+Ω·m
+ΣF = 0
+θ₀
+σ²
+α = 0.05
+λ = 0.5
+μm
+2πr
+αρχή
+ξένος
+ζωή
+Ψ(x)
+ΦΧΨΩ
+άέήίόύώ
+ΐΰϊϋ
+Άλφα
+Ώρα
+Ένα
+⌘C
+⌥⇧⌘
+⌃C
+⏎
+⇧⇪
+✓ done
+✗ fail
+⚠ 경고
+⌫⌦
+⎋ Esc
+⇥ Tab
+‼
+⁉
+‽
+a‽
+‘a’
+“a”
+„a“
+‚a‘
+x′
+x″
+x‴
+5′ 6″
+a‥b
+‧
+※
+…
+a—b
+a―b
+a‐b
+a‑b
+‖x‖
+№5
+№ 5
+100‰
+0.1‱
+‹a›
+Ⅰ Ⅱ Ⅲ Ⅳ Ⅴ Ⅵ Ⅶ Ⅷ Ⅸ Ⅹ Ⅺ Ⅻ
+ⅰ ⅱ ⅲ ⅳ ⅴ ⅵ ⅶ ⅷ ⅸ ⅹ ⅺ ⅻ
+Ⅳ장
+제Ⅱ부
+ⅻ.
+Chapter Ⅳ
+ⅢⅣ
+XII Ⅻ
+25℃
+77℉
+℃는
+10 K
+5 Å
+50 Ω
+ℓ
+℮ 500g
+™
+℠
+℗ 2026
+©℗
+α값
+β값
+→ 다음
+다음 →
+가→나
+→다음
+①→②
+H₂O는
+CO₂ 배출
+m²당
+㎡당
+x² 항
+10⁻³배
+±5%
+≤ 3개
+π값은 3.14
+Δ변화
+σ가
+μm당
+λ는
+“인용”
+‘작은’
+ΩΩ의
+√2는
+∞대
+∑의
+⇒ 결론
+약 ≈ 3
+5×3
+5 × 3
+3²=9
+n²개
+Ⅱ권
+½가
+αβ감마
+₩과 €
+→
+A→B
+a→b
+1→2
+x→∞

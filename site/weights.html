@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>limn — 굵기 100–900 · Development preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="limn-pages.css?v=20261021-release-docs">
+<script src="limn-font.js?v=20260927n1"></script>
+<script src="limn-font-play.js?v=20260927n1"></script>
+<script src="limn-brand.js?v=20260927n1"></script>
+<script src="weights-data.js?v=20260927n1"></script>
+<script src="weights-seam.js?v=20260927n1"></script>
+<style>
+.wf{border-top:1px solid var(--ink)}
+.wf>div{display:grid;grid-template-columns:90px minmax(0,1fr);gap:24px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
+.wf .lab{font:500 12px var(--mono);color:var(--muted)}.wf .lab b{display:block;font-size:20px;color:var(--ink)}
+.wf .lab em{font-style:normal;color:var(--ver)}
+.lines{display:flex;flex-direction:column;gap:10px;min-width:0;overflow-x:auto}
+.card{background:#fff;border-radius:8px;padding:18px 20px}
+.num td,.num th{font-family:var(--mono);font-size:12px;text-align:right}
+.num td:first-child,.num th:first-child{text-align:left}
+.num tr.ext td{color:var(--ink)}.num tr.q td{color:var(--muted)}
+.num tr.brand td{background:#fff3ef}
+.good{color:#1c7a3c}.bad{color:var(--ver)}
+.seam{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:36px}
+.ov{display:flex;gap:18px;flex-wrap:wrap;background:#fff;padding:16px;border-radius:8px}
+.legend{font:11.5px var(--mono);color:var(--muted);display:flex;gap:14px;margin-top:8px;flex-wrap:wrap}
+.legend i{display:inline-block;width:18px;height:3px;vertical-align:middle;margin-right:5px}
+.rec{background:var(--ink);color:#fbfaf7;padding:28px 32px;border-radius:10px;max-width:1120px}
+.rec h3{margin:0 0 8px;font-size:20px}.rec li{margin:4px 0}
+.vr{background:#fff;border-radius:8px;padding:10px 16px;overflow-x:auto}
+.vr>div{display:grid;grid-template-columns:60px minmax(0,1fr);align-items:center;gap:12px}
+.vr .lab{font:500 12px var(--mono);color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="bar"><nav><a href="index.html">홈</a><a href="bi.html">BI</a><a href="dock.html">앱 아이콘</a><a href="icons.html">작은 아이콘</a><a href="type.html">서체</a><b>굵기</b><a href="hangul.html">한글 실험</a><a href="punct.html">구두점</a><a href="symbols.html">특수문자</a><a href="accents.html">악센트</a><a href="spacing.html">자간</a><a href="proof.html">교정쇄</a><a href="compare.html">비교</a><a href="coverage.html">커버리지</a><a href="fonts.html">폰트 파일</a><a href="concept.html">의미</a></nav></div>
+<aside class="release-note" aria-label="Release and preview scope"><strong>개발·연구 미리보기</strong> · 이 화면의 엔진·한글·브랜드 실험은 배포본과 다릅니다.
+<a href="https://github.com/dartworklabs/limn-sans/releases/tag/v1.002">Limn Sans 1.002 받기</a>: 영어·기호 919자, 정적 9굵기(100–900). 한글·로고 글리프는 제외되며, 그리스어·확장 라틴은 언어 QA 대상이 아닙니다.</aside>
+<header>
+  <div><p class="kicker">서체 · 굵기 100–900</p><h1>limn 굵기 100–900</h1>
+  <p class="lede">Quicksand의 굵기 축은 300–700(획 40–120)뿐입니다. 그 안에 드는 200–700은 부모 그대로 두고, 밖(100·800·900)은 가장 가까운 마스터를 타원 펜으로 깎거나(침식) 불려서(팽창) 만듭니다. 세로 선(기준선·x높이·t 높이·대문자 높이·어센더·디센더)은 축 밖에서 가장 가까운 마스터의 값을 그대로 지키고, 여백은 각 글자가 Quicksand 안에서 보이던 변화 추세를 연장합니다. 그 뒤에 limn의 규칙(어깨 없는 n, 핀, 평평한 발)이 굵기마다 그대로 적용됩니다.</p></div>
+  <ul class="facts">
+    <li><b>세로 규칙</b><span id="f-v"></span></li>
+    <li><b>획 굵기</b><span id="f-s"></span></li>
+    <li><b>200–700</b><span>획 51.2–116.8, Quicksand 축 안 · 로고는 Quicksand Bold 획 120(700의 116.8과 800의 134.7 사이)</span></li>
+  </ul>
+</header>
+
+<section class="sec">
+  <h2><span class="no">01</span>폭포 — 100에서 900까지</h2>
+  <p class="sub">limn 규칙이 모두 적용된 결과입니다(type.html 놀이터와 같은 데이터). 모든 줄이 같은 세로 눈금(어센더 740 ~ 디센더 −200)을 쓰므로, 줄마다 l·b·h·k의 길이와 핀의 윗끝을 그대로 비교할 수 있습니다. 주황 표시는 Quicksand 축 밖(획 40 미만, 120 초과)에서 만든 굵기입니다.</p>
+  <div class="wf" id="wf"></div>
+</section>
+
+<section class="sec">
+  <h2><span class="no">01a</span>세로 규칙 — l 길이와 핀</h2>
+  <p class="sub">한 눈금으로 겹쳐 본 세로 선. 위에서부터 어센더 740(l·b·d·h·k·f의 윗끝, 굵은 쪽에서는 핀 윗끝), 대문자 높이 700, t 높이 650, x높이, 기준선, 디센더 −200. x높이는 축 안에서 Quicksand를 따르고(510 → 535), 축 밖에서는 가까운 마스터 값에 멈춥니다.</p>
+  <div class="vr" id="vr"></div>
+  <div style="overflow-x:auto;margin-top:18px"><table class="t num" id="vtbl"></table></div>
+</section>
+
+<section class="sec">
+  <h2><span class="no">01b</span><span id="all-h">전체 글자</span> — 100 · 300 · 700 · 900</h2>
+  <p class="sub">limn 규칙까지 적용한 전체 글자(놀이터 데이터의 글자 목록 그대로). 커닝 없이 고정 간격으로 늘어놓았습니다.</p>
+  <div class="wf" id="all"></div>
+</section>
+
+<section class="sec">
+  <h2><span class="no">02</span>획 굵기 곡선</h2>
+  <p class="sub">획 굵기 ÷ x높이. 회색 선은 100–900 전 범위를 가진 참고 서체(google/fonts의 OFL TTF에서 l의 세로획을 x높이 절반에서 잼), 검은 선이 limn입니다. Quicksand의 700은 참고 서체의 600 언저리, 300은 200 언저리에 해당합니다 — 부모의 이름표가 한 칸쯤 가볍습니다. limn의 획 ÷ x높이는 100(39.5/510)에서 900(155/535)까지 아홉 값을 한 걸음씩 이어, 아홉 굵기가 고르게 짙어집니다.</p>
+  <div class="split" style="margin-top:0">
+    <div class="card" id="chart"></div>
+    <div>
+      <table class="t"><tbody>
+        <tr><td>굵기 곡선</td><td>S ÷ x높이를 아홉 굵기마다 정함: 100 = 39.5/510, 900 = 155/535. S 39.5 · 51.2 · 63.2 · 75.9 · 88.9 · 102.6 · 116.8 · 134.7 · 155 (걸음 11.7–20.3)</td></tr>
+        <tr><td>축 안·밖</td><td>S는 굵기마다 정한 값이고, 그 획을 가진 Quicksand 인스턴스가 있으면 그것을, 없으면 가까운 마스터를 펜으로 깎거나 불려 씀. 문단 농도(L*)가 한 걸음씩 <span id="dl"></span>로 짙어짐</td></tr>
+        <tr><td>대비</td><td>가로획 ÷ 세로획. Quicksand .95(300)→.92(700). 100은 <span id="c100"></span>(참고 전부 1.00), 900은 <span id="c900"></span>(Inter .73 · Nunito .73 · M PLUS Rounded .68 · Lexend .83 · Outfit .87)</td></tr>
+        <tr><td>x높이</td><td>축 안은 Quicksand의 추세 510 + 0.0625(w−300). 축 밖은 가까운 마스터의 값(100·200 = 510, 800·900 = 535) — 어센더 740 아래에 핀과 흰 틈이 들어갈 자리를 지키고, l이 x높이 위로 솟는 길이가 800 · 900에서 205로 같음</td></tr>
+        <tr><td>여백·폭</td><td>글자마다 Quicksand의 300→700 여백 변화를 S에 비례해 연장(700 위에서는 n보다 빨리 줄지 않게)</td></tr>
+        <tr><td>기호</td><td>® © ™ ¹ ² ³ ½ % … 은 Quicksand 안에서 세로획보다 느리게 굵어짐(® 0.25, © 0.56, ™ 0.76, % 0.78배). 축 밖에서도 그 비율로 굵어지고, 떨어진 조각 사이 흰 틈은 줄어들되 닫히지 않음</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <h2><span class="no">03</span>10 걸음 — 290 · 300 · 310, 690 · 700 · 710</h2>
+  <p class="sub">굵기가 10씩 바뀔 때 튀지 않고 이어지는지. 위는 limn 전체 규칙을 적용한 글, 아래는 세 굵기의 윤곽을 겹친 것입니다. 색은 그 굵기가 Quicksand 인스턴스(파랑)인지, 축 밖에서 깎거나 불린 것(주홍)인지를 나타냅니다. 10 단위 변화의 크기(윤곽 XOR 면적 ÷ 윤곽 길이, 로마자·숫자 62자 중앙값)는 <span id="seam-n"></span>.</p>
+  <div class="seam" id="seam"></div>
+</section>
+
+<section class="sec">
+  <h2><span class="no">04</span>굵기별 치수</h2>
+  <p class="sub">limn 빌드(build_font.py)가 굵기마다 잰 값(tools/build_weights_page.py). S는 l의 폭, 핀 반지름은 그 굵기의 Quicksand(또는 확장) 점에서 규칙으로, 흰 틈은 어센더까지 남는 자리와 다른 핀들의 흰 틈 규칙(GAP) 중 작은 쪽. e·o 속공간은 흰 면적(단위²), L*는 같은 문단의 농도(종이 100).</p>
+  <div style="overflow-x:auto"><table class="t num" id="tbl"></table></div>
+</section>
+
+<section class="sec">
+  <h2><span class="no">05</span>규칙과 알려진 한계</h2>
+  <div class="rec" id="rec">
+    <h3>마스터 침식·팽창 — tools/weights.py, 규칙은 tools/build_font.py</h3>
+    <ul>
+      <li id="rv"></li>
+      <li>u의 두 세로획 끝을 x높이에 맞춤(Quicksand는 300에서 11 모자람) — 거꾸로 돌린 n이 기준선에 바로 섬.</li>
+      <li>팽창에서 기호는 제 굵어짐 비율을 따르고, 떨어진 조각은 흰 틈을 지킴: 안에 든 조각(® ©)은 줄이고, 상대를 향한 획 끝(±)은 짧게 둥글리고, 나란한 조각(% ‰ ¼ ½ ¾ ™)은 옆으로 벌림.</li>
+      <li>발: 700 위에서도 이음부(N의 오른쪽 아래)는 둥글게 — 볼과 줄기 사이 V가 열린 것(a b d q)만 평평한 발.</li>
+      <li>필렛: 짧은 계단 모서리·가는 조각(8° 모서리)에는 넣지 않고, 700 위에서는 앞의 흰 공간이 허락하는 만큼 0.25 s까지 키움 — n·h의 아치 안 가시, 300 A 다리의 이빨, ¼ ¾의 4 속공간 닫힘이 사라짐.</li>
+    </ul>
+  </div>
+  <table class="t" style="margin-top:28px"><tbody>
+    <tr><td>알려진 한계</td><td id="left"></td></tr>
+  </tbody></table>
+</section>
+
+<script>
+const L=LIMN,f=L.f,D=window.LIMN_WDATA,$=id=>document.getElementById(id),INK="#15161a",VER="#e8452c";
+const WS=[100,200,300,400,500,600,700,800,900];
+// seam weights are added next to the built ones; a built weight is never replaced
+for(const w in window.LIMN_WSEAM) if(!(w in LIMN_PLAY)) LIMN_PLAY[w]=LIMN_WSEAM[w];
+const sv=(t,h)=>`<svg viewBox="${L.vbs(t.vb)}" width="${f(h*t.vb[2]/t.vb[3])}" height="${h}">${t.body}</svg>`;
+const ps=(s,w,h,o={})=>sv(LIMN_playset(s,{w,ink:INK,pin:VER,app:true,full:true,pad:10,kern:true,...o}),h);
+$("f-s").textContent=D.table.map(r=>r.S).join(" · ");
+/* the vertical rule as the data has it: pins that reach the ascender, and where the thin end brings them down */
+(()=>{const T=D.table,top=T.filter(r=>Math.abs(r.pin_top-r.asc)<=0.5).map(r=>r.w),t0=T[0];
+  $("f-v").textContent=`l 윗끝 = 어센더 740 — 모든 굵기. 핀 윗끝 = 어센더는 ${top.join(" · ")}, 가는 쪽은 흰 틈을 지키고 핀이 내려옴(${t0.w}에서 ${f(t0.pin_top)})`;
+  const r8=T.find(r=>r.w===800),r9=T.find(r=>r.w===900);
+  $("c100").textContent=t0.contrast.toFixed(2);$("c900").textContent=r9.contrast.toFixed(2);
+  $("rv").textContent=`세로: l 윗끝 = 어센더 740, 대문자 700, t 650, 디센더 −200은 모든 굵기에서 같음. 핀 크기는 Quicksand 점을 따르고, 흰 틈은 어센더까지 남는 자리와 다른 핀들의 흰 틈 규칙(GAP) 중 작은 쪽 — ${top.join(" · ")}은 핀 윗끝 = 어센더, 가는 쪽은 틈을 지키고 핀이 내려옴(${t0.w}에서 윗끝 ${f(t0.pin_top)}, 틈 ${f(t0.gap)}). 700 위에서는 흰 틈이 0.2 s까지 좁아지고 핀은 r ${r8.pin_r.toFixed(1)}(800) · ${r9.pin_r.toFixed(1)}(900).`;})();
+
+/* 01 waterfall: one vertical scale for every line (full box, ascender to descender) */
+$("wf").innerHTML=WS.map(w=>`<div><div class="lab"><b>${w}</b>${w<300||w>700?"<em>확장</em>":"Quicksand"}</div><div class="lines">
+  <div style="display:flex;gap:40px;align-items:flex-end">${ps("limn",w,74)}${ps("Sphinx of black quartz, judge my vow.",w,74)}</div>
+  ${ps("pin it. fix it. done. main.tex:1108 · 11 pins — the quick brown fox jumps over the lazy dog",w,30)}</div></div>`).join("");
+
+/* 01a vertical rule: nine weights on one scale, with the lines drawn */
+(()=>{const S="lil hibdk ij 림 Hxzt u n",rows=WS.map(w=>{const t=LIMN_playset(S,{w,ink:INK,pin:VER,app:true,full:true,pad:0,kern:true});return {w,t};});
+  const x0=Math.min(...rows.map(r=>r.t.vb[0]))-20,x1=Math.max(...rows.map(r=>r.t.vb[0]+r.t.vb[2]))+20;
+  $("vr").innerHTML=rows.map(({w,t})=>{const P=LIMN_PLAY[w],ln=(y,c,d="")=>`<line x1="${x0}" x2="${x1}" y1="${-y}" y2="${-y}" stroke="${c}" stroke-width="2.5" ${d?`stroke-dasharray="${d}"`:""}/>`;
+    const lines=ln(P.asc,VER)+ln(P.cap,"#9aa6b2","8 6")+ln(650,"#c8cfd6","3 6")+ln(P.xh,"#2f6fdf")+ln(0,"#9aa6b2")+ln(P.desc,"#c8cfd6");
+    const vb=[x0,-780,x1-x0,1010];
+    return `<div><span class="lab">${w}</span><svg viewBox="${L.vbs(vb)}" width="${f(64*vb[2]/vb[3])}" height="64">${lines}${t.body}</svg></div>`;}).join("");
+  const T=D.table,col=(k,lab)=>`<tr><td>${lab}</td>${T.map(r=>`<td>${r[k]}</td>`).join("")}</tr>`;
+  $("vtbl").innerHTML=`<thead><tr><th></th>${T.map(r=>`<th>${r.w}</th>`).join("")}</tr></thead><tbody>`+
+    col("l_top","l 윗끝")+col("pin_top","핀 윗끝")+col("b_top","b 윗끝")+col("k_top","k 윗끝")+col("H_top","H 윗끝")+col("t_top","t 윗끝")+col("xh","x높이")+col("u_top","u 윗끝")+col("gap","핀 흰 틈")+col("pin_r","핀 반지름")+"</tbody>";})();
+
+/* 01b all glyphs, from the current glyph set */
+(()=>{const K=Object.keys(LIMN_PLAY[700].glyphs).filter(c=>c!==" "),O="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",G=[...[...O].filter(c=>K.includes(c)),...K.filter(c=>!O.includes(c))],rows=[];   /* number-like keys come first in a JS object: put the letters first */for(let i=0;i<G.length;i+=26)rows.push(G.slice(i,i+26));
+  $("all-h").textContent=`전체 ${G.length}자`;
+  $("all").innerHTML=[100,300,700,900].map(w=>`<div><div class="lab"><b>${w}</b></div><div class="lines">${rows.map(r=>ps(r.join(" "),w,46,{kern:false,tnum:false,full:true})).join("")}</div></div>`).join("");})();
+
+/* 02 chart */
+(()=>{const W=560,H=320,x=w=>50+(w-100)/900*(W-70),y=v=>H-30-v/0.42*(H-50);
+  const fams=Object.entries(D.refs).filter(([k])=>k!=="Quicksand");
+  const line=(pts,c,wd,dash="")=>`<polyline fill="none" stroke="${c}" stroke-width="${wd}" ${dash?`stroke-dasharray="${dash}"`:""} points="${pts.map(([a,b])=>`${f(x(a))},${f(y(b))}`).join(" ")}"/>`;
+  let g=`<rect x="${x(300)}" y="10" width="${x(700)-x(300)}" height="${H-40}" fill="#f3f1ec"/><text x="${x(500)}" y="24" font-size="11" text-anchor="middle" fill="#6d6a64" font-family="monospace">Quicksand 축 300–700</text>`;
+  for(const v of [0,.1,.2,.3,.4]) g+=`<line x1="50" x2="${W-10}" y1="${y(v)}" y2="${y(v)}" stroke="#e4e0d8"/><text x="44" y="${y(v)+4}" font-size="10" text-anchor="end" fill="#6d6a64" font-family="monospace">${v.toFixed(1)}</text>`;
+  for(const w of WS) g+=`<text x="${x(w)}" y="${H-12}" font-size="10" text-anchor="middle" fill="#6d6a64" font-family="monospace">${w}</text>`;
+  const labs=[];
+  for(const [k,d] of fams){const pts=Object.entries(d).map(([w,v])=>[+w,v.S_xh]).filter(p=>p[0]<=900);g+=line(pts,"#b7b2a8",1.4);const l=pts[pts.length-1];labs.push([l,k]);}
+  labs.sort((a,b)=>a[0][1]-b[0][1]);let last=-1e9;for(const [l,k] of labs){let yy=y(l[1]);if(last-yy<11) yy=last-11;last=yy;g+=`<text x="${x(900)+4}" y="${yy+3}" font-size="9.5" fill="#8a857c" font-family="monospace">${k.replace("MPLUSRounded1c","M+R1c")}</text>`;}
+  const q=Object.entries(D.refs.Quicksand).map(([w,v])=>[+w,v.S_xh]);
+  g+=line(D.curve.map(c=>[c.w,c.S/c.XH]),INK,2.6)+line(q,VER,2,"4 3");
+  for(const r of D.table) g+=`<circle cx="${x(r.w)}" cy="${y(r.S/r.xh)}" r="4" fill="${r.w<300||r.w>700?VER:INK}"/>`;
+  $("chart").innerHTML=`<svg viewBox="0 0 ${W+60} ${H}" width="${W+60}" height="${H}" style="max-width:100%;height:auto">${g}</svg><div class="legend"><span><i style="background:${INK}"></i>limn S/x높이</span><span><i style="background:${VER}"></i>Quicksand (300–700)</span><span><i style="background:#b7b2a8"></i>참고 서체</span></div>`;
+  const T=D.table.filter(r=>r.w>=500);$("dl").textContent=T.slice(1).map((r,i)=>(T[i].L-r.L).toFixed(2)).join(" · ");})();
+
+/* 03 seams */
+(()=>{const out=[],sm=D.seam;
+  $("seam-n").textContent=`290→300 ${sm[300].out} · 300→310 ${sm[300].in} (${sm[300].ratio}배), 700→710 ${sm[700].out} · 690→700 ${sm[700].in} (${sm[700].ratio}배) — 두 걸음의 비가 1에 가까울수록 고르게 이어짐`;
+  for(const [a,b,c] of [[290,300,310],[690,700,710]]){
+    const ext=w=>LIMN_PLAY[w].s<=40||LIMN_PLAY[w].s>120,   /* outside Quicksand's axis (S 40-120); the data rounds S, and 100 is 39.5 */col={[a]:ext(a)?VER:"#2f6fdf",[b]:INK,[c]:ext(c)?VER:"#2f6fdf"};
+    const rows=[a,b,c].map(w=>`<div style="display:grid;grid-template-columns:48px 1fr;align-items:center;gap:10px"><span class="lab" style="font:12px var(--mono);color:${col[w]}">${w}</span>${ps("nnoonnlamp hamburgefonstiv",w,40)}</div>`).join("");
+    const kind=w=>ext(w)?(LIMN_PLAY[w].s<40?" (침식)":" (팽창)"):" (Quicksand)";
+    const ov=[..."aegs8B"].map(ch=>{let body="",vb=[1e9,1e9,-1e9,-1e9];
+      for(const w of [a,b,c]){const t=LIMN_playset(ch,{w,ink:"none",pin:"none",pad:0,full:false});const g=LIMN_PLAY[w].glyphs[ch];
+        body+=`<path d="${g.d}" fill="none" stroke="${col[w]}" stroke-width="3" opacity=".9"/>`;vb=[Math.min(vb[0],t.vb[0]),Math.min(vb[1],t.vb[1]),Math.max(vb[2],t.vb[0]+t.vb[2]),Math.max(vb[3],t.vb[1]+t.vb[3])];}
+      const v=[vb[0]-15,vb[1]-15,vb[2]-vb[0]+30,vb[3]-vb[1]+30];return `<svg viewBox="${L.vbs(v)}" width="${f(120*v[2]/v[3])}" height="120">${body}</svg>`;}).join("");
+    out.push(`<div><h3 style="margin:0 0 10px">${a} · ${b} · ${c}</h3><div style="display:flex;flex-direction:column;gap:8px;background:#fff;padding:14px;border-radius:8px">${rows}</div>
+      <div class="ov" style="margin-top:14px">${ov}</div><div class="legend"><span><i style="background:${col[a]}"></i>${a}${kind(a)}</span><span><i style="background:${INK}"></i>${b}${kind(b)}</span><span><i style="background:${col[c]}"></i>${c}${kind(c)}</span></div></div>`);}
+  $("seam").innerHTML=out.join("");})();
+
+/* 04 table */
+(()=>{const T=D.table;
+  $("tbl").innerHTML=`<thead><tr><th>굵기</th><th>S</th><th>S/x높이</th><th>가로획</th><th>대비</th><th>x높이</th><th>어센더</th><th>l 윗끝</th><th>핀 r</th><th>흰 틈</th><th>핀 윗끝</th><th>n 폭</th><th>o 폭</th><th>m 폭</th><th>e 속공간</th><th>o 속공간</th><th>문단 L*</th></tr></thead><tbody>`+
+  T.map(r=>`<tr class="${r.w<300||r.w>700?"ext":"q"}"><td>${r.w}${r.w<300||r.w>700?" ·확장":""}</td><td>${r.S_exact}</td><td>${r.S_xh.toFixed(3)}</td><td>${r.H}</td><td>${r.contrast.toFixed(2)}</td><td>${r.xh}</td><td>${r.asc}</td><td class="${Math.abs(r.l_top-r.asc)>0.5?"bad":"good"}">${f(r.l_top)}</td><td>${r.pin_r.toFixed(1)}</td><td>${r.gap.toFixed(1)}</td><td>${f(r.pin_top)}</td><td>${r.adv_n}</td><td>${r.adv_o}</td><td>${r.adv_m}</td><td>${r.e_counter.toLocaleString()}</td><td>${r.o_counter.toLocaleString()}</td><td>${r.L.toFixed(2)}</td></tr>`).join("")+"</tbody>";})();
+
+$("left").innerHTML=["① Quicksand 자체의 세로 차이는 그대로: z 윗끝(300에서 x높이 +5, 700에서 −10), 300 이하 v·w의 둥근 끝 +7, i 세로획 +5(o와 같은 오버슈트), f 갈고리 735(300 이하), b 739",
+  "② ¥ ¦ ¶ ¢의 발은 100–600에서 평평하고 700–900에서 둥긂 — 발의 판정선이 짧은 세로획(¥ 아래)에 걸리지 않음",
+  "③ ™의 M 가운데 아래 작은 홈(800), * (900)는 팽창에서 끝이 뾰족해지거나 팔 사이가 얕아짐 — 곡선끼리 만나는 안쪽 이음은 필렛 규칙(직선끼리만)이 닿지 않음",
+  "④ ?·¿: 700 위에서는 갈고리를 대문자 높이에 맞추느라 속공간이 작아짐. 700의 ? 꼬리 왼쪽 아래에 네모난 턱이 있음(LIMN_SEAM700=1이면 다듬음)",
+  "⑤ } { 의 가늘어지는 끝은 100에서 머리카락처럼 가늘어짐(Quicksand 300의 모양을 깎은 결과)",
+  "⑥ 커닝은 HarfBuzz가 Quicksand 축 끝(wght 300 · 700)의 값을 씀"].join("<br>");
+</script>
+</body>
+</html>

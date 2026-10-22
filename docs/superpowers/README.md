@@ -1,0 +1,3 @@
+# Internal development records
+
+The specs and plans in this directory are working records from internal development, written by AI coding agents and the maintainers while they scoped, implemented and verified two changes in October 2026 (the exact-input Hangul cache and the font coverage page). They are kept only as a historical record of how that work was carried out. They are not product documentation, they are not maintained, and their task checklists, issue references and approval notes describe the state of the project at the time they were written. For the current behavior of Limn Sans, read the [README](../../README.md), the [release profile](../release-profile.md) and the [development guide](../development.md).

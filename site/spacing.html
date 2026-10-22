@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>limn — 자간(옆 여백 체계) · Development preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="limn-pages.css?v=20261021-release-docs">
+<script src="limn-font.js?v=20260927n1"></script>
+<script src="limn-font-play.js?v=20260927n1"></script>
+<script src="limn-brand.js?v=20260927n1"></script>
+<style>
+.pair{background:#fff;border-radius:8px;padding:8px 16px;margin:0 0 8px;overflow-x:auto}
+.pair svg{display:block}
+table.t td.num{font-family:var(--mono);text-align:right;white-space:nowrap}
+td.sds{font:12px/1.9 var(--mono);color:var(--muted);width:56%}
+table.t td:first-child small{font-weight:400;color:var(--muted)}
+.sd{display:inline-block;margin:0 14px 0 0;white-space:nowrap}.sd b{color:var(--ink);font-weight:500}.sd i{font-style:normal;font-size:10px;margin:0 3px 0 1px}
+.kl{font:12px/2 var(--mono);color:var(--muted)}.kl span{display:inline-block;margin:0 12px 0 0}.kl b{color:var(--ink);font-weight:500}
+.why li{margin:0 0 12px;line-height:1.65}
+.num3 td{font-family:var(--mono)}
+table.cls{table-layout:fixed;width:100%;min-width:1100px}
+</style>
+</head>
+<body>
+<div class="bar"><nav><a href="index.html">홈</a><a href="bi.html">BI</a><a href="dock.html">앱 아이콘</a><a href="icons.html">작은 아이콘</a><a href="type.html">서체</a><a href="weights.html">굵기</a><a href="hangul.html">한글 실험</a><a href="punct.html">구두점</a><a href="symbols.html">특수문자</a><a href="accents.html">악센트</a><b>자간</b><a href="proof.html">교정쇄</a><a href="compare.html">비교</a><a href="coverage.html">커버리지</a><a href="fonts.html">폰트 파일</a><a href="concept.html">의미</a></nav></div>
+
+<aside class="release-note" aria-label="Release and preview scope"><strong>개발·연구 미리보기</strong> · 이 화면의 엔진·한글·브랜드 실험은 배포본과 다릅니다.
+<a href="https://github.com/dartworklabs/limn-sans/releases/tag/v1.002">Limn Sans 1.002 받기</a>: 영어·기호 919자, 정적 9굵기(100–900). 한글·로고 글리프는 제외되며, 그리스어·확장 라틴은 언어 QA 대상이 아닙니다.</aside>
+<header>
+  <div>
+    <p class="kicker">서체 · 자간</p>
+    <h1>옆 여백은 글자 모양으로 정한다</h1>
+    <p class="lede">모든 글자의 옆 여백은 Walter Tracy의 방법대로 <b>모양 부류 × o의 옆 여백</b>입니다. o(대문자는 O)가 단위라서 모든 값이 "o의 몇 배"이고 굵기마다 저절로 따라갑니다. 부류의 값은 전문 서체 14종이 실제로 띄운 간격에 맞춘 것이고, 부류로 고르게 되지 않는 짝만 커닝합니다.</p>
+  </div>
+  <ul class="facts">
+    <li><b>4.3</b>소문자 짝의 어긋남 rms, 700 · 400은 4.8 (전문 서체 하나하나는 6.9 안팎)</li>
+    <li><b>49</b>400의 s 왼쪽 옆 여백 · 700은 35</li>
+    <li><b>19 + 21</b>소문자·대문자 부류 — 곧은 1.75, 아치 1.62, 둥근 1.00 × o</li>
+    <li><b>147</b>예외 커닝 — 부류로 고르게 되지 않는 짝</li>
+  </ul>
+</header>
+
+<section class="sec">
+  <h2><span class="no">01</span>방법</h2>
+  <ul class="rules">
+    <li><div><b>Tracy (Letters of Credit)</b> n과 o의 옆 여백을 먼저 정합니다(nnnn · oooo · nnonn). 다른 글자는 옆모양이 곧은지, 둥근지, 열렸는지, 사선인지에 따라 그 둘에서 가져옵니다. 곧은 줄기는 둥근 쪽보다 넓게(전문 서체의 곧은:둥근 비율, o의 1.75배 안팎), n 왼쪽 ≥ n 오른쪽입니다. 대문자는 H와 O로, 숫자는 0과 1로 같은 일을 합니다. limn은 o(대문자는 O)를 Quicksand 그대로 두고 단위로 씁니다. 그래서 모든 값이 "o의 몇 배"이고 굵기마다 저절로 따라갑니다.</div></li>
+    <li><div><b>Kindersley · 광학 면적</b> 글자 사이의 흰 면적이 같아 보여야 합니다. 여기서는 흐림 모델로 잽니다. 글자를 x높이 띠 안의 세로 먹 농도로 줄이고 x높이의 0.095배로 흐린 뒤, 두 글자 사이 가장 옅은 곳을 잽니다. 가까운 흰 공간일수록 크게, 열린 속공간도 거리에 따라 세므로 s · c · e의 열린 속공간이 글자 사이 흰 공간과 합쳐 보이는 정도까지 들어갑니다. 이 자는 전문 서체 14종의 간격을 rms 6.9로 설명합니다(글자 옆마다 "고르게 하려면 몇 단위를 더해야 하나", 잘 짜인 서체일수록 0).</div></li>
+    <li><div><b>Sousa / Adobe의 실무</b> nnXnn · ooXoo · HHXHH · OOXOO 조판으로 부류를 정한 뒤, 부류로 안 되는 짝만 커닝합니다. 대문자의 옆 여백은 대문자끼리 · 대문자 + 소문자 · 소문자 + 대문자 세 경우를 함께 봅니다. 문장에서는 대문자 + 소문자가 가장 흔합니다.</div></li>
+    <li><div><b>굵기별 예외</b> 400에서는 s 왼쪽과 t 왼쪽을 따로 둡니다(49 · 17) — 모델 값(s 왼쪽 0.84 o, t 왼쪽 0.15 o)으로는 os · is · ss · st가 답답해 보입니다. 700의 r 오른쪽은 8로, r 뒤 모음이 떠 보이지 않게 합니다. HTML · THE의 T|H가 떠 보이지 않도록 T와 곧은 줄기 대문자 짝에 −3, Tr에 −8을 더합니다.</div></li>
+    <li><div><b>참고 서체 실측</b> 둥근 친척 8종(Quicksand · Nunito · Fredoka · Poppins · Comfortaa · Varela Round · M PLUS Rounded 1c · Outfit)과 본문 서체 6종(Inter · Source Sans 3 · Roboto · Lato · Liberation Sans · DejaVu Sans)의 모든 짝을 같은 모델로 쟀습니다. 부류 값은 이들의 중앙값에 가장 가깝도록 700과 400에서 함께 맞춘 것입니다. 굵을수록 곧은 쪽이 둥근 쪽보다 조금 넓어지는 관행(Inter 1.52 → 1.64, Nunito 1.64 → 1.76, 400 → 900)도 따릅니다. 둥근 부류가 아닌 모든 부류에 × (1 + 0.05 · (줄기 − 120)/60)을 곱하고, 범위는 ±0.05로 제한합니다.</div></li>
+  </ul>
+</section>
+
+<section class="sec">
+  <h2><span class="no">02</span>어긋남 — s 둘레와 곧은 줄기</h2>
+  <table class="t num3" style="margin-top:18px"><thead><tr><th>짝</th><th>100</th><th>400</th><th>700</th><th>900</th></tr></thead><tbody>
+  <tr><td><b>ps</b></td><td>-9</td><td>-5</td><td>+2</td><td>+1</td></tr><tr><td><b>as</b></td><td>-13</td><td>-7</td><td>+1</td><td>+4</td></tr><tr><td><b>ss</b></td><td>-14</td><td>-9</td><td>+3</td><td>+0</td></tr><tr><td><b>is</b></td><td>-12</td><td>-5</td><td>+3</td><td>+7</td></tr><tr><td><b>sh</b></td><td>-5</td><td>-2</td><td>-0</td><td>+4</td></tr><tr><td><b>si</b></td><td>-3</td><td>-1</td><td>+2</td><td>+7</td></tr><tr><td><b>hi</b></td><td>-5</td><td>+1</td><td>+1</td><td>+8</td></tr><tr><td><b>ip</b></td><td>-7</td><td>+1</td><td>+1</td><td>+10</td></tr><tr><td><b>nn</b></td><td>-4</td><td>-0</td><td>-3</td><td>+4</td></tr><tr><td><b>oo</b></td><td>+0</td><td>+0</td><td>+0</td><td>+0</td></tr>
+  </tbody></table>
+  <p class="cap">전문 서체 14종의 중앙값과 비교한 어긋남(폰트 단위, + 조임 · − 벌어짐). ps · as · ss · is는 s 앞, sh · si는 s 뒤, hi · ip는 곧은 줄기끼리입니다.</p>
+</section>
+
+<section class="sec">
+  <h2><span class="no">03</span>부류 표 — 옆 여백 = 비율 × o (대문자는 O)</h2>
+  <p class="sub">옆 여백은 x높이 띠(대문자는 대문자 높이 띠) 안에서 가장 가까운 먹까지의 거리입니다. 오른쪽 칸은 글자별 700의 옆 여백이고, 괄호 안은 400입니다. o · O는 단위라서 그대로입니다.</p>
+  <h3>소문자</h3>
+  <div style="overflow-x:auto"><table class="t cls"><colgroup><col style="width:24%"><col style="width:10%"><col style="width:5%"><col style="width:5%"><col style="width:5%"><col style="width:5%"><col style="width:46%"></colgroup><thead><tr><th>부류</th><th>비율 × o</th><th>100</th><th>400</th><th>700</th><th>900</th><th>글자 · 700 (400)</th></tr></thead><tbody>
+  <tr><td><b>round</b><br><small>o and every bowl that faces out like o</small></td><td class='num'>1.00</td><td class='num'>55</td><td class='num'>49</td><td class='num'>40</td><td class='num'>32</td><td class='sds'><span class="sd"><b>o</b><i>왼</i> 40 <small>(49)</small></span><span class="sd"><b>o</b><i>오</i> 40 <small>(49)</small></span><span class="sd"><b>c</b><i>왼</i> 40 <small>(49)</small></span><span class="sd"><b>e</b><i>왼</i> 40 <small>(49)</small></span><span class="sd"><b>d</b><i>왼</i> 40 <small>(49)</small></span><span class="sd"><b>q</b><i>왼</i> 40 <small>(49)</small></span><span class="sd"><b>g</b><i>왼</i> 40 <small>(49)</small></span><span class="sd"><b>a</b><i>왼</i> 40 <small>(49)</small></span><span class="sd"><b>b</b><i>오</i> 40 <small>(49)</small></span><span class="sd"><b>p</b><i>오</i> 40 <small>(49)</small></span></td></tr>
+<tr><td><b>straight</b><br><small>a stem running the full x-height</small></td><td class='num'>1.75</td><td class='num'>92</td><td class='num'>82</td><td class='num'>70</td><td class='num'>58</td><td class='sds'><span class="sd"><b>b</b><i>왼</i> 70 <small>(82)</small></span><span class="sd"><b>h</b><i>왼</i> 70 <small>(82)</small></span><span class="sd"><b>k</b><i>왼</i> 70 <small>(82)</small></span><span class="sd"><b>l</b><i>왼</i> 70 <small>(82)</small></span><span class="sd"><b>p</b><i>왼</i> 70 <small>(82)</small></span><span class="sd"><b>i</b><i>왼</i> 70 <small>(82)</small></span><span class="sd"><b>i</b><i>오</i> 70 <small>(81)</small></span><span class="sd"><b>j</b><i>왼</i> 70 <small>(82)</small></span><span class="sd"><b>j</b><i>오</i> 70 <small>(82)</small></span><span class="sd"><b>d</b><i>오</i> 70 <small>(81)</small></span><span class="sd"><b>q</b><i>오</i> 70 <small>(81)</small></span><span class="sd"><b>a</b><i>오</i> 70 <small>(81)</small></span><span class="sd"><b>y</b><i>오</i> 70 <small>(81)</small></span></td></tr>
+<tr><td><b>arch</b><br><small>a stem that turns into the arch (the spurless n, and u, its turned form)</small></td><td class='num'>1.62</td><td class='num'>85</td><td class='num'>76</td><td class='num'>65</td><td class='num'>54</td><td class='sds'><span class="sd"><b>n</b><i>왼</i> 65 <small>(76)</small></span><span class="sd"><b>n</b><i>오</i> 65 <small>(76)</small></span><span class="sd"><b>m</b><i>왼</i> 65 <small>(76)</small></span><span class="sd"><b>m</b><i>오</i> 64 <small>(76)</small></span><span class="sd"><b>h</b><i>오</i> 65 <small>(76)</small></span><span class="sd"><b>r</b><i>왼</i> 65 <small>(76)</small></span><span class="sd"><b>u</b><i>왼</i> 65 <small>(76)</small></span><span class="sd"><b>u</b><i>오</i> 65 <small>(76)</small></span><span class="sd"><b>y</b><i>왼</i> 65 <small>(76)</small></span></td></tr>
+<tr><td><b>l R</b><br><small>l&#x27;s free right side: the tall stem wants more room than a stem inside a letter</small></td><td class='num'>1.90</td><td class='num'>100</td><td class='num'>89</td><td class='num'>76</td><td class='num'>63</td><td class='sds'><span class="sd"><b>l</b><i>오</i> 76 <small>(88)</small></span></td></tr>
+<tr><td><b>g R</b><br><small>g&#x27;s stem, which bends away into the tail below</small></td><td class='num'>1.84</td><td class='num'>96</td><td class='num'>86</td><td class='num'>74</td><td class='num'>61</td><td class='sds'><span class="sd"><b>g</b><i>오</i> 74 <small>(86)</small></span></td></tr>
+<tr><td><b>c R</b><br><small>open: the aperture counts as the letter&#x27;s own white</small></td><td class='num'>0.92</td><td class='num'>48</td><td class='num'>43</td><td class='num'>37</td><td class='num'>30</td><td class='sds'><span class="sd"><b>c</b><i>오</i> 37 <small>(43)</small></span></td></tr>
+<tr><td><b>e R</b><br><small>open, like c</small></td><td class='num'>0.92</td><td class='num'>48</td><td class='num'>43</td><td class='num'>37</td><td class='num'>30</td><td class='sds'><span class="sd"><b>e</b><i>오</i> 37 <small>(43)</small></span></td></tr>
+<tr><td><b>s L</b><br><small>s by trial: its open bowls hold white of their own. At light weights the thin s needs more room than the model gives (at 400, os, is, ss read cramped at 0.84), so 400 takes 1.05</small></td><td class='num'>0.88 (700) · 1.05 (400)</td><td class='num'>55</td><td class='num'>49</td><td class='num'>35</td><td class='num'>29</td><td class='sds'><span class="sd"><b>s</b><i>왼</i> 35 <small>(49)</small></span></td></tr>
+<tr><td><b>s R</b><br><small>s by trial</small></td><td class='num'>1.03</td><td class='num'>54</td><td class='num'>48</td><td class='num'>41</td><td class='num'>34</td><td class='sds'><span class="sd"><b>s</b><i>오</i> 41 <small>(49)</small></span></td></tr>
+<tr><td><b>r R</b><br><small>the arm alone; white under the arm reads as the letter&#x27;s own, so a wider r would leave r before a vowel open at 700 (Tracking, grey)</small></td><td class='num'>0.20 (700) · 0.30 (400)</td><td class='num'>16</td><td class='num'>14</td><td class='num'>8</td><td class='num'>7</td><td class='sds'><span class="sd"><b>r</b><i>오</i> 8 <small>(14)</small></span></td></tr>
+<tr><td><b>k R</b><br><small>diagonal</small></td><td class='num'>0.85</td><td class='num'>44</td><td class='num'>40</td><td class='num'>34</td><td class='num'>28</td><td class='sds'><span class="sd"><b>k</b><i>오</i> 34 <small>(40)</small></span></td></tr>
+<tr><td><b>t L</b><br><small>the bar end; white under the bar counts. Quicksand&#x27;s bar is shorter at 400, where 0.15 would close st and it (Most, lists)</small></td><td class='num'>0.15 (700) · 0.37 (400)</td><td class='num'>19</td><td class='num'>17</td><td class='num'>6</td><td class='num'>5</td><td class='sds'><span class="sd"><b>t</b><i>왼</i> 6 <small>(17)</small></span></td></tr>
+<tr><td><b>t R</b><br><small>the bar end; Quicksand draws t&#x27;s bar much longer at 700 than at 400, so this one side has its own value at each end (700, 400)</small></td><td class='num'>0.57 (700) · 0.28 (400)</td><td class='num'>15</td><td class='num'>13</td><td class='num'>23</td><td class='num'>19</td><td class='sds'><span class="sd"><b>t</b><i>오</i> 23 <small>(13)</small></span></td></tr>
+<tr><td><b>f L</b><br><small>the bar end</small></td><td class='num'>0.17</td><td class='num'>9</td><td class='num'>8</td><td class='num'>7</td><td class='num'>6</td><td class='sds'><span class="sd"><b>f</b><i>왼</i> 7 <small>(8)</small></span></td></tr>
+<tr><td><b>f R</b><br><small>hook and bar</small></td><td class='num'>0.52</td><td class='num'>27</td><td class='num'>24</td><td class='num'>21</td><td class='num'>17</td><td class='sds'><span class="sd"><b>f</b><i>오</i> 21 <small>(24)</small></span></td></tr>
+<tr><td><b>v</b><br><small>diagonal</small></td><td class='num'>0.54</td><td class='num'>28</td><td class='num'>25</td><td class='num'>22</td><td class='num'>18</td><td class='sds'><span class="sd"><b>v</b><i>왼</i> 22 <small>(25)</small></span><span class="sd"><b>v</b><i>오</i> 22 <small>(25)</small></span></td></tr>
+<tr><td><b>w</b><br><small>diagonal</small></td><td class='num'>0.67</td><td class='num'>35</td><td class='num'>31</td><td class='num'>27</td><td class='num'>22</td><td class='sds'><span class="sd"><b>w</b><i>왼</i> 27 <small>(31)</small></span><span class="sd"><b>w</b><i>오</i> 26 <small>(31)</small></span></td></tr>
+<tr><td><b>x</b><br><small>diagonal</small></td><td class='num'>0.89</td><td class='num'>47</td><td class='num'>42</td><td class='num'>36</td><td class='num'>29</td><td class='sds'><span class="sd"><b>x</b><i>왼</i> 36 <small>(42)</small></span><span class="sd"><b>x</b><i>오</i> 36 <small>(42)</small></span></td></tr>
+<tr><td><b>z</b><br><small>bars</small></td><td class='num'>0.91</td><td class='num'>48</td><td class='num'>42</td><td class='num'>36</td><td class='num'>30</td><td class='sds'><span class="sd"><b>z</b><i>왼</i> 36 <small>(42)</small></span><span class="sd"><b>z</b><i>오</i> 36 <small>(42)</small></span></td></tr>
+  </tbody></table></div>
+  <h3 style="margin-top:28px">대문자</h3>
+  <p class="sub">Fitted on all three places a capital meets a letter: all caps (cap-height band), capital + lowercase and lowercase + capital (x-height band, lowercase at its classes), weighted by how often each occurs in running text. Pairs that stay uneven are kerned (kern); Quicksand&#x27;s and the proof reviewers&#x27; capital and mixed-case pair kerning stays on top.</p>
+  <div style="overflow-x:auto"><table class="t cls"><colgroup><col style="width:24%"><col style="width:10%"><col style="width:5%"><col style="width:5%"><col style="width:5%"><col style="width:5%"><col style="width:46%"></colgroup><thead><tr><th>부류</th><th>비율 × O</th><th>100</th><th>400</th><th>700</th><th>900</th><th>글자 · 700 (400)</th></tr></thead><tbody>
+  <tr><td><b>round</b><br><small>O, and every side that faces out like O (S by trial lands here too)</small></td><td class='num'>1.00</td><td class='num'>53</td><td class='num'>48</td><td class='num'>40</td><td class='num'>33</td><td class='sds'><span class="sd"><b>O</b><i>왼</i> 40 <small>(48)</small></span><span class="sd"><b>O</b><i>오</i> 40 <small>(48)</small></span><span class="sd"><b>C</b><i>왼</i> 40 <small>(48)</small></span><span class="sd"><b>G</b><i>왼</i> 40 <small>(48)</small></span><span class="sd"><b>Q</b><i>왼</i> 40 <small>(48)</small></span><span class="sd"><b>D</b><i>오</i> 40 <small>(48)</small></span><span class="sd"><b>S</b><i>왼</i> 40 <small>(47)</small></span><span class="sd"><b>S</b><i>오</i> 40 <small>(48)</small></span></td></tr>
+<tr><td><b>straight</b><br><small>a stem running the full cap height (Quicksand 1.875)</small></td><td class='num'>1.92</td><td class='num'>96</td><td class='num'>87</td><td class='num'>77</td><td class='num'>66</td><td class='sds'><span class="sd"><b>B</b><i>왼</i> 77 <small>(87)</small></span><span class="sd"><b>D</b><i>왼</i> 77 <small>(87)</small></span><span class="sd"><b>E</b><i>왼</i> 77 <small>(87)</small></span><span class="sd"><b>F</b><i>왼</i> 77 <small>(87)</small></span><span class="sd"><b>H</b><i>왼</i> 77 <small>(87)</small></span><span class="sd"><b>H</b><i>오</i> 77 <small>(87)</small></span><span class="sd"><b>I</b><i>왼</i> 77 <small>(87)</small></span><span class="sd"><b>I</b><i>오</i> 77 <small>(86)</small></span><span class="sd"><b>K</b><i>왼</i> 77 <small>(87)</small></span><span class="sd"><b>L</b><i>왼</i> 77 <small>(87)</small></span><span class="sd"><b>M</b><i>왼</i> 77 <small>(87)</small></span><span class="sd"><b>M</b><i>오</i> 77 <small>(87)</small></span><span class="sd"><b>N</b><i>왼</i> 77 <small>(87)</small></span><span class="sd"><b>N</b><i>오</i> 77 <small>(87)</small></span><span class="sd"><b>P</b><i>왼</i> 77 <small>(87)</small></span><span class="sd"><b>R</b><i>왼</i> 77 <small>(87)</small></span><span class="sd"><b>J</b><i>오</i> 77 <small>(87)</small></span></td></tr>
+<tr><td><b>U</b><br><small>a stem that turns into the bowl</small></td><td class='num'>1.74</td><td class='num'>87</td><td class='num'>79</td><td class='num'>70</td><td class='num'>59</td><td class='sds'><span class="sd"><b>U</b><i>왼</i> 70 <small>(79)</small></span><span class="sd"><b>U</b><i>오</i> 70 <small>(78)</small></span></td></tr>
+<tr><td><b>B R</b><br><small>two bowls, the lower one wider</small></td><td class='num'>1.12</td><td class='num'>56</td><td class='num'>51</td><td class='num'>45</td><td class='num'>38</td><td class='sds'><span class="sd"><b>B</b><i>오</i> 45 <small>(50)</small></span></td></tr>
+<tr><td><b>G R</b><br><small>the bar and the short stem</small></td><td class='num'>1.43</td><td class='num'>72</td><td class='num'>65</td><td class='num'>57</td><td class='num'>49</td><td class='sds'><span class="sd"><b>G</b><i>오</i> 57 <small>(64)</small></span></td></tr>
+<tr><td><b>Q R</b><br><small>bowl and tail</small></td><td class='num'>1.18</td><td class='num'>59</td><td class='num'>53</td><td class='num'>47</td><td class='num'>40</td><td class='sds'><span class="sd"><b>Q</b><i>오</i> 47 <small>(54)</small></span></td></tr>
+<tr><td><b>E R</b><br><small>bars</small></td><td class='num'>0.89</td><td class='num'>44</td><td class='num'>40</td><td class='num'>36</td><td class='num'>30</td><td class='sds'><span class="sd"><b>E</b><i>오</i> 36 <small>(40)</small></span></td></tr>
+<tr><td><b>R R</b><br><small>leg</small></td><td class='num'>0.80</td><td class='num'>40</td><td class='num'>36</td><td class='num'>32</td><td class='num'>27</td><td class='sds'><span class="sd"><b>R</b><i>오</i> 32 <small>(36)</small></span></td></tr>
+<tr><td><b>P R</b><br><small>bowl, open below</small></td><td class='num'>0.76</td><td class='num'>38</td><td class='num'>34</td><td class='num'>30</td><td class='num'>26</td><td class='sds'><span class="sd"><b>P</b><i>오</i> 30 <small>(35)</small></span></td></tr>
+<tr><td><b>C R</b><br><small>open</small></td><td class='num'>0.75</td><td class='num'>38</td><td class='num'>34</td><td class='num'>30</td><td class='num'>26</td><td class='sds'><span class="sd"><b>C</b><i>오</i> 30 <small>(34)</small></span></td></tr>
+<tr><td><b>K R</b><br><small>diagonals</small></td><td class='num'>0.69</td><td class='num'>34</td><td class='num'>31</td><td class='num'>28</td><td class='num'>24</td><td class='sds'><span class="sd"><b>K</b><i>오</i> 28 <small>(31)</small></span></td></tr>
+<tr><td><b>F R</b><br><small>bars, open below</small></td><td class='num'>0.52</td><td class='num'>26</td><td class='num'>24</td><td class='num'>21</td><td class='num'>18</td><td class='sds'><span class="sd"><b>F</b><i>오</i> 21 <small>(24)</small></span></td></tr>
+<tr><td><b>J L</b><br><small>the hook</small></td><td class='num'>0.53</td><td class='num'>26</td><td class='num'>24</td><td class='num'>21</td><td class='num'>18</td><td class='sds'><span class="sd"><b>J</b><i>왼</i> 21 <small>(24)</small></span></td></tr>
+<tr><td><b>L R</b><br><small>the foot bar, open above</small></td><td class='num'>0.31</td><td class='num'>16</td><td class='num'>14</td><td class='num'>12</td><td class='num'>11</td><td class='sds'><span class="sd"><b>L</b><i>오</i> 12 <small>(14)</small></span></td></tr>
+<tr><td><b>X</b><br><small>diagonals</small></td><td class='num'>0.89</td><td class='num'>44</td><td class='num'>40</td><td class='num'>36</td><td class='num'>30</td><td class='sds'><span class="sd"><b>X</b><i>왼</i> 36 <small>(40)</small></span><span class="sd"><b>X</b><i>오</i> 36 <small>(40)</small></span></td></tr>
+<tr><td><b>Z</b><br><small>bars</small></td><td class='num'>0.71</td><td class='num'>36</td><td class='num'>32</td><td class='num'>28</td><td class='num'>24</td><td class='sds'><span class="sd"><b>Z</b><i>왼</i> 28 <small>(32)</small></span><span class="sd"><b>Z</b><i>오</i> 28 <small>(32)</small></span></td></tr>
+<tr><td><b>W</b><br><small>diagonals</small></td><td class='num'>0.45</td><td class='num'>22</td><td class='num'>20</td><td class='num'>18</td><td class='num'>15</td><td class='sds'><span class="sd"><b>W</b><i>왼</i> 18 <small>(20)</small></span><span class="sd"><b>W</b><i>오</i> 18 <small>(21)</small></span></td></tr>
+<tr><td><b>A</b><br><small>diagonals</small></td><td class='num'>0.36</td><td class='num'>18</td><td class='num'>16</td><td class='num'>14</td><td class='num'>12</td><td class='sds'><span class="sd"><b>A</b><i>왼</i> 14 <small>(17)</small></span><span class="sd"><b>A</b><i>오</i> 14 <small>(16)</small></span></td></tr>
+<tr><td><b>T</b><br><small>the bar, open below</small></td><td class='num'>0.34</td><td class='num'>17</td><td class='num'>15</td><td class='num'>14</td><td class='num'>12</td><td class='sds'><span class="sd"><b>T</b><i>왼</i> 14 <small>(16)</small></span><span class="sd"><b>T</b><i>오</i> 14 <small>(15)</small></span></td></tr>
+<tr><td><b>V</b><br><small>diagonals</small></td><td class='num'>0.33</td><td class='num'>16</td><td class='num'>15</td><td class='num'>13</td><td class='num'>11</td><td class='sds'><span class="sd"><b>V</b><i>왼</i> 13 <small>(15)</small></span><span class="sd"><b>V</b><i>오</i> 13 <small>(15)</small></span></td></tr>
+<tr><td><b>Y</b><br><small>arms, open below</small></td><td class='num'>0.11</td><td class='num'>6</td><td class='num'>5</td><td class='num'>4</td><td class='num'>4</td><td class='sds'><span class="sd"><b>Y</b><i>왼</i> 4 <small>(5)</small></span><span class="sd"><b>Y</b><i>오</i> 4 <small>(5)</small></span></td></tr>
+  </tbody></table></div>
+  <p class="cap">어깨 없는 n(u를 180° 돌린 것)은 둥근 어깨라도 옆모양이 줄기이고, n과 u는 같은 모양이므로 같은 부류(아치 1.62)에 둡니다. i는 곧은 부류(1.75)라 옆 여백이 700에서 70입니다. 숫자는 고정폭(표 폭 TN)이라 이 표에 넣지 않았습니다.</p>
+</section>
+
+<section class="sec">
+  <h2><span class="no">04</span>예외 커닝 — 부류로 고르게 되지 않는 짝</h2>
+  <p class="sub">700과 400에서 같은 쪽으로 어긋나고 그 폭이 10 단위(자주 쓰는 짝) · 15 단위(드문 짝)를 넘는 짝만 넣었습니다. 모델이 두 글자를 윤곽 거리 0.6 o(700에서 24)보다 가깝게 붙이려 하면 그 거리에서 멈춥니다(TT · ff · ft). 값은 700 기준이며 o 옆 여백 비례로 모든 굵기에 적용합니다. Quicksand의 커닝, KERN_FIX, 교정쇄의 대문자 · 섞인 짝 · 구두점 짝은 그대로 있고, 이 값은 그 위에 더합니다.</p>
+  <h3>소문자끼리 · 16쌍</h3><p class='kl'><span>ff <b>-4</b></span> <span>fg <b>-18</b></span> <span>ft <b>-6</b></span> <span>fz <b>-16</b></span> <span>ge <b>+13</b></span> <span>lv <b>+19</b></span> <span>rw <b>-18</b></span> <span>tf <b>+24</b></span> <span>ts <b>-19</b></span> <span>tw <b>-34</b></span> <span>vt <b>-33</b></span> <span>vv <b>-35</b></span> <span>wt <b>-37</b></span> <span>wv <b>-28</b></span> <span>xt <b>-39</b></span> <span>yg <b>+15</b></span></p><h3>대문자끼리 · 38쌍</h3><p class='kl'><span>AT <b>-19</b></span> <span>AW <b>-18</b></span> <span>ET <b>-3</b></span> <span>FA <b>-27</b></span> <span>FJ <b>+61</b></span> <span>FT <b>-24</b></span> <span>GY <b>+16</b></span> <span>HT <b>-3</b></span> <span>IT <b>-3</b></span> <span>JJ <b>-16</b></span> <span>LV <b>-18</b></span> <span>LW <b>-24</b></span> <span>LY <b>-22</b></span> <span>MT <b>-3</b></span> <span>NT <b>-3</b></span> <span>PA <b>-16</b></span> <span>TA <b>-17</b></span> <span>TB <b>-3</b></span> <span>TD <b>-3</b></span> <span>TE <b>-3</b></span> <span>TF <b>-3</b></span> <span>TH <b>-3</b></span> <span>TI <b>-3</b></span> <span>TJ <b>-18</b></span> <span>TK <b>-3</b></span> <span>TL <b>-3</b></span> <span>TM <b>-3</b></span> <span>TN <b>-3</b></span> <span>TP <b>-3</b></span> <span>TR <b>-3</b></span> <span>TS <b>-14</b></span> <span>TT <b>-14</b></span> <span>UY <b>+17</b></span> <span>VA <b>-22</b></span> <span>WA <b>-16</b></span> <span>YU <b>+16</b></span> <span>YV <b>+17</b></span> <span>YY <b>+33</b></span></p><h3>대문자 + 소문자 · 38쌍</h3><p class='kl'><span>Aj <b>+15</b></span> <span>An <b>+11</b></span> <span>As <b>+16</b></span> <span>Ay <b>+18</b></span> <span>Az <b>+20</b></span> <span>Dx <b>+23</b></span> <span>Fx <b>+17</b></span> <span>Gx <b>+15</b></span> <span>Ox <b>+17</b></span> <span>Qx <b>+19</b></span> <span>Tc <b>+20</b></span> <span>Td <b>+42</b></span> <span>Te <b>+25</b></span> <span>Tg <b>-24</b></span> <span>Th <b>+15</b></span> <span>Tk <b>+17</b></span> <span>To <b>+18</b></span> <span>Tp <b>-22</b></span> <span>Tq <b>+46</b></span> <span>Tr <b>-8</b></span> <span>Ts <b>+17</b></span> <span>Tt <b>-18</b></span> <span>Tu <b>+39</b></span> <span>Tv <b>-26</b></span> <span>Tw <b>+43</b></span> <span>Tx <b>-17</b></span> <span>Ty <b>+37</b></span> <span>Tz <b>+62</b></span> <span>Va <b>-23</b></span> <span>Ve <b>-17</b></span> <span>Vo <b>-20</b></span> <span>Vy <b>-22</b></span> <span>Wh <b>+12</b></span> <span>Yb <b>+32</b></span> <span>Yh <b>+31</b></span> <span>Yj <b>+28</b></span> <span>Yk <b>+32</b></span> <span>Yl <b>+33</b></span></p><h3>소문자 + 대문자 · 55쌍</h3><p class='kl'><span>aC <b>+23</b></span> <span>aG <b>+23</b></span> <span>aO <b>+22</b></span> <span>aQ <b>+22</b></span> <span>aY <b>+36</b></span> <span>bY <b>+28</b></span> <span>cY <b>+32</b></span> <span>dY <b>+31</b></span> <span>eT <b>+16</b></span> <span>eY <b>+25</b></span> <span>fJ <b>-21</b></span> <span>fV <b>-45</b></span> <span>fW <b>-34</b></span> <span>fX <b>-39</b></span> <span>fY <b>-20</b></span> <span>fZ <b>-49</b></span> <span>gA <b>+21</b></span> <span>hY <b>+23</b></span> <span>iT <b>+18</b></span> <span>iY <b>+29</b></span> <span>jA <b>+16</b></span> <span>jT <b>+19</b></span> <span>jU <b>+15</b></span> <span>jY <b>+29</b></span> <span>kA <b>+17</b></span> <span>kY <b>+38</b></span> <span>lC <b>+18</b></span> <span>lG <b>+18</b></span> <span>lO <b>+18</b></span> <span>lQ <b>+18</b></span> <span>lT <b>+23</b></span> <span>lV <b>+29</b></span> <span>lW <b>+26</b></span> <span>lY <b>+54</b></span> <span>mA <b>+16</b></span> <span>mY <b>+24</b></span> <span>nY <b>+23</b></span> <span>oY <b>+29</b></span> <span>pY <b>+41</b></span> <span>qY <b>+25</b></span> <span>rA <b>+18</b></span> <span>rJ <b>-32</b></span> <span>sA <b>+17</b></span> <span>tA <b>+17</b></span> <span>vA <b>+25</b></span> <span>vX <b>+30</b></span> <span>vY <b>+25</b></span> <span>vZ <b>+29</b></span> <span>xA <b>+22</b></span> <span>xC <b>+17</b></span> <span>xG <b>+17</b></span> <span>xY <b>+31</b></span> <span>yA <b>+25</b></span> <span>yZ <b>+17</b></span> <span>zA <b>+15</b></span></p>
+</section>
+
+<section class="sec">
+  <h2><span class="no">05</span>문장</h2>
+  <p class="sub">놀이터 데이터(<code>limn-font-play.js</code>)를 <code>LIMN_playset</code>의 기본 규칙(커닝 켬)으로 조판합니다.</p>
+  <div id="sent"></div>
+  <h3 style="margin-top:28px">가장 가는 굵기와 가장 굵은 굵기</h3>
+  <div id="glance"></div>
+</section>
+
+<section class="sec">
+  <h2><span class="no">06</span>격자 — nnXnn · ooXoo · HHXHH · OOXOO</h2>
+  <div id="grid"></div>
+</section>
+
+<section class="sec">
+  <h2><span class="no">07</span>워드마크</h2>
+  <p>워드마크 limn은 부류 간격을 따르지 않고 브랜드 그림의 먹 자리를 지킵니다. 부류 간격에서 l · i · m · n의 옆 여백은 워드마크보다 넓어(700, 가장 가까운 먹 기준 l|i 146 · i|m 135 · m|n 129), <code>limn-brand.js</code>의 <code>LOGO_KERN = { li: −7, im: −6, mn: −10 }</code>이 그만큼 좁혀 워드마크를 제자리에 둡니다.</p>
+</section>
+
+<section class="sec">
+  <h2><span class="no">08</span>검증</h2>
+  <table class="t num3"><thead><tr><th>굵기</th><th>소문자 짝 rms</th><th>대문자 짝 rms</th></tr></thead><tbody><tr><td>100</td><td>8.4</td><td>17.7</td></tr><tr><td>400</td><td>4.8</td><td>7.4</td></tr><tr><td>700</td><td>4.3</td><td>6.1</td></tr><tr><td>900</td><td>7.4</td><td>5.5</td></tr></tbody></table>
+  <p class="cap">전문 서체 14종 중앙값과의 어긋남(빈도 가중 rms, 폰트 단위). 참고로 전문 서체 하나하나의 같은 값은 6.9 안팎입니다.</p>
+</section>
+<footer>자료: tools/spacing.json(부류 · 예외 커닝), tools/build_font.py의 "spacing" 블록, tools/proof_fixes.json(대문자 · 섞인 짝 · 구두점 커닝).</footer>
+<script>
+(function () {
+  const L = LIMN, f = L.f, INK = "#15161a";
+  const sv = (t, h) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${L.vbs(t.vb)}" width="${f(h * t.vb[2] / t.vb[3])}" height="${h}">${t.body}</svg>`;
+  const line = (s, w, h) => `<div class="pair">${sv(LIMN_playset(s, { w, ink: INK, pin: INK, full: true, pad: 40 }), h)}</div>`;
+  const S1 = ["ships sail past slow sands", "this is his tips cups mass lists", "the ships sail on; it is his",
+    "When you open a document, the words should read as one even grey line.",
+    "Most people who work here know the sea better than they know the town.",
+    "minimum illumination of the limn", "Pin It, Fix It, Ship It · Typography, Kerning and Tracking",
+    "A WAVY AVENUE TO THE YARD · LATTE TAXI VOLVO AWAY HTML"];
+  document.getElementById("sent").innerHTML = [700, 400].map(w => `<h3>${w}</h3>` + S1.map(s => line(s, w, 36)).join("")).join("");
+  document.getElementById("glance").innerHTML = [100, 900].map(w => `<h3>${w}</h3>` + S1.slice(0, 4).map(s => line(s, w, 30)).join("")).join("");
+  const LC = "abcdefghijklmnopqrstuvwxyz", UC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  let grid = "";
+  for (const w of [700, 400]) {
+    grid += `<h3>${w}</h3>`;
+    for (const [ctl, letters] of [["n", LC], ["o", LC], ["H", UC], ["O", UC]])
+      for (const half of [letters.slice(0, 13), letters.slice(13)])
+        grid += line([...half].map(c => ctl + ctl + c).join("") + ctl + ctl, w, 34);
+  }
+  document.getElementById("grid").innerHTML = grid;
+})();
+</script>
+</body>
+</html>

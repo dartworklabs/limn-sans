@@ -1,0 +1,13 @@
+# New tooling targets the Python 3.13 runtime used by CI; existing scripts retain their layout.
+[tool.ruff]
+target-version = "py313"
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]
+
+[tool.mypy]
+python_version = "3.13"
+files = ["site/tools/stamp_preview.py", "site/tools/hangul_cache.py", "site/tools/build_coverage_page.py", "site/tools/review_hangul_quality.py", "site/tools/mark_attachment.py"]
+follow_imports = "skip"
+ignore_missing_imports = true

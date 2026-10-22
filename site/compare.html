@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>limn — 글자 대 글자 비교 · Development preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Fredoka:wght@600&family=Lexend:wght@600&family=M+PLUS+Rounded+1c:wght@800&family=Nunito:wght@800&family=Poppins:wght@600&family=Quicksand:wght@700&family=Varela+Round&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="limn-pages.css?v=20261021-release-docs">
+<script src="limn-font.js?v=20260927n1"></script>
+<script src="limn-brand.js?v=20260927n1"></script>
+<style>
+.ctlbar{display:flex;flex-wrap:wrap;gap:26px;align-items:flex-end;padding:6px 0 24px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.ctl{display:flex;flex-direction:column;gap:7px;font-size:12px;color:var(--muted)}
+.ctl.wide{min-width:230px}
+.ctl>span{display:flex;gap:8px;align-items:center}
+.ctl code{color:var(--ink);font:11px var(--mono)}
+.ctl select{font:13px var(--ui);padding:6px 10px;border:1px solid var(--ink);border-radius:6px;background:#fff;color:var(--ink)}
+.ctl input[type=range]{width:190px;accent-color:var(--ink)}
+.seg{display:flex;gap:4px;flex-wrap:wrap}
+.seg button{font:12px var(--mono);border-color:var(--line);color:var(--muted);padding:3px 10px}
+.seg button[aria-pressed=true]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.reffact{margin:0;font-size:12px;color:var(--muted);max-width:360px}
+.ldg{font:11px var(--mono);color:var(--ver);min-height:14px}
+.legend{display:flex;gap:18px;align-items:center;flex-wrap:wrap;font:11.5px var(--mono);color:var(--muted);margin-bottom:16px}
+.legend i{width:11px;height:11px;border-radius:50%;display:inline-block;margin-right:5px;vertical-align:-1px}
+.legend b{color:var(--ink);font-weight:600}
+.cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));border-top:1px solid var(--ink);border-left:1px solid var(--line)}
+.cg h3{grid-column:1/-1;margin:0;padding:16px 4px 6px;font:500 12px var(--mono);color:var(--muted);border-bottom:1px solid var(--line);background:var(--paper)}
+.cgc{all:unset;box-sizing:border-box;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff;display:flex;flex-direction:column;align-items:center;gap:5px;padding:12px 4px 10px;cursor:zoom-in;font:inherit}
+.cgc:hover{background:#fbfaf7}
+.cgc:focus-visible{outline:2px solid var(--ver);outline-offset:-2px}
+.cgc svg{max-width:100%;height:auto}
+.cgc svg circle{stroke:none}
+.cgc .ch{font:600 13px var(--mono);color:var(--ink)}
+.cgc .nums{font:10.5px var(--mono);color:var(--muted);display:flex;gap:7px}
+.cgc .nums b{color:var(--ink);font-weight:600}
+.cgc .nums i{font-style:normal;font-weight:600}
+.scmp{border-top:1px solid var(--line);padding:20px 0}
+.scmp:first-child{border-top:1px solid var(--ink)}
+.scmp-row{display:flex;align-items:center;gap:18px;padding:5px 0;overflow-x:auto}
+.scmp-tag{flex:0 0 150px;font:11px var(--mono);color:var(--muted)}
+.scmp-row.limn .scmp-tag{color:var(--ver)}
+.scmp-row.ref .scmp-tag{color:#2f5bea}
+.scmp-svgwrap svg{display:block}
+.scmp-textwrap{white-space:nowrap;color:var(--ink)}
+.zoom-ov{position:fixed;inset:0;background:rgba(21,22,26,.55);display:flex;align-items:center;justify-content:center;z-index:50;padding:24px}
+.zoom-ov[hidden]{display:none}
+.zoom-panel{background:#fff;border-radius:10px;max-width:min(760px,94vw);max-height:88vh;overflow:auto;padding:26px 30px 22px;position:relative;box-shadow:0 30px 70px rgba(21,22,26,.35)}
+.zoom-panel svg circle{stroke:none}
+.zoom-close{position:absolute;top:14px;right:14px}
+.zoom-title{margin:0 0 4px;font-size:20px}
+.zoom-sub{margin:0 0 16px;color:var(--muted);font-size:12.5px}
+.zoom-svgwrap{display:flex;justify-content:center}
+.zoom-legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px;font:11px var(--mono);color:var(--muted)}
+.zoom-legend b{color:var(--ink);font-weight:600}
+</style>
+</head>
+<body>
+<div class="bar"><nav><a href="index.html">홈</a><a href="bi.html">BI</a><a href="dock.html">앱 아이콘</a><a href="icons.html">작은 아이콘</a><a href="type.html">서체</a><a href="weights.html">굵기</a><a href="hangul.html">한글 실험</a><a href="punct.html">구두점</a><a href="symbols.html">특수문자</a><a href="accents.html">악센트</a><a href="spacing.html">자간</a><a href="proof.html">교정쇄</a><b>비교</b><a href="coverage.html">커버리지</a><a href="fonts.html">폰트 파일</a><a href="concept.html">의미</a></nav></div>
+
+<aside class="release-note" aria-label="Release and preview scope"><strong>개발·연구 미리보기</strong> · 이 화면의 엔진·한글·브랜드 실험은 배포본과 다릅니다.
+<a href="https://github.com/dartworklabs/limn-sans/releases/tag/v1.002">Limn Sans 1.002 받기</a>: 영어·기호 919자, 정적 9굵기(100–900). 한글·로고 글리프는 제외되며, 그리스어·확장 라틴은 언어 QA 대상이 아닙니다.</aside>
+<section class="sec">
+  <h2><span class="no">비교</span>limn 글자 대 글자 비교</h2>
+  <p class="sub">limn의 88개 글리프 전부를 기준 글꼴과 겹쳐 보거나 나란히 놓고, 기준선·x높이·대문자높이에 맞춰 비교합니다. 아래 문장 비교로는 리듬과 간격까지 확인할 수 있습니다. 글자를 클릭하면 크게 확대됩니다.</p>
+
+  <div class="ctlbar">
+    <label class="ctl"><span>기준 글꼴</span><select id="refSel"></select></label>
+    <div class="ctl"><span>보기</span>
+      <div class="seg" id="modeSeg" role="group" aria-label="보기 방식">
+        <button type="button" data-v="overlay" aria-pressed="true">겹쳐 보기</button>
+        <button type="button" data-v="side" aria-pressed="false">나란히</button>
+      </div>
+    </div>
+    <div class="ctl"><span>맞춤 기준</span>
+      <div class="seg" id="scaleSeg" role="group" aria-label="크기 맞춤 기준">
+        <button type="button" data-v="xh" aria-pressed="true">x높이 맞춤</button>
+        <button type="button" data-v="cap" aria-pressed="false">대문자 높이 맞춤</button>
+      </div>
+    </div>
+    <div class="ctl"><span>글자 폭 세로선</span>
+      <div class="seg" id="vlSeg" role="group" aria-label="글자 폭 세로선">
+        <button type="button" data-v="1" aria-pressed="true">켬</button>
+        <button type="button" data-v="0" aria-pressed="false">끔</button>
+      </div>
+    </div>
+    <label class="ctl wide"><span>글자 크기 <code id="sizeOut">60px</code></span><input type="range" id="sizeRange" min="32" max="120" step="2" value="60"></label>
+    <span class="ldg" id="loadState"></span>
+  </div>
+
+  <div class="legend">
+    <span><i style="background:#15161a"></i><b>limn</b></span>
+    <span><i style="background:#2f5bea"></i><b id="legRef">Quicksand</b></span>
+    <span class="note">붉은 테두리 = 옆 여백이 기준 글꼴과 25 넘게 다른 글자 · 점선 = 각 글자의 원점과 전진폭 · 글자 밑 숫자 2개 = limn 잉크폭 · 비교 글꼴 잉크폭 (둘 다 limn 단위, 값 없으면 “–”)</span>
+  </div>
+
+  <div class="cg" id="grid"></div>
+</section>
+
+<section class="sec">
+  <h2><span class="no">문장</span>문장으로 리듬 비교</h2>
+  <p class="sub">같은 x높이(또는 대문자 높이)로 맞춘 뒤, limn과 기준 글꼴을 한 문장씩 위아래로 쌓았습니다. 글자 사이 간격과 리듬의 차이를 봅니다. 문장 크기는 한 줄이 화면에 들어오도록 고정값을 쓰며, 위 그리드의 글자 크기 슬라이더와는 무관합니다.</p>
+  <div id="sent"></div>
+</section>
+
+<footer>모든 글리프 윤곽은 <code>limn-font.js</code>(<code>window.LIMN_FONT</code>)에서, 타이프셋·핀 규칙은 <code>limn-brand.js</code>(<code>LIMN.typeset</code>)에서 가져옵니다. 비교 글꼴은 Google Fonts로 불러온 원본 글꼴이며(SIL OFL), 폭 측정은 브라우저 canvas <code>measureText</code>의 잉크 경계 상자를 씁니다.</footer>
+
+<div class="zoom-ov" id="zoomOv" hidden>
+  <div class="zoom-panel" role="dialog" aria-modal="true" aria-label="글자 확대 비교">
+    <button class="zoom-close" type="button" id="zoomClose">닫기 ✕</button>
+    <h3 class="zoom-title" id="zoomTitle"></h3>
+    <p class="zoom-sub" id="zoomSub"></p>
+    <div class="zoom-svgwrap" id="zoomSvgWrap"></div>
+    <div class="zoom-legend" id="zoomLegend"><b>선</b>: baseline 0 · x높이 535 · 대문자 700 · 어센더 740 · 디센더 −200 (모두 limn 단위)</div>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+const { XH, ASC, CAP, DESC, r: PINR, CY } = LIMN;
+const INK = "#15161a", MUTED = "#6d6a64", LINEHEX = "#e4e0d8", REF = "#2f5bea";
+const FALLBACK_RATIO = { xhRatio: .52, capRatio: .72 };
+
+const REF_FONTS = [
+  { key:"quicksand", label:"Quicksand", family:"Quicksand", weight:700, note:"Andrew Paglinawan · 기하학적 산세리프, limn의 부모." },
+  { key:"comfortaa", label:"Comfortaa", family:"Comfortaa", weight:700, note:"Johan Åkerlund · 원과 직선의 기하학적 둥근 글자." },
+  { key:"nunito", label:"Nunito", family:"Nunito", weight:800, note:"Vernon Adams · 둥근 끝의 균형 잡힌 산세리프." },
+  { key:"varela", label:"Varela Round", family:"Varela Round", weight:400, note:"Joe Prince · 둥근 끝, 한 가지 굵기." },
+  { key:"fredoka", label:"Fredoka", family:"Fredoka", weight:600, note:"Milena Brandão · 둥글고 통통한 표정." },
+  { key:"mplus", label:"M PLUS Rounded 1c", family:"M PLUS Rounded 1c", weight:800, note:"M+ Fonts · 둥근 고딕, 라틴은 반듯한 구성." },
+  { key:"lexend", label:"Lexend", family:"Lexend", weight:600, note:"Bonnie Shaver-Troup · Thomas Jockin · 가독성 연구 기반, 끝은 평평." },
+  { key:"poppins", label:"Poppins", family:"Poppins", weight:600, note:"Indian Type Foundry · 기하학적 산세리프, 둥근 도트." },
+];
+
+const LOWER = Array.from({length:26},(_,i)=>String.fromCharCode(97+i));
+const UPPER = Array.from({length:26},(_,i)=>String.fromCharCode(65+i));
+const DIGITS = Array.from({length:10},(_,i)=>String(i));
+const SYMBOLS = [".",",",":",";","!","?","·","-","–","—","/","'","\"","(",")","&","@","#","%","+","=","*","_","[","]"];
+const HANGUL = ["림"];
+const GROUPS = [
+  { label:`소문자 a–z (${LOWER.length})`, chars:LOWER },
+  { label:`대문자 A–Z (${UPPER.length})`, chars:UPPER },
+  { label:`숫자 0–9 (${DIGITS.length})`, chars:DIGITS },
+  { label:`기호 (${SYMBOLS.length})`, chars:SYMBOLS },
+  { label:`한글 (${HANGUL.length})`, chars:HANGUL },
+];
+
+const SENTENCES = [
+  "Quiet Zebras jumped? Yes! 12:48 — wait; (a/b) & @limn",
+  "pin it. fix it. done. hum 12–18",
+  "The quick brown fox jumps over 13 lazy dogs.",
+  "Flex, fix, and finish: v3.0 ships 100% on time.",
+  "Hello world! Is this readable at 24px? [maybe] *yes*",
+];
+
+const state = { ref:"quicksand", mode:"overlay", scaleMode:"xh", size:60, vlines:true };
+const measCache = {};
+let fontsReady = false;
+const ZOOM_SIZE = 190;
+const SENT_SIZE = 24; /* sentences use a fixed, smaller matched-dimension size so a full line fits without heavy scrolling — independent of the grid's size slider */
+
+const $ = id => document.getElementById(id);
+const refSel = $("refSel"), modeSeg = $("modeSeg"), scaleSeg = $("scaleSeg"), sizeRange = $("sizeRange"),
+      sizeOut = $("sizeOut"), loadState = $("loadState"), legRef = $("legRef"), gridEl = $("grid"), sentEl = $("sent"),
+      zoomOv = $("zoomOv"), zoomTitle = $("zoomTitle"), zoomSub = $("zoomSub"), zoomSvgWrap = $("zoomSvgWrap"), zoomClose = $("zoomClose");
+
+function esc(s){
+  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+}
+
+/* ---------- font metric measurement (canvas ink bounds) ---------- */
+const _mcanvas = document.createElement("canvas");
+const _mctx = _mcanvas.getContext("2d");
+function measureRatios(f){
+  _mctx.textBaseline = "alphabetic"; _mctx.textAlign = "left";
+  _mctx.font = `${f.weight} 400px "${f.family}"`;
+  const mx = _mctx.measureText("x"), mH = _mctx.measureText("H");
+  const xhRatio = (mx.actualBoundingBoxAscent || 0) / 400;
+  const capRatio = (mH.actualBoundingBoxAscent || 0) / 400;
+  return { xhRatio: xhRatio > 0 ? xhRatio : FALLBACK_RATIO.xhRatio, capRatio: capRatio > 0 ? capRatio : FALLBACK_RATIO.capRatio };
+}
+function measureGlyph(f, sizePx, ch){
+  _mctx.textBaseline = "alphabetic"; _mctx.textAlign = "left";
+  _mctx.font = `${f.weight} ${sizePx}px "${f.family}"`;
+  const m = _mctx.measureText(ch);
+  const left = m.actualBoundingBoxLeft || 0, right = m.actualBoundingBoxRight || 0;
+  return { left, right, width: left + right, adv: m.width };
+}
+function refFontSizePx(size, scaleMode, ratios){
+  const R = ratios || FALLBACK_RATIO;
+  const ratio = scaleMode === "cap" ? R.capRatio : R.xhRatio;
+  return ratio > 0 ? size / ratio : size * 1.7;
+}
+
+/* ---------- per-glyph comparison SVG ---------- */
+function buildSvg(ch, size, scaleMode, mode, ratios, refFont, opts){
+  opts = opts || {};
+  const k = scaleMode === "cap" ? size / CAP : size / XH;
+  const isHangul = ch === "림";
+  const tMeasure = LIMN.typeset(ch);
+  const lx0 = tMeasure.vb[0], lw = tMeasure.vb[2];
+  const limnMid = lx0 + lw / 2;
+  const limnWidthUnits = lw;
+  const G0 = LIMN.F.glyphs[ch] || {adv: lw, box:[lx0,0,lx0+lw,0]};
+  const lAdv = G0.adv, lLsb = G0.box[0], lRsb = G0.adv - G0.box[2];
+
+  let gm = null, fsize = 0, refReady = false, refWidthUnits = null;
+  if (!isHangul){
+    fsize = refFontSizePx(size, scaleMode, ratios);
+    gm = measureGlyph(refFont, fsize, ch);
+    if (gm.width > 0){ refWidthUnits = gm.width / k; refReady = true; }
+  }
+
+  const topMost = Math.min(-ASC * k, (CY - PINR) * k) * 1.22 - 26;
+  const botMost = (-DESC * k) * 1.45 + 30;
+  const H = botMost - topMost;
+  const W = Math.max(150, size * 4.2);
+  const baselineY = -topMost;
+  const cx = W / 2;
+  const yXH = baselineY - XH * k;
+  const yCap = baselineY - CAP * k;
+  const yAsc = baselineY - ASC * k;
+  const yDesc = baselineY - DESC * k;
+
+  let glyphsSvg = "";
+  // glyph side lines: origin and advance of each glyph (limn: ink colour, reference: blue)
+  const vline = (x, col, dash) => `<line x1="${x.toFixed(1)}" y1="${(topMost+6).toFixed(1)}" x2="${x.toFixed(1)}" y2="${(botMost-6).toFixed(1)}" stroke="${col}" stroke-width="1.2" stroke-dasharray="${dash === "1 2" ? "none" : "4 3"}" opacity=".6"/>`;
+  const sides = (xl, xr, col, dash) => state.vlines ? vline(xl, col, dash) + vline(xr, col, dash) : "";
+  let refLsb = null, refRsb = null;
+  if (refReady){ refLsb = -gm.left / k; refRsb = (gm.adv - gm.right) / k; }
+  if (mode === "overlay"){
+    if (refReady){
+      const ax = cx - (gm.right - gm.left) / 2;
+      glyphsSvg += `<text x="${ax.toFixed(1)}" y="${baselineY.toFixed(1)}" font-family="'${refFont.family}',sans-serif" font-weight="${refFont.weight}" font-size="${fsize.toFixed(2)}" fill="${REF}" fill-opacity="0.42">${esc(ch)}</text>` + sides(ax, ax + gm.adv, REF, "3 3");
+    } else if (isHangul){
+      glyphsSvg += `<text x="${cx.toFixed(1)}" y="${(topMost + 16).toFixed(1)}" font-family="ui-sans-serif,system-ui,sans-serif" font-size="11.5" fill="${MUTED}" text-anchor="middle">비교 글꼴 한글 미지원</text>`;
+    }
+    const tOut = LIMN.typeset(ch, { ink: "none" });
+    const tx = cx - k * limnMid;
+    const sw = (1.55 / k).toFixed(3);
+    glyphsSvg += `<g transform="translate(${tx.toFixed(2)} ${baselineY.toFixed(2)}) scale(${k.toFixed(4)})"><g stroke="${INK}" stroke-width="${sw}" stroke-linejoin="round" stroke-linecap="round">${tOut.body}</g></g>` + sides(tx, tx + k * lAdv, INK, "1 2");
+  } else {
+    const leftCX = W * 0.26, rightCX = W * 0.74;
+    const txL = leftCX - k * limnMid;
+    glyphsSvg += `<line x1="${(W/2).toFixed(1)}" y1="${(topMost+8).toFixed(1)}" x2="${(W/2).toFixed(1)}" y2="${(botMost-8).toFixed(1)}" stroke="${LINEHEX}" stroke-width="1" stroke-dasharray="2 3"/>`;
+    glyphsSvg += `<g transform="translate(${txL.toFixed(2)} ${baselineY.toFixed(2)}) scale(${k.toFixed(4)})">${tMeasure.body}</g>` + sides(txL, txL + k * lAdv, INK, "1 2");
+    if (refReady){
+      const ax = rightCX - (gm.right - gm.left) / 2;
+      glyphsSvg += `<text x="${ax.toFixed(1)}" y="${baselineY.toFixed(1)}" font-family="'${refFont.family}',sans-serif" font-weight="${refFont.weight}" font-size="${fsize.toFixed(2)}" fill="${REF}">${esc(ch)}</text>` + sides(ax, ax + gm.adv, REF, "3 3");
+    } else if (isHangul){
+      glyphsSvg += `<text x="${rightCX.toFixed(1)}" y="${(topMost + 16).toFixed(1)}" font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" fill="${MUTED}" text-anchor="middle">미지원</text>`;
+    }
+  }
+
+  let guides = `<line x1="0" y1="${yCap.toFixed(1)}" x2="${W.toFixed(1)}" y2="${yCap.toFixed(1)}" stroke="${MUTED}" stroke-width="1" stroke-dasharray="1 3" opacity=".55"/>
+    <line x1="0" y1="${yXH.toFixed(1)}" x2="${W.toFixed(1)}" y2="${yXH.toFixed(1)}" stroke="${MUTED}" stroke-width="1" stroke-dasharray="1 3" opacity=".8"/>
+    <line x1="0" y1="${baselineY.toFixed(1)}" x2="${W.toFixed(1)}" y2="${baselineY.toFixed(1)}" stroke="${INK}" stroke-width="1" opacity=".7"/>`;
+
+  if (opts.labels){
+    guides += `<line x1="0" y1="${yAsc.toFixed(1)}" x2="${W.toFixed(1)}" y2="${yAsc.toFixed(1)}" stroke="${MUTED}" stroke-width="1" stroke-dasharray="1 4" opacity=".4"/>
+      <line x1="0" y1="${yDesc.toFixed(1)}" x2="${W.toFixed(1)}" y2="${yDesc.toFixed(1)}" stroke="${MUTED}" stroke-width="1" stroke-dasharray="1 4" opacity=".4"/>`;
+    const lbl = (y, t, fill) => `<text x="6" y="${(y-4).toFixed(1)}" font-family="ui-monospace,SFMono-Regular,monospace" font-size="11" fill="${fill||MUTED}">${esc(t)}</text>`;
+    guides += lbl(yAsc, "어센더 740") + lbl(yCap, "대문자 700") + lbl(yXH, "x높이 535") + lbl(baselineY, "baseline 0", INK) + lbl(yDesc, "디센더 −200");
+  }
+
+  const svg = `<svg viewBox="0 0 ${W.toFixed(1)} ${H.toFixed(1)}" width="${W.toFixed(1)}" height="${H.toFixed(1)}" xmlns="http://www.w3.org/2000/svg">${guides}${glyphsSvg}</svg>`;
+  return { svg, limnWidthUnits, refWidthUnits, refReady, isHangul, lLsb, lRsb, refLsb, refRsb };
+}
+
+/* ---------- render: grid ---------- */
+function cellHTML(ch){
+  const ratios = measCache[state.ref];
+  const refFont = REF_FONTS.find(f => f.key === state.ref);
+  const r = buildSvg(ch, state.size, state.scaleMode, state.mode, ratios, refFont, {});
+  const refTxt = r.refWidthUnits != null ? r.refWidthUnits.toFixed(0) : (r.isHangul ? "–" : "…");
+  const sb = (a, b) => a == null ? "–" : `${a.toFixed(0)}·${b.toFixed(0)}`;
+  // side-bearing flag: limn's left or right bearing strays more than 25 units from the reference
+  const off = r.refLsb != null && (Math.abs(r.lLsb - r.refLsb) > 25 || Math.abs(r.lRsb - r.refRsb) > 25);
+  return `<button type="button" class="cgc" data-ch="${esc(ch)}" aria-label="${esc(ch)} 비교, 클릭하면 확대"${off ? ' style="outline:2px solid #e8452c;outline-offset:-2px"' : ""}>${r.svg}<span class="ch">${esc(ch)}</span><span class="nums"><b>${r.limnWidthUnits.toFixed(0)}</b><i style="color:${REF}">${refTxt}</i></span><span class="nums" style="font-size:10.5px;opacity:.8" title="옆 여백 왼쪽·오른쪽"><b>${sb(r.lLsb, r.lRsb)}</b><i style="color:${REF}">${sb(r.refLsb, r.refRsb)}</i></span></button>`;
+}
+function renderGrid(){
+  let html = "";
+  for (const g of GROUPS){
+    html += `<h3>${esc(g.label)}</h3>`;
+    for (const ch of g.chars) html += cellHTML(ch);
+  }
+  gridEl.innerHTML = html;
+}
+
+/* ---------- render: sentences ---------- */
+function sentenceHTML(s){
+  const ratios = measCache[state.ref];
+  const refFont = REF_FONTS.find(f => f.key === state.ref);
+  const k = state.scaleMode === "cap" ? SENT_SIZE / CAP : SENT_SIZE / XH;
+  const fsize = refFontSizePx(SENT_SIZE, state.scaleMode, ratios);
+  const t = LIMN.typeset(s, { pad: 16 });
+  const svg = LIMN.svg(t, { scale: k });
+  return `<div class="scmp">
+    <div class="scmp-row limn"><span class="scmp-tag">limn</span><div class="scmp-svgwrap">${svg}</div></div>
+    <div class="scmp-row ref"><span class="scmp-tag">${esc(refFont.label)}</span><div class="scmp-textwrap" style="font-family:'${refFont.family}',sans-serif;font-weight:${refFont.weight};font-size:${fsize.toFixed(2)}px">${esc(s)}</div></div>
+  </div>`;
+}
+function renderSentences(){
+  sentEl.innerHTML = SENTENCES.map(sentenceHTML).join("");
+}
+
+/* ---------- zoom modal ---------- */
+let zoomCh = null;
+function renderZoom(){
+  if (zoomCh == null) return;
+  const ratios = measCache[state.ref];
+  const refFont = REF_FONTS.find(f => f.key === state.ref);
+  const r = buildSvg(zoomCh, ZOOM_SIZE, state.scaleMode, state.mode, ratios, refFont, { labels: true });
+  zoomTitle.textContent = `“${zoomCh}” 확대 비교 — ${refFont.label}`;
+  zoomSub.textContent = r.isHangul
+    ? "비교 글꼴 대부분 한글을 지원하지 않아 limn 글리프만 표시합니다."
+    : `limn 잉크폭 ${r.limnWidthUnits.toFixed(0)} · ${refFont.label} 잉크폭 ${r.refWidthUnits != null ? r.refWidthUnits.toFixed(0) : "–"} (둘 다 limn 단위, 기준 ${state.scaleMode === "cap" ? "대문자 높이" : "x높이"} ${state.size}px)`;
+  zoomSvgWrap.innerHTML = r.svg;
+}
+function openZoom(ch){ zoomCh = ch; renderZoom(); zoomOv.hidden = false; }
+function closeZoom(){ zoomOv.hidden = true; }
+
+/* ---------- top-level render ---------- */
+function renderAll(){
+  const refFont = REF_FONTS.find(f => f.key === state.ref);
+  legRef.textContent = refFont.label;
+  renderGrid();
+  renderSentences();
+  if (!zoomOv.hidden) renderZoom();
+}
+
+/* ---------- controls wiring ---------- */
+function setPressed(container, activeBtn){
+  container.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(b === activeBtn)));
+}
+refSel.innerHTML = REF_FONTS.map(f => `<option value="${f.key}">${esc(f.label)}</option>`).join("");
+refSel.value = state.ref;
+refSel.addEventListener("change", () => { state.ref = refSel.value; renderAll(); });
+
+$("vlSeg").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  state.vlines = b.dataset.v === "1"; setPressed($("vlSeg"), b); renderAll();
+});
+modeSeg.addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  state.mode = b.dataset.v; setPressed(modeSeg, b); renderAll();
+});
+scaleSeg.addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  state.scaleMode = b.dataset.v; setPressed(scaleSeg, b); renderAll();
+});
+sizeRange.addEventListener("input", () => {
+  state.size = +sizeRange.value; sizeOut.textContent = state.size + "px"; renderAll();
+});
+gridEl.addEventListener("click", e => {
+  const b = e.target.closest(".cgc"); if (!b) return;
+  openZoom(b.dataset.ch);
+});
+zoomClose.addEventListener("click", closeZoom);
+zoomOv.addEventListener("click", e => { if (e.target === zoomOv) closeZoom(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape" && !zoomOv.hidden) closeZoom(); });
+
+/* ---------- font loading ---------- */
+async function loadFonts(){
+  loadState.textContent = "기준 글꼴 측정 중…";
+  try {
+    await Promise.allSettled(REF_FONTS.map(f => document.fonts.load(`${f.weight} 32px "${f.family}"`)));
+    if (document.fonts && document.fonts.ready) await document.fonts.ready;
+  } catch (e) { /* proceed with fallback ratios */ }
+  for (const f of REF_FONTS){
+    try { measCache[f.key] = measureRatios(f); }
+    catch (e) { measCache[f.key] = { ...FALLBACK_RATIO }; }
+  }
+  fontsReady = true;
+  loadState.textContent = "";
+  renderAll();
+}
+
+renderAll();
+loadFonts();
+})();
+</script>
+</body>
+</html>

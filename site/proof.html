@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>limn — 교정쇄 · Development preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="limn-pages.css?v=20261021-release-docs">
+<script src="limn-font.js?v=20260927n1"></script>
+<script src="limn-font-play.js?v=20260927n1"></script>
+<script src="limn-brand.js?v=20260927n1"></script>
+<style>
+.ctl{display:flex;flex-wrap:wrap;gap:18px 28px;align-items:center;margin:0 0 26px;font-size:13px}
+.ctl label{display:flex;gap:8px;align-items:center;color:var(--muted)}
+.ctl input[type=range]{width:180px}
+.ctl b{font-family:var(--mono);font-weight:500;color:var(--ink);min-width:44px}
+.grp{margin:0 0 34px}.grp h3{font-size:13px;color:var(--muted);font-weight:500;margin:0 0 10px;font-family:var(--mono)}
+.sheet{background:#fff;border-radius:8px;padding:18px 24px;display:flex;flex-direction:column;gap:4px;overflow:hidden}
+.sheet svg{display:block;max-width:none}
+textarea{width:100%;max-width:1120px;min-height:70px;font:14px/1.5 var(--mono);padding:10px;border:1px solid var(--line);border-radius:6px;background:#fff}
+</style>
+</head>
+<body>
+<div class="bar"><nav><a href="index.html">홈</a><a href="bi.html">BI</a><a href="dock.html">앱 아이콘</a><a href="icons.html">작은 아이콘</a><a href="type.html">서체</a><a href="weights.html">굵기</a><a href="hangul.html">한글 실험</a><a href="punct.html">구두점</a><a href="symbols.html">특수문자</a><a href="accents.html">악센트</a><a href="spacing.html">자간</a><b>교정쇄</b><a href="compare.html">비교</a><a href="coverage.html">커버리지</a><a href="fonts.html">폰트 파일</a><a href="concept.html">의미</a></nav></div>
+<aside class="release-note" aria-label="Release and preview scope"><strong>개발·연구 미리보기</strong> · 이 화면의 엔진·한글·브랜드 실험은 배포본과 다릅니다.
+<a href="https://github.com/dartworklabs/limn-sans/releases/tag/v1.002">Limn Sans 1.002 받기</a>: 영어·기호 919자, 정적 9굵기(100–900). 한글·로고 글리프는 제외되며, 그리스어·확장 라틴은 언어 QA 대상이 아닙니다.</aside>
+<header>
+  <div><p class="kicker">서체 · 교정쇄</p><h1>여러 문장으로 써 보기</h1>
+  <p class="lede">글자 하나하나가 규칙을 지켜도 문장에서는 어색할 수 있습니다. 여기서는 본문, 제목, 앱 문구, 숫자, 코드, 기호가 섞인 문장과 간격 점검용 문자열을 굵기와 크기를 바꿔 가며 한꺼번에 봅니다. 맨 아래 칸에 직접 쓴 문장도 같은 조건으로 조판됩니다.</p></div>
+</header>
+<section class="sec">
+  <div class="ctl">
+    <label>굵기 <input id="w" type="range" min="100" max="900" step="100" value="700"><b id="wv">700</b></label>
+    <label>크기 <input id="px" type="range" min="12" max="96" step="2" value="28"><b id="pxv">28px</b></label>
+    <label><input id="opt" type="checkbox" checked> 광학 크기(작은 크기에서 핀 틈 보장)</label>
+    <label><input id="tn" type="checkbox" checked> 고정폭 숫자</label>
+    <label><input id="app" type="checkbox"> 주홍 핀(limn 앱)</label>
+  </div>
+  <div id="out"></div>
+  <div class="grp"><h3>직접 쓰기 — 줄마다 한 줄씩 조판</h3><p id="miss" style="font-size:12.5px;color:#a32a14;margin:0 0 6px"></p><textarea id="mine">Type anything here, then compare it at 100 and 900.
+Quick fox, lazy dog: 12 pins, 3 open.</textarea><div class="sheet" id="mineOut" style="margin-top:10px"></div></div>
+</section>
+<footer>조판은 <code>LIMN_playset</code>(서체 페이지의 "직접 써보기"와 같은 엔진)으로 합니다. 글자 데이터는 <code>limn-font-play.js</code>(100~900)이고, 한글은 굵기마다 <code>limn-hangul-&lt;w&gt;.js</code>(나눔스퀘어라운드 기반, <a href="hangul.html">한글 실험</a>)를 쓰는 굵기만 불러옵니다.</footer>
+<script>
+const G=[
+ ["본문",["Limn is a quiet place to read a manuscript, pin a thought to a line, and come back to it later.","Every dot is a pin: small, round and warm. The letters stay calm so the pins can speak.","The quick brown fox jumps over the lazy dog. Sphinx of black quartz, judge my vow.","Rhythm, syzygy, jiffy, quizzical, nimble, illumination, minimum, summer, common mnemonic."]],
+ ["제목 · 대문자",["Pin It, Fix It, Ship It","A WAVY AVENUE TO THE YARD","LATTE · TAXI · VOLVO · AWAY · HTML · API · PDF","Typography, Kerning & Tracking — Vol. 7"]],
+ ["앱 문구",["3 open pins · Resolve all · Line 118, Col 4","hello@limn.app · @wonjun · #42 · v0.3.12","https://limn.dartworklabs.com/p/xyz?view=all","Saved at 12:30 PM on 2026-09-27 — 99% done!"]],
+ ["숫자",["0123456789 · 1,111 · 3.14159 · 10:10 · 7.5%","$1,299.00 · €48 · 2 × 3 = 6 · (a + b) ÷ 2","Line 1 · Line 11 · Line 111 · Line 1011"]],
+ ["구두점 · 코드",["“Pins,” she said, ‘are dots.’ It’s 12–18 o’clock… Really?!","¿Qué? ¡Hola! (maybe) [draft] {v2} — see p. 4/5.","if (a && b) { x[i] = f(y); } // a != b, x <= 3","'single' \"double\" `tick` a_b c|d e\\f ~5 ^2 *"]],
+ ["간격 점검 문자열",["nnannbnncnndnnennfnngnnhnninnjnnknnlnnmnnonnpnnqnnrnnsnntnnunnvnnwnnxnnynnzn","ooaoobooco odooeoofoogoohooioojookooloomoonooopooqooroosootoouoovoowooxooyoozo","HHAHHBHHCHHDHHEHHFHHGHHHHIHHJHHKHHLHHMHHNHHOHHPHHQHHRHHSHHTHHUHHVHHWHHXHHYHHZH","OOAOOBOOCOODOOEOOFOOGOOHOOIOOJOOKOOLOOMOONOOPOOQOOROOSOOTOOUOOVOOWOOXOOYOOZO","H0H1H2H3H4H5H6H7H8H9H · n.n,n:n;n!n?n-n(n)n“n”n'n"]],
+ ["어려운 짝",["Ta Te To Tr Ty Va Ve Vo Wa We Wo Ya Yo Fa Pa Ly Lt Av Aw Ay","rn rm fr fn ry rv rw ft ff fi fl tt ll ij ji ii jj","limn 림 · 림 limn · LIMN 림 · Limn 림, limn."]],
+ ["한글 · 섞어 쓰기",["limn에 핀을 꽂아 두면 다시 읽힌다","원고 PDF 3개 · 핀 12개 · Resolve all","오늘의 manuscript를 pin it, fix it, done.","리뷰어 코멘트 v0.3.12 — 2026년 9월 27일","Limn 림 · 림 limn · 타이포그래피 Typography"]],
+ ["한글 · 문단",["limn은 원고 PDF 위에 핀을 꽂아 두는 viewer다. 핀마다 comment와 page 번호가 남아서,","다음 revision에서 바로 다시 찾는다. 모두 고치면 Resolve all 한 번으로 정리한다.","「한글」과 『라틴』을 섞어도 줄이 고르게 — 쉼표, 마침표. 물음표? 느낌표!","ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅅ ㅇ ㅈ ㅎ · ㅏ ㅓ ㅗ ㅜ ㅡ ㅣ · 흙 읊 밟 꿇 뛸 쐈 넓 값 닭"]],
+];
+const $=id=>document.getElementById(id);
+function row(t,c,h){const r=LIMN_playset(t,c);return `<svg viewBox="${r.vb.join(" ")}" height="${h}" width="${(r.vb[2]/r.vb[3]*h).toFixed(1)}">${r.body}</svg>`}
+// text cuts (12 16 20 28 px, 6 MB each) load only when the size needs one
+const CUTS=[12,16,20,28],cutState={};
+function needCut(px){ if(!$("opt").checked||px>34) return; const c=CUTS.reduce((b,p)=>Math.abs(Math.log(p/px))<Math.abs(Math.log(b/px))?p:b,CUTS[0]);
+  if(cutState[c]) return; cutState[c]="loading"; const el=document.createElement("script"); el.src=`limn-font-play-opt${c}.js?v=20260927n1`; el.onload=()=>{cutState[c]="ok";draw();}; document.head.appendChild(el); }
+function draw(){
+  const w=+$("w").value,px=+$("px").value;$("wv").textContent=w;$("pxv").textContent=px+"px";
+  const F=LIMN_PLAY[w]; needCut(px);
+  // the Hangul of this weight (limn-hangul-<w>.js, ~2 MB) loads on first use, then the sheet redraws
+  if(!(window.LIMN_HANGUL&&LIMN_HANGUL[w])) LIMN_loadHangul(w).then(ok=>{if(ok)draw();});
+  const ppu=px/1000,h=Math.round((F.asc-F.desc+40)*ppu);
+  const c={w,full:true,pad:20,optical:$("opt").checked,ppu,tnum:$("tn").checked,app:$("app").checked,ink:"#15161a",pin:"#e8452c"};
+  $("out").innerHTML=G.map(([n,L])=>`<div class="grp"><h3>${n}</h3><div class="sheet">${L.map(t=>row(t,c,h)).join("")}</div></div>`).join("");
+  // characters the font does not have are drawn as an open box — list them so a box is never mistaken for a broken glyph
+  const F7=LIMN_PLAY[w],HW=window.LIMN_HANGUL&&LIMN_HANGUL[w],miss=[...new Set([...G.flatMap(([,L])=>L).join(""),...$("mine").value].filter(ch=>ch.trim()&&!F7.glyphs[ch]&&!(HW&&HW.glyphs[ch])))];
+  $("miss").textContent=miss.length?`이 폰트에 없는 글자(빈 상자로 표시): ${miss.join(" ")}`:"";
+  $("mineOut").innerHTML=$("mine").value.split("\n").filter(Boolean).map(t=>row(t,c,h)).join("");
+}
+["w","px","opt","tn","app","mine"].forEach(id=>$(id).addEventListener("input",draw));
+draw();
+</script>
+</body>
+</html>

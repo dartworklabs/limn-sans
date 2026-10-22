@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Limn Sans · Development preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="limn-pages.css?v=20261021-release-docs">
+<script src="limn-font.js?v=20260927n1"></script>
+<script src="limn-font-play.js?v=20260927n1"></script>
+<script src="limn-brand.js?v=20260927n1"></script>
+<style>
+.inh{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));border-top:1px solid var(--ink);border-left:1px solid var(--line)}
+.inh figure{margin:0;padding:14px 10px 10px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:8px;align-items:center}
+.inh .pair{display:flex;gap:10px;align-items:flex-end}
+.inh figcaption{font:11px var(--mono);color:var(--muted);text-align:center}
+.inh .arr{color:var(--ver);font-size:16px;align-self:center}
+.gt h3{grid-column:1/-1;margin:0;padding:14px 0 6px;font:500 12px var(--mono);color:var(--muted);border-right:0!important;border-bottom:1px solid var(--line)!important;background:var(--paper)}
+.dz{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px 30px;padding:18px 0 20px;border-top:1px solid var(--line);margin-top:4px}
+.dz .c{display:flex;flex-direction:column;gap:7px;font-size:12.5px}
+.dz .c>span{display:flex;justify-content:space-between;color:var(--muted)}.dz .c>span b{font-weight:600;color:var(--ink)}.dz .c>span code{color:var(--ink)}
+.seg{display:flex;gap:4px;flex-wrap:wrap}.seg button{font:12px var(--mono);border-color:var(--line);color:var(--muted);padding:3px 10px}
+.seg button[aria-pressed=true]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.dz input[type=range]{width:100%;accent-color:var(--ink)}.dz input[type=range]:disabled{opacity:.35}
+.dzbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:0 0 14px}.dzbar button{font:12px var(--mono)}
+.readout{font:12px/1.7 var(--mono);color:var(--muted);margin-top:10px}.readout b{color:var(--ink);font-weight:500}.readout .warn{color:var(--ver)}
+</style>
+</head>
+<body>
+<div class="bar">
+  <nav><a href="index.html">홈</a><a href="bi.html">BI</a><a href="dock.html">앱 아이콘</a><a href="icons.html">작은 아이콘</a><b>서체</b><a href="weights.html">굵기</a><a href="hangul.html">한글 실험</a><a href="punct.html">구두점</a><a href="symbols.html">특수문자</a><a href="accents.html">악센트</a><a href="spacing.html">자간</a><a href="proof.html">교정쇄</a><a href="compare.html">비교</a><a href="coverage.html">커버리지</a><a href="fonts.html">폰트 파일</a><a href="concept.html">의미</a></nav>
+  <button id="mo" aria-pressed="true">움직임 켜짐</button><button id="re">다시 재생</button>
+</div>
+
+<aside class="release-note" aria-label="Release and preview scope"><strong>개발·연구 미리보기</strong> · 이 화면의 엔진·한글·브랜드 실험은 배포본과 다릅니다.
+<a href="https://github.com/dartworklabs/limn-sans/releases/tag/v1.002">Limn Sans 1.002 받기</a>: 영어·기호 919자, 정적 9굵기(100–900). 한글·로고 글리프는 제외되며, 그리스어·확장 라틴은 언어 QA 대상이 아닙니다.</aside>
+<header>
+  <div>
+    <p class="kicker">서체 · Quicksand Bold 기반</p>
+    <h1>Limn Sans · 개발 미리보기</h1>
+    <p class="lede">Quicksand Bold를 부모로 삼았습니다. 비례·곡선·숫자·커닝까지 그 체계를 물려받고, limn의 규칙 세 가지를 더합니다. 세 가지는 어깨 없는 n 가족, 모든 점은 핀, 기준선에 서는 세로획의 발은 평평입니다. 옆 여백은 글자 모양 부류로 정합니다(<a href="spacing.html">자간</a>). 이 화면의 워드마크 <b>limn</b>은 브랜드 엔진의 그림이며, 배포 폰트와 별도의 상표 자산입니다.</p>
+    <div class="hero" id="hero"></div>
+  </div>
+  <ul class="facts" id="facts"></ul>
+</header>
+
+<section class="sec">
+  <h2><span class="no">01</span>물려받은 것과 바꾼 것</h2>
+  <p class="sub">회색이 Quicksand Bold 원본이고, 검정이 limn입니다. 아래에 없는 글자는 원본 그대로입니다. 바꾼 곳은 모두 <code>tools/build_font.py</code>가 원본 윤곽에 규칙을 적용해 만들고, 손으로 그린 윤곽은 없습니다.</p>
+  <table class="t" id="mods"></table>
+  <div class="inh" id="inh" style="margin-top:26px"></div>
+</section>
+
+<section class="sec">
+  <h2><span class="no">02</span>치수와 규칙</h2>
+  <p class="sub">단위는 폰트 단위(em = 1000)이고, 획 굵기 <code>s = 120</code>이 기준입니다. 세로 비례는 모두 Quicksand의 값입니다. 어센더와 디센더가 거의 같은 길이(205 · 200)라, b·d·f와 p·q·g가 위아래로 같은 만큼 뻗습니다.</p>
+  <div class="split">
+    <div id="metric"></div>
+    <ol class="rules">
+      <li><span><b>부모의 체계를 따른다.</b> 비례·곡선·숫자·커닝은 Quicksand Bold 그대로. 바꾸는 곳은 규칙으로만 바꾼다.</span></li>
+      <li><span><b>위는 둥글게, 발은 평평하게.</b> 기준선에 서거나 디센더로 내려가는 세로획의 끝만 네모. 윗끝·사선 끝(v·w·x·z·k·y·7)·곡선 끝은 둥글게.</span></li>
+      <li><span><b>어깨 없는 n 가족.</b> n은 u를 180° 돌린 것. m은 n 둘, h는 l에 n, r은 n의 아치를 잘라 둥근 끝.</span></li>
+      <li><span><b>점은 모두 핀.</b> i·j·마침표·콜론·느낌표·물음표의 점은 한 크기의 주색 원.</span></li>
+      <li><span><b>브랜드 그림에서 핀 윗끝 = 어센더.</b> 획 120에서 x높이 535 + 틈 48 + 지름 157 = 740.</span></li>
+      <li><span><b>핀은 이웃에 닿지 않는다.</b> 핀과 이웃 글자 윤곽 사이 흰 폭은 최소 0.54s(65). 모자라는 쌍만 커닝으로 벌린다.</span></li>
+      <li><span><b>핀은 부모의 점을 따른다.</b> 굵기마다 Quicksand 점 × 1.246, 틈 × 0.738 — 획이 가늘어지면 핀도 작아지되 획보다 덜 작아짐(700 1.31s → 400 1.73s, Quicksand도 1.05s → 1.39s).</span></li>
+      <li><span><b>작으면 틈을 연다.</b> 화면에서 틈은 1.25px, 핀은 2.2px 아래로 내려가지 않는다(광학 크기).</span></li>
+    </ol>
+  </div>
+  <p class="sub" style="margin:34px 0 12px">간격 시험 — 옆 여백은 글자 모양 부류 × o의 옆 여백이고, 부류로 고르게 되지 않는 짝만 커닝합니다(<a href="spacing.html">자간</a>). 글자 사이가 고르게 보여야 합니다.</p>
+  <div id="spacing"></div>
+</section>
+
+<section class="sec">
+  <h2><span class="no">03</span>개발 엔진 직접 써보기 · 한글 실험 포함</h2>
+  <p class="sub">a–z, A–Z, 0–9, 기호 <code>. , : ; ! ? · … - – — / \ | ' " ‘ ’ “ ” ( ) [ ] { } &amp; @ # % $ + = × ÷ &lt; &gt; ^ ~ * _ ¡ ¿</code>, 한글 2,350자(KS X 1001)와 낱자 ㄱ–ㅣ — 한글은 나눔스퀘어라운드를 굵기마다 짝지은 것(<a href="hangul.html">한글 실험</a>), 그리고 핀을 단 <code>림</code>. 아래 조절로 limn의 규칙을 하나씩 끄고 켜고, 굵기(100–900 — 300–700은 Quicksand의 축, 그 밖은 펜으로 깎고 불린 확장, <a href="weights.html">굵기</a>)와 핀 치수를 바꿔 볼 수 있습니다. 이 조절은 이 칸에만 적용되고, 나머지 페이지는 limn 기본값 그대로입니다.</p>
+  <div class="play-ctl">
+    <input id="pin" type="text" value="pin it. fix it. done." maxlength="48" aria-label="써 볼 글자">
+    <div class="chips" id="chips"></div>
+  </div>
+  <div class="dz" id="dz"></div>
+  <div class="dzbar"><button type="button" id="dzreset">limn 기본값</button><button type="button" id="dzsvg">SVG 내려받기</button><span class="readout" id="rules"></span></div>
+  <div class="play-out" id="play"></div>
+  <div class="readout" id="stat"></div>
+</section>
+
+<section class="sec">
+  <h2><span class="no">04</span>글자판</h2>
+  <p class="sub">88자. 숫자는 대문자 높이(700)에 맞춘 Quicksand의 숫자이고, 1·4는 세로획의 발이 평평합니다.</p>
+  <div class="gt" id="gt"></div>
+</section>
+
+<div id="bands"></div>
+<footer>이 페이지의 모든 글자는 <code>limn-font.js</code>(생성물)와 <code>limn-brand.js</code>에서 그립니다. Quicksand © The Quicksand Project Authors · 한글·보충 기호의 나눔스퀘어라운드 © NAVER Corporation, SIL Open Font License 1.1 — 수정본은 예약 글꼴 이름을 쓰지 않고 limn으로만 배포합니다(<code>tools/OFL-Quicksand.txt</code>). 로고 규정은 <a href="bi.html">BI 페이지</a>.</footer>
+
+<script>
+const L=LIMN,C=L.COLOR,f=L.f,F=L.F;
+let ANIM=!matchMedia("(prefers-reduced-motion: reduce)").matches;
+const $=id=>document.getElementById(id);
+
+function hero(){$("hero").innerHTML=L.svg(L.wordmark({anim:ANIM,step:.14}),{h:150,attrs:`class="${ANIM?"w":""}"`})}
+function facts(){
+  $("facts").innerHTML=[
+    ["부모","Quicksand Bold (wght 700) — SIL OFL 1.1"],["s 120","획 굵기, 모든 치수의 기준 (em 1000)"],
+    ["535 · 740 · 200","x높이 · 어센더 · 디센더(기준선 아래)"],["r 78.5 · 틈 48","핀 반지름 0.65s · 핀과 획 사이 0.4s"],
+    ["88자 + 한글","a–z · A–Z · 0–9 · 기호 25 · 림 — 한글 2,350자는 나눔스퀘어라운드(NAVER, OFL)"],
+  ].map(([b,s])=>`<li><b>${b}</b><span>${s}</span></li>`).join("");
+}
+// one glyph (limn) next to its Quicksand original, same scale
+function pair(ch){
+  const g=F.glyphs[ch],o=g.orig,sc=L.atXH(26),top=-F.asc-10,bot=-F.desc+10;
+  const one=(d,adv,fill,pins)=>`<svg viewBox="-20 ${top} ${adv+40} ${bot-top}" width="${f((adv+40)*sc)}" height="${f((bot-top)*sc)}"><path d="${d}" fill="${fill}"/>${pins||""}</svg>`;
+  const pins=g.pins.map(([x,y])=>`<circle cx="${x}" cy="${"ij".includes(ch)?L.CY:y}" r="${L.r}" fill="${C.ver}"/>`).join("");
+  return `<figure><div class="pair">${one(o.d,o.adv,"#b9b5ad")}<span class="arr">→</span>${one(g.d,g.adv,C.ink,pins)}</div><figcaption>${ch}</figcaption></figure>`;
+}
+function mods(){
+  $("mods").innerHTML=`<thead><tr><th>글자</th><th>바꾼 것</th><th>이유 · 수치</th></tr></thead><tbody>${F.mods.map(([c,w,y])=>`<tr><td><code>${c}</code></td><td>${w}</td><td>${y}</td></tr>`).join("")}<tr><td><code>나머지</code></td><td>Quicksand 그대로</td><td>a–z·A–Z·0–9의 나머지 윤곽. 커닝 ${Object.keys(F.kern).length}쌍</td></tr></tbody>`;
+  $("inh").innerHTML=[..."nmhrij.:!?abdkN14wWQZzYxXvVAMU"].filter(c=>F.glyphs[c].orig).map(pair).join("");
+}
+function metric(){
+  const t=L.typeset("Hlimn pqd",{full:true}),[x0,y0,w,h]=t.vb,Lx=x0-900,mono=`font-size="68" font-family="JetBrains Mono,monospace"`;
+  const lines=[[-F.asc,"어센더 740 = 핀 윗끝"],[-F.cap,"대문자·숫자 700",1],[-F.xh,"x높이 535"],[0,"기준선 0"],[-F.desc,"디센더 −200"]].map(([y,l,rt])=>`<line x1="${Lx+860}" x2="${x0+w+60}" y1="${y}" y2="${y}" stroke="${C.ink}" stroke-width="4" opacity=".3"/><text x="${rt?x0+w+90:Lx}" y="${y+22}" ${mono} fill="${C.ink}" opacity=".6">${l}</text>`).join("");
+  const R=C.ver,dim=(xa,xb,y,l)=>`<g stroke="${R}" stroke-width="5"><line x1="${xa}" x2="${xb}" y1="${y}" y2="${y}"/><line x1="${xa}" x2="${xa}" y1="${y-24}" y2="${y+24}"/><line x1="${xb}" x2="${xb}" y1="${y-24}" y2="${y+24}"/></g><text x="${(xa+xb)/2}" y="${y+86}" text-anchor="middle" ${mono} fill="${R}">${l}</text>`;
+  const gi=t.glyphs.find(g=>g.ch==="i"),ix=gi.x+gi.stems[0],gn=t.glyphs.find(g=>g.ch==="n");
+  const g=-F.desc+110,cy=L.CY;
+  const dv=(ya,yb,x,l)=>`<g stroke="${R}" stroke-width="5"><line x1="${x}" x2="${x}" y1="${ya}" y2="${yb}"/><line x1="${x-24}" x2="${x+24}" y1="${ya}" y2="${ya}"/><line x1="${x-24}" x2="${x+24}" y1="${yb}" y2="${yb}"/></g><text x="${x+40}" y="${(ya+yb)/2+22}" ${mono} fill="${R}">${l}</text>`;
+  $("metric").innerHTML=`<svg viewBox="${Lx} ${y0-60} ${w+960+700} ${h+300}" width="100%" style="max-width:760px">${lines}
+    ${dim(ix-60,ix+60,g,"s 120")}${dim(gn.x+gn.stems[0]+60,gn.x+gn.stems[1]-60,g,"속공간 217")}
+    ${dv(cy+L.r,-F.xh,ix+L.r+30,"틈 48")}${dv(cy-L.r,cy+L.r,ix+L.r+260,"2r 157")}${t.body}</svg>`;
+}
+function spacing(){
+  $("spacing").innerHTML=["nnonnoonnn","hamburgefonstiv","minimum illumine","dot the i's, pin it.","HAMBURGEFONSTIV 1234567890"].map(t=>`<div style="padding:8px 0;border-top:1px solid var(--line)">${L.svg(L.typeset(t),{scale:L.atXH(30)})}</div>`).join("");
+}
+const SAMPLES=["limn","pin it. fix it. done.","Limn serve :18104","minimum","12–18","림","hamburgefonstiv","main.tex:1108 · 11 pins","limn에 핀을 꽂아 두면","Limn 림 · 타이포그래피"];
+/* design controls — each limn rule is a switch; the default is the final limn */
+const DEF={w:700,spur:false,feet:"flat",dots:"pin",gap:.4,fit:true,dia:1.3,optical:true,track:0,kern:true,ss01:false,zero:false,tnum:true,app:false,size:190,bg:"paper"};
+let D={...DEF};
+const BG={paper:["#fff",C.ink,C.ver],ink:[C.ink,C.cream,C.ver],ver:[C.ver,C.sky,C.sky]};
+const CTLS=[
+  ["w","굵기 100–900","range",[100,900,100],v=>`${v}${v===700?" · limn":v<300||v>700?" · 확장":""}`],
+  ["spur","n 가족의 어깨","seg",[[false,"없음 · limn"],[true,"있음 · Quicksand"]]],
+  ["feet","세로획의 발","seg",[["flat","평평 · limn"],["round","둥글게 · Quicksand"]]],
+  ["app","핀 색","seg",[[false,"먹 · 기본"],[true,"주홍 · limn 앱"]],"주홍 핀은 limn 앱 안에서만 씁니다. 쉼표 머리는 핀이 아니라 늘 먹색입니다."],
+  ["dots","점","seg",[["pin","핀 · limn"],["orig","원래 점 · Quicksand"]]],
+  ["fit","핀 크기","seg",[[true,"부모 점을 따라 · limn"],[false,"직접"]],"limn: 굵기마다 Quicksand의 점 × 1.246, 틈 × 0.738. 700에서 핀 윗끝 = 어센더."],
+  ["gap","핀 틈 (직접일 때)","range",[.1,1.2,.05],v=>`${v.toFixed(2)}s`],
+  ["dia","핀 지름 (직접일 때)","range",[.8,2.4,.05],v=>`${v.toFixed(2)}s`],
+  ["optical","광학 크기","seg",[[true,"켬 · limn"],[false,"끔"]],"작게 볼 때 틈은 화면에서 1.25px, 핀은 2.2px 아래로 내려가지 않게."],
+  ["track","자간","range",[-80,200,5],v=>`${v>0?"+":""}${v}`],
+  ["kern","커닝","seg",[[true,"켬 · limn"],[false,"끔"]]],
+  ["ss01","a · g","seg",[[false,"1층 · limn"],[true,"2층 · Quicksand ss01"]]],
+  ["zero","0","seg",[[false,"보통 · limn"],[true,"점 있는 0"]]],
+  ["tnum","숫자 폭","seg",[[true,"고정폭 · limn"],[false,"비례"]],"줄 번호·핀 개수처럼 자릿수가 바뀌는 숫자는 고정폭이면 흔들리지 않습니다."],
+  ["size","보기 크기","range",[80,300,10],v=>`${v}px`],
+  ["bg","바탕","seg",[["paper","종이"],["ink","먹"],["ver","주"]]],
+];
+function dzUI(){
+  $("dz").innerHTML=CTLS.map(([k,label,type,opt,fmt])=>type==="seg"
+    ?`<div class="c"><span><b>${label}</b></span><div class="seg" data-k="${k}">${opt.map(([v,t])=>`<button type="button" data-v='${JSON.stringify(v)}' aria-pressed="${D[k]===v}">${t}</button>`).join("")}</div>${fmt?`<span style="font-size:11.5px">${fmt}</span>`:""}</div>`
+    :`<label class="c"><span><b>${label}</b><code id="v-${k}">${fmt(D[k])}</code></span><input type="range" data-k="${k}" min="${opt[0]}" max="${opt[1]}" step="${opt[2]}" value="${D[k]}"${(k==="dia"||k==="gap")&&(D.fit||D.dots==="orig")?" disabled":""}></label>`).join("");
+}
+$("dz").addEventListener("click",e=>{const b=e.target.closest(".seg button");if(!b)return;D[b.parentElement.dataset.k]=JSON.parse(b.dataset.v);dzUI();play()});
+$("dz").addEventListener("input",e=>{const i=e.target.closest("input[type=range]");if(!i)return;const k=i.dataset.k;D[k]=+i.value;$("v-"+k).textContent=CTLS.find(c=>c[0]===k)[4](D[k]);play(false)});
+$("dzreset").addEventListener("click",()=>{D={...DEF};dzUI();play()});
+$("dzsvg").addEventListener("click",()=>{const s=$("play").innerHTML;if(!s.startsWith("<svg"))return;const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([s],{type:"image/svg+xml"}));a.download="limn-type.svg";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000)});
+function play(animate=true){
+  const [bg,ink,pin]=BG[D.bg],anim=ANIM&&animate;
+  const txt=$("pin").value;
+  if(LIMN_needsHangul(txt)&&LIMN_hangulMissing(D.w,txt)) LIMN_loadHangul(D.w,txt).then(ok=>{if(ok)play(false);});   // Hangul of this weight, on first use
+  const t=LIMN_playset(txt,{...D,ink,pin,anim,step:.06,full:true,pad:40,ppu:D.size/1020}),I=t.info,s=I.s;
+  $("play").style.background=bg;
+  $("play").innerHTML=t.glyphs.length?`<svg xmlns="http://www.w3.org/2000/svg" viewBox="${L.vbs(t.vb)}" width="${f(D.size*t.vb[2]/t.vb[3])}" height="${D.size}" class="${anim?"w":""}">${t.body}</svg>`:`<p style="text-align:center;color:var(--muted)">쓸 수 있는 글자가 없습니다</p>`;
+  const on=[[!D.spur,"어깨 없음"],[D.feet==="flat","발 평평"],[D.dots==="pin","핀"],[D.dots==="pin"&&D.fit,"핀 윗끝 = 어센더"]];
+  $("rules").innerHTML=`limn 규칙 ${on.filter(o=>o[0]).length}/4 — `+on.map(([v,n])=>v?`<b>${n}</b>`:`<s>${n}</s>`).join(" · ");
+  const warn=[];
+  if(I.r){ if(I.pinTop>I.asc+1) warn.push(`핀 윗끝 ${f(I.pinTop)}이 어센더 ${I.asc} 위로 ${f(I.pinTop-I.asc)} 솟음`);
+    if(I.gap<.25*s) warn.push("틈이 좁아 작은 크기에서 핀과 획이 붙어 보임");
+    if(2*I.r>2.2*s) warn.push("핀이 획보다 많이 커 무게가 위로 쏠림");
+    if(I.opt.gap||I.opt.r) warn.push(`광학 크기 보정 중 — ${I.opt.gap?"틈":""}${I.opt.gap&&I.opt.r?"·":""}${I.opt.r?"핀":""}을 화면 최소치로 키움`); }
+  $("stat").innerHTML=`글자 ${t.glyphs.length} · 핀 ${t.dots.length} &nbsp;|&nbsp; 굵기 <b>${I.w}</b> · s <b>${s}</b> · x높이 <b>${I.xh}</b> · 어센더 <b>${I.asc}</b> · 디센더 <b>${-I.desc}</b>`+
+    (I.r?` · 핀 r <b>${f(I.r)}</b> (${(I.r/s).toFixed(2)}s, Quicksand 점의 ${(I.r/I.qr).toFixed(2)}배) · 틈 <b>${f(I.gap)}</b> (${(I.gap/s).toFixed(2)}s)`:` · 원래 점`)+(warn.length?`<br><span class="warn">${warn.join(" · ")}</span>`:"");
+}
+function table(){
+  const groups=[["소문자","abcdefghijklmnopqrstuvwxyz"],["대문자","ABCDEFGHIJKLMNOPQRSTUVWXYZ"],["숫자","0123456789"],["기호",".,:;!?·-–—/'\"()&@#%+=*_[]"],["한글","림가나다라마바사아자차카타파하한글ㄱㅎㅏㅣ「」"]];
+  $("gt").innerHTML=groups.map(([n,cs])=>`<h3>${n}</h3>`+[...cs].map(c=>`<div>${L.svg(L.typeset(c,{full:true,pad:30}),{h:70})}<small>${c}</small></div>`).join("")).join("");
+}
+
+/* ---------- expressions (same glyphs, different motion and colour) ---------- */
+const M=L.MINIM, VB=()=>L.wordmark({pad:60}).vb;
+const wrap=(vb,h,inner,style="")=>`<svg viewBox="${L.vbs(vb)}" width="${f(h*vb[2]/vb[3])}" height="${h}" style="${style}">${inner}</svg>`;
+const stripDots=s=>s.replace(/<circle[^>]*\/>/g,"");
+const minim=(b,anim,h)=>L.minimArt({h,ink:b.k,anim});
+function lumen(b,anim,h){
+  const t=L.wordmark({ink:b.k,pin:b.k,pad:60}),vb=t.vb,id="lm"+Math.random().toString(36).slice(2,6);
+  if(!anim) return L.svg(t,{h});
+  const lt=stripDots(t.body),mx=[vb[0]-1500,vb[1]-1000,vb[2]+3000,vb[3]+2000];
+  return `<svg viewBox="${L.vbs(vb)}" width="${f(h*vb[2]/vb[3])}" height="${h}" style="--x0:${f(vb[0]-500)}px;--x1:${f(vb[0]+vb[2]*.8)}px;--y0:${f(-F.xh/2)}px;--dx:${M.dotX}px;--dy:${f(L.CY)}px;--sc:${f(L.r/460)};overflow:visible">
+   <defs><radialGradient id="${id}g"><stop offset="0" stop-color="#fff"/><stop offset=".55" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+   <radialGradient id="${id}h"><stop offset="0" stop-color="${b.k}" stop-opacity=".3"/><stop offset="1" stop-color="${b.k}" stop-opacity="0"/></radialGradient>
+   <mask id="${id}" maskUnits="userSpaceOnUse" x="${mx[0]}" y="${mx[1]}" width="${mx[2]}" height="${mx[3]}"><g class="lm-light"><circle r="460" fill="url(#${id}g)"/></g><rect class="lm-full" x="${mx[0]}" y="${mx[1]}" width="${mx[2]}" height="${mx[3]}" fill="#fff"/></mask></defs>
+   <g opacity=".13">${lt}</g><g class="lm-light"><circle r="800" fill="url(#${id}h)"/></g><g mask="url(#${id})">${lt}</g><circle class="lm-dot" cx="${M.dotX}" cy="${f(L.CY)}" r="${L.r}" fill="${b.k}"/></svg>`;
+}
+function ripple(b,anim,h){
+  const dl={l:.07,i:0,m:.1,n:.24},t=L.wordmark({ink:b.k,pin:b.k,pad:60,gattr:anim?ch=>`class="rp-wave" style="animation-delay:${dl[ch]}s"`:null});
+  if(!anim) return L.svg(t,{h});
+  const c=`cx="${M.dotX}" cy="${f(L.CY)}" r="${L.r}"`;
+  return wrap(VB(),h,`${stripDots(t.body)}<circle class="rp-ring" ${c} fill="none" stroke="${b.k}" stroke-width="2" vector-effect="non-scaling-stroke"/><circle class="rp-ring b" ${c} fill="none" stroke="${b.k}" stroke-width="1.5" vector-effect="non-scaling-stroke"/><circle class="rp-dot" ${c} fill="${b.k}"/>`,"overflow:visible");
+}
+function outline(b,anim,h){
+  // outline = the glyph minus itself eroded by th (SVG feMorphology) — works for any shape
+  const th=24,t=L.wordmark({ink:b.k,pad:60}),vb=t.vb,id="ol"+Math.random().toString(36).slice(2,6),r=L.r,sx=M.dotX-r-60,sy=L.CY-r-60,sh=60-sy;
+  const ants=anim?`<g class="ol-sel"><rect class="ol-ants" x="${f(sx)}" y="${f(sy)}" width="${f(2*r+120)}" height="${f(sh)}" fill="none" stroke="${b.k}" stroke-width="1.6" stroke-dasharray="5 3" vector-effect="non-scaling-stroke"/></g>`:"";
+  return wrap([vb[0],sy-40,vb[2],sh+100],h,`<defs><filter id="${id}" x="-5%" y="-5%" width="110%" height="110%"><feMorphology in="SourceGraphic" operator="erode" radius="${th}" result="e"/><feComposite in="SourceGraphic" in2="e" operator="out"/></filter></defs><g filter="url(#${id})">${stripDots(t.body)}</g><g class="${anim?"ol-pop":""}"><circle cx="${M.dotX}" cy="${f(L.CY)}" r="${r}" fill="${b.k}"/><circle class="${anim?"ol-hole":""}" cx="${M.dotX}" cy="${f(L.CY)}" r="${f(r-th)}" fill="${b.g}" opacity="${anim?1:0}"/></g>${ants}`);
+}
+function gutter(b,anim,h){
+  // the bar stands where the l stands, "imn" where it sits in the wordmark
+  const bw=L.s*1.4,t=L.typeset("imn",{ink:b.k,pin:b.k}),lx=M.l,off=M.glyphs[1].x-lx,ix=M.dotX-lx;
+  const ticks=Array.from({length:7},(_,i)=>`<line x1="${-bw/2-150}" x2="${-bw/2-70}" y1="${f(-F.asc+i*F.asc/6)}" y2="${f(-F.asc+i*F.asc/6)}" stroke="${b.k}" stroke-width="16" opacity=".4"/>`).join("");
+  const top=L.CY-L.r-60,vb=[-bw/2-220,top,off+t.vb[0]+t.vb[2]+bw/2+220,60-top];
+  return wrap(vb,h,`${ticks}<rect class="${anim?"gu-bar":""}" x="${-bw/2}" y="${-F.asc}" width="${bw}" height="${F.asc}" rx="${bw/2}" fill="${b.k}"/><g transform="translate(${off} 0)">${stripDots(t.body)}</g><circle class="${anim?"gu-dot":""}" cx="${f(ix)}" cy="${f(L.CY)}" r="${L.r}" fill="${b.k}"/>`);
+}
+function rimBand(b,anim,h){
+  const tl=L.wordmark({ink:b.k,pin:b.k,gattr:anim?ch=>ch==="n"?'class="lr-n"':"":ch=>ch==="n"?'opacity=".2"':""});
+  const tr=L.rim({ink:b.k,pin:b.k}),gap=820,X0=tl.vb[0]+tl.vb[2]+gap-tr.vb[0];
+  let rb=tr.body; if(anim) rb=rb.replace(/<path d=/,'<path class="lr-k" d=').replace(/<circle /,'<circle class="lr-dot" ');
+  const top=Math.min(tl.vb[1],tr.vb[1])-60,vb=[tl.vb[0]-60,top,X0+tr.vb[0]+tr.vb[2]-tl.vb[0]+120,60-top];
+  return wrap(vb,h,`${tl.body}<text class="${anim?"lr-ipa":""}" x="${f(tl.vb[0]+tl.vb[2]+gap/2)}" y="-230" text-anchor="middle" font-size="190" font-family="JetBrains Mono,monospace" fill="${b.k}">/lɪm/</text><g transform="translate(${f(X0)} 0)">${rb}</g>`);
+}
+const BANDS=[
+ {no:"05-1",n:"미님",h:"점이 떨어지면 읽힌다",g:C.paper,k:C.ink,inks:[[C.ink,"먹"],[C.ver,"주"]],p:"같은 세로획 일곱 개가 서 있다가 두 번째 획에 핀이 떨어지면, l이 어센더까지 자라고 m·n의 아치가 획 위로 지나가며 단어가 됩니다. 마지막 장면은 서체의 윤곽 그대로입니다.",u:"첫 실행 · 설치 완료 · README 첫머리 — 한 번",f:minim},
+ {no:"05-2",n:"빛",h:"비추던 빛이 점이 된다",g:C.teal,k:C.amber,inks:[[C.teal,"심청"],[C.amber,"호박"]],p:"어원 lūmināre(빛을 비추다). 빛이 단어를 훑다가 i 위에서 오므라들어 점이 되고, 단어 전체가 밝아집니다.",u:"찾는 중 · 변경 보기 대기 · 빈 화면",f:lumen},
+ {no:"05-3",n:"파문",h:"핀이 떨어지면 번진다",g:C.ver,k:C.sky,inks:[[C.ver,"주"],[C.sky,"미색"]],p:"점이 i에 떨어지면 물결이 퍼지고 가까운 글자부터 출렁입니다.",u:"새 핀 도착 · 저장 확인 — 1초 안에 한 번",f:ripple},
+ {no:"05-4",n:"윤곽",h:"윤곽만 긋고, 점만 채운다",g:C.blue,k:C.sky,inks:[[C.blue,"파랑"],[C.sky,"미색"]],p:"limn = 윤곽을 긋다. 속이 빈 글자에서, 끌어서 고른 자리의 점만 채워집니다.",u:"온보딩 \"끌어서 고르고 핀을 찍으세요\"",f:outline},
+ {no:"05-5",n:"거터",h:"l은 줄 범위, 점은 핀",g:C.ink,k:C.ver,inks:[[C.ink,"먹"],[C.ver,"주"]],p:"편집기 여백의 줄 범위 막대가 l이 됩니다. 막대가 범위를 잡고 점이 찍힙니다.",u:"줄 범위 선택 표시와 같은 모양",f:gutter},
+ {no:"05-6",n:"림",h:"limn → /lɪm/ → 림",g:C.amber,k:C.teal,inks:[[C.amber,"호박"],[C.teal,"심청"]],p:"끝의 n은 묵음. n이 흐려지고 한글 림이 써집니다 — ㄹ은 선, ㅣ 위의 점은 핀, 받침 ㅁ은 고른 영역.",u:"한국어 UI 첫 화면 · 한국어 문서 머리",f:rimBand},
+];
+function bands(){
+  $("bands").innerHTML=`<section class="sec" style="border-bottom:0;padding-bottom:28px"><h2><span class="no">05</span>같은 서체, 여섯 가지 표정</h2><p class="sub" style="margin:0">글자는 모두 위 서체 그대로이고 움직임과 색만 다릅니다. 각 표정이 앱의 어느 순간에 쓰이는지는 BI 페이지의 움직임 명세에 있습니다.</p></section>`+
+  BANDS.map(b=>`<section class="band" style="--g:${b.g};--k:${b.k}"><div class="meta"><span class="no">${b.no} · ${b.n}</span><h3>${b.h}</h3><p>${b.p}</p><p class="use"><b>쓰임</b> — ${b.u}</p><div class="sw">${b.inks.map(([c,l])=>`<span><i style="background:${c}"></i> ${l} ${c}</span>`).join("")}</div></div>
+   <div class="stage">${b.f(b,ANIM,200)}<div class="minis">${[48,24,14].map(h=>b.f(b,false,h)).join("")}</div></div></section>`).join("");
+}
+function renderAll(){hero();facts();mods();metric();spacing();dzUI();play();table();bands()}
+$("chips").innerHTML=SAMPLES.map(s=>`<button type="button">${s}</button>`).join("");
+$("chips").addEventListener("click",e=>{if(e.target.tagName==="BUTTON"){$("pin").value=e.target.textContent;play()}});
+$("pin").addEventListener("input",play);
+const mo=$("mo");
+function setMo(v){ANIM=v;mo.setAttribute("aria-pressed",String(v));mo.textContent=v?"움직임 켜짐":"움직임 꺼짐";renderAll()}
+mo.addEventListener("click",()=>setMo(!ANIM));$("re").addEventListener("click",renderAll);
+if(!ANIM) setMo(false); else renderAll();
+LIMN_loadHangul(800).then(ok=>{if(ok){table();play(false);}});   // the brand's Hangul for the glyph table (limn-hangul-800.js, nearest Quicksand Bold)
+</script>
+</body>
+</html>

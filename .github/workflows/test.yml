@@ -1,0 +1,21 @@
+# Unit tests of site/tools on every pull request and on main. They need no build data: `make test` fetches
+# NanumSquareRound (checked by SHA-256) and runs the tests. The glyph gates (make check) need a full build and
+# run on the build machine.
+name: test
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      UV_PYTHON: "3.13"
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: astral-sh/setup-uv@d0d8abe699bfb85fec6de9f7adb5ae17292296ff # v6
+      - run: make quality
+      - run: make test

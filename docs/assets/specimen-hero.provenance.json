@@ -1,0 +1,122 @@
+{
+  "release": "https://github.com/dartworklabs/limn-sans/releases/tag/v1.002",
+  "releaseRev": "2dc8684",
+  "manifestSHA256": "ea2a6594a777ee34b63b6d4e30ee51fb50f764ef366fae62d729134694713c20",
+  "ttfSHA256": {
+    "LimnSans-Thin.ttf": "a069a673d76f29b06dd6e5161cc4581e8b6d9039815b4f9e813bb8c05c103dbc",
+    "LimnSans-ExtraLight.ttf": "f1a86730b1a7e57cde00024a320c18e20fd156681623344e2af0f4d9bc8ba4ef",
+    "LimnSans-Light.ttf": "2155cbea888cdadf859771031a92435941bb384d2bc50ea570588b72e3203024",
+    "LimnSans-Regular.ttf": "36ff799a13df9afb2d99678a5939700d676f988a8a2a81f75897d2977540924c",
+    "LimnSans-Medium.ttf": "615675f2ed2c04a01380b951412a5c1e5ef1fd62afa2c24c76c5d78cc534eae3",
+    "LimnSans-SemiBold.ttf": "b82874947a0741517cff76fac1c2be18edbe26adf89fdaaf779b4964176ef322",
+    "LimnSans-Bold.ttf": "e90f9b922cbaf818f1678c25e68e4712cb201ccd0b2d86339d11c0751620edbf",
+    "LimnSans-ExtraBold.ttf": "6714eef4aaeea4e21192baab2dda2116b54ccf8de183993a4da538d574003721",
+    "LimnSans-Black.ttf": "d1a028f51d6a9e7043432c9164fb291bbf1e115c0595c859b2b2742201ddc11f"
+  },
+  "renderer": "HarfBuzz shaping + FontTools SVGPathPen; no installed fonts or fallback",
+  "canvas": [
+    1288,
+    694
+  ],
+  "runs": [
+    {
+      "text": "1.002 / English & symbols",
+      "w": 400,
+      "size": 32,
+      "x": 72,
+      "y": 92
+    },
+    {
+      "text": "Pin it. Fix it. Done.",
+      "w": 700,
+      "size": 88,
+      "x": 72,
+      "y": 210
+    },
+    {
+      "text": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+      "w": 400,
+      "size": 42,
+      "x": 72,
+      "y": 294
+    },
+    {
+      "text": "abcdefghijklmnopqrstuvwxyz 0123456789",
+      "w": 400,
+      "size": 42,
+      "x": 72,
+      "y": 352
+    },
+    {
+      "text": "& @ # % $ \u20ac \u00a3 \u00a5 \u20a9 \u00b1 \u00d7 \u00f7 \u2260 \u2264 \u2265 \u221e \u2192 \u2713",
+      "w": 500,
+      "size": 42,
+      "x": 72,
+      "y": 421
+    },
+    {
+      "text": "100 Thin",
+      "w": 100,
+      "size": 32,
+      "x": 72,
+      "y": 509
+    },
+    {
+      "text": "200 ExtraLight",
+      "w": 200,
+      "size": 32,
+      "x": 464,
+      "y": 509
+    },
+    {
+      "text": "300 Light",
+      "w": 300,
+      "size": 32,
+      "x": 856,
+      "y": 509
+    },
+    {
+      "text": "400 Regular",
+      "w": 400,
+      "size": 32,
+      "x": 72,
+      "y": 565
+    },
+    {
+      "text": "500 Medium",
+      "w": 500,
+      "size": 32,
+      "x": 464,
+      "y": 565
+    },
+    {
+      "text": "600 SemiBold",
+      "w": 600,
+      "size": 32,
+      "x": 856,
+      "y": 565
+    },
+    {
+      "text": "700 Bold",
+      "w": 700,
+      "size": 32,
+      "x": 72,
+      "y": 621
+    },
+    {
+      "text": "800 ExtraBold",
+      "w": 800,
+      "size": 32,
+      "x": 464,
+      "y": 621
+    },
+    {
+      "text": "900 Black",
+      "w": 900,
+      "size": 32,
+      "x": 856,
+      "y": 621
+    }
+  ],
+  "svgSHA256": "8fe3aa5909f6229664aab7cf6de59e647385c45eea44d3ced79c1b4cc13c09a2"
+}

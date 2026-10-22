@@ -1,0 +1,13 @@
+# Pinned study/comparison inputs: filename, SHA-256, official immutable URL (tab-separated).
+Inter.ttf	29160a80ff49ddcab2c97711247e08b1fab27a484a329ce8b813d820dc559031	https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/inter/Inter%5Bopsz,wght%5D.ttf
+NotoSansKR.ttf	194018e6b2b293a7964f037b25c0249ce1418bc9ab3c971060a03aa57861e252	https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/notosanskr/NotoSansKR%5Bwght%5D.ttf
+Pretendard-Regular.ttf	6d0af5258997aec7354a6e340fc2325ba321c410ca48b3af858c8c3d6e92a324	https://raw.githubusercontent.com/orioncactus/pretendard/5c41199ea0024a9e0b2cb31735265056e5472d76/packages/pretendard/dist/public/static/alternative/Pretendard-Regular.ttf
+OFL-Inter.txt	5b9321a4298cfeb6b34354164a1c3afc3db114569984c502b9b35d988fd58c57	https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/inter/OFL.txt
+OFL-NotoSansKR.txt	1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9	https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/notosanskr/OFL.txt
+OFL-Pretendard.txt	b04538c9abec39a3db75108cf0af0fd9c77032fe8aa2cf38345b4d250e98e38e	https://raw.githubusercontent.com/orioncactus/pretendard/5c41199ea0024a9e0b2cb31735265056e5472d76/packages/pretendard/dist/LICENSE.txt
+Quicksand.ttf	39c9b64223561f56aaff6062a6f04063c4fc86809ad6768722c06614d977e1cc	https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/quicksand/Quicksand%5Bwght%5D.ttf
+Nunito.ttf	bb55a5ca5c2042335b3991af27c4d0705d0ef41cac6164ac737fd8f2a1e85207	https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/nunito/Nunito%5Bwght%5D.ttf
+Fredoka.ttf	2ba02e68b152868aef9ba28e24b3648c7d457fe6f25c761f2c2c53fb61a73fc8	https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/fredoka/Fredoka%5Bwdth,wght%5D.ttf
+OFL-Quicksand.txt	14d28541780d90f6577bb7abcc6f005bf6969614294e75c82abb8758a696ad46	https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/quicksand/OFL.txt
+OFL-Nunito.txt	580df76c95a1ec5ab878ceb25bb3d85c6a076804e9c970c8c6972aea775fdf65	https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/nunito/OFL.txt
+OFL-Fredoka.txt	5c9e7eee5c6b25f4b05b8d53b2e470ea4962f9ced742d044a98f7d95d1375bab	https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/fredoka/OFL.txt

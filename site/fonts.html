@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>limn 서체 — 폰트 파일 · Development preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="limn-pages.css?v=20261021-release-docs">
+<script src="limn-font.js?v=20260928f1"></script>
+<script src="limn-font-play.js?v=20260928f1"></script>
+<script src="limn-brand.js?v=20260928f1"></script>
+<script src="fonts/fonts.js?v=20260928f1"></script>
+<style>
+/* the font files (make fonts): one family, nine weights. No local(): an installed copy never stands in. */
+@font-face{font-family:"Limn Sans";font-weight:100;src:url("fonts/LimnSans-Thin.woff2?v=20260928f1") format("woff2")}
+@font-face{font-family:"Limn Sans";font-weight:200;src:url("fonts/LimnSans-ExtraLight.woff2?v=20260928f1") format("woff2")}
+@font-face{font-family:"Limn Sans";font-weight:300;src:url("fonts/LimnSans-Light.woff2?v=20260928f1") format("woff2")}
+@font-face{font-family:"Limn Sans";font-weight:400;src:url("fonts/LimnSans-Regular.woff2?v=20260928f1") format("woff2")}
+@font-face{font-family:"Limn Sans";font-weight:500;src:url("fonts/LimnSans-Medium.woff2?v=20260928f1") format("woff2")}
+@font-face{font-family:"Limn Sans";font-weight:600;src:url("fonts/LimnSans-SemiBold.woff2?v=20260928f1") format("woff2")}
+@font-face{font-family:"Limn Sans";font-weight:700;src:url("fonts/LimnSans-Bold.woff2?v=20260928f1") format("woff2")}
+@font-face{font-family:"Limn Sans";font-weight:800;src:url("fonts/LimnSans-ExtraBold.woff2?v=20260928f1") format("woff2")}
+@font-face{font-family:"Limn Sans";font-weight:900;src:url("fonts/LimnSans-Black.woff2?v=20260928f1") format("woff2")}
+.ctl{display:flex;flex-wrap:wrap;gap:18px 28px;align-items:center;margin:0 0 20px;font-size:13px}
+.ctl label{display:flex;gap:8px;align-items:center;color:var(--muted)}
+.wt{background:#fff;border-radius:8px;padding:10px 24px 16px;margin:0 0 14px;overflow-x:auto}
+.wt h3{font:500 12px var(--mono);color:var(--muted);margin:6px 0 4px}
+.pair{display:grid;grid-template-columns:44px minmax(0,1fr);align-items:start;border-top:1px solid #f0ede7;padding:6px 0}
+.pair .d{grid-column:2;text-align:left}
+.pair .rows{grid-column:1/-1}
+.pair:first-of-type{border-top:0}
+.lab{font:11px/1.5 var(--mono);color:var(--muted);padding-top:2px}
+.lab i{font-style:normal;display:block}
+.rows{position:relative;min-width:0}
+.rows svg{max-width:none;overflow:visible}
+.fnt{font-family:"Limn Sans";white-space:pre;font-kerning:normal;font-synthesis:none;color:var(--ink)}
+.over .rows .eng{position:absolute;left:0;top:0;opacity:.62;mix-blend-mode:multiply}
+.over .lab i:first-child{color:var(--ver)}
+.d{font:11px/1.5 var(--mono);color:var(--muted);white-space:nowrap}
+.d.off{color:var(--ver);font-weight:600}
+table.t.num td,table.t.num th{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;padding-right:12px}
+table.t.num td:first-child,table.t.num th:first-child,table.t.num td.l{text-align:left}
+table.t.num td.off{color:var(--ver);font-weight:600}
+pre.css{background:#fff;border-radius:8px;padding:16px 20px;font:12.5px/1.6 var(--mono);overflow-x:auto;max-width:1120px}
+.note{font-size:13px;color:var(--muted);max-width:900px}
+</style>
+</head>
+<body>
+<div class="bar"><nav><a href="index.html">홈</a><a href="bi.html">BI</a><a href="dock.html">앱 아이콘</a><a href="icons.html">작은 아이콘</a><a href="type.html">서체</a><a href="weights.html">굵기</a><a href="hangul.html">한글 실험</a><a href="punct.html">구두점</a><a href="symbols.html">특수문자</a><a href="accents.html">악센트</a><a href="spacing.html">자간</a><a href="proof.html">교정쇄</a><a href="compare.html">비교</a><a href="coverage.html">커버리지</a><b>폰트 파일</b><a href="concept.html">의미</a></nav></div>
+<aside class="release-note" aria-label="Release and preview scope"><strong>개발·연구 미리보기</strong> · 이 화면의 엔진·한글·브랜드 실험은 배포본과 다릅니다.
+<a href="https://github.com/dartworklabs/limn-sans/releases/tag/v1.002">Limn Sans 1.002 받기</a>: 영어·기호 919자, 정적 9굵기(100–900). 한글·로고 글리프는 제외되며, 그리스어·확장 라틴은 언어 QA 대상이 아닙니다.</aside>
+<header>
+  <div><p class="kicker">개발 폰트 · 엔진 비교 · 100–900</p><h1>개발 폰트와 엔진 비교</h1>
+  <p class="lede">이 화면은 기본 <code>full</code> 개발 프로필(0.100)의 비교 도구입니다. 조판 엔진(<code>limn-brand.js</code>)이 그리는 글자를 폰트 파일로 굽습니다. 핀은 윤곽에 먹 원으로 합치고(폰트는 한 가지 색이라 주홍 핀은 limn 앱 엔진에만 있습니다), 커닝은 엔진의 쌍과 부류를 GPOS로, 숫자는 엔진처럼 고정폭이 기본이고 <code>pnum</code>이 비례 숫자를 줍니다. 한글은 같은 굵기의 한글 데이터에서 오고, 본문의 림은 핀 없는 원래 음절입니다.</p></div>
+  <ul class="facts" id="facts"></ul>
+</header>
+
+<section class="sec">
+  <h2><span class="no">01</span>엔진 대 폰트</h2>
+  <p class="sub">굵기마다 같은 문장을 위에는 SVG 엔진(<code>LIMN_playset</code>, 기본 규칙)으로, 바로 아래에는 브라우저가 WOFF2로 그립니다. 두 줄은 같은 원점과 같은 기준선에 놓여, 어긋나면 바로 보입니다. 오른쪽 수치는 줄 끝(펜 전진)과 먹 폭의 차이 — 엔진 대비 %.</p>
+  <div class="ctl">
+    <label>크기 <select id="px"><option>24</option><option selected>36</option><option>48</option><option>64</option></select></label>
+    <label><input id="over" type="checkbox"> 겹쳐 보기(엔진 주홍 · 폰트 먹)</label>
+  </div>
+  <div id="cmp"><p class="note" id="wait">폰트와 한글 데이터를 불러오는 중… (굵기마다 약 2 MB)</p></div>
+</section>
+
+<section class="sec">
+  <h2><span class="no">02</span>기능</h2>
+  <p class="sub">엔진의 스위치와 같은 OpenType 기능입니다. 위는 엔진(해당 스위치를 켠 것), 아래는 폰트(<code>font-feature-settings</code>).</p>
+  <div class="ctl"><label>굵기 <select id="fw"><option>100</option><option>200</option><option>300</option><option selected>400</option><option>500</option><option>600</option><option>700</option><option>800</option><option>900</option></select></label></div>
+  <div id="feat"></div>
+</section>
+
+<section class="sec">
+  <h2><span class="no">03</span>측정</h2>
+  <p class="sub">값은 폰트 단위. 줄 끝: 엔진의 펜 전진 대 브라우저 레이아웃 폭(DOM, 1000 px에서). 먹과 픽셀 차: 엔진 SVG와 폰트의 <code>fillText</code>를 같은 원점·기준선에 200 px로 그려(1 px = 5 단위) 먹이 있는 열의 범위를 비교하고, 한쪽에만 먹이 있는 픽셀을 먹이 있는 픽셀 전체로 나눕니다. 두 래스터라이저는 윤곽 가장자리에서 반 픽셀씩 달라 가는 굵기일수록 이 값이 커지므로, 상대 먹에서 1 px(5 단위) 넘게 떨어진 픽셀만 따로 셉니다(1 px 밖) — 빠진 핀이나 옮겨진 글자는 여기서 드러납니다. 주홍은 끝·먹이 1 %, 1 px 밖이 0.2 %를 넘는 것(핀 하나가 빠지면 400에서 0.35 %).</p>
+  <table class="t num" id="tab"></table>
+</section>
+
+<section class="sec">
+  <h2><span class="no">04</span>개발 빌드 파일 · 0.100</h2>
+  <p class="sub">SIL Open Font License 1.1. Limn Sans 자체는 예약 글꼴 이름을 두지 않으므로 고친 판도 같은 이름으로 낼 수 있습니다. 다만 Quicksand(© The Quicksand Project Authors)와 나눔스퀘어라운드(© NAVER Corporation)의 수정판이라 그 두 예약 이름은 쓰지 않습니다. 아래 파일과 CSS는 로컬 개발 산출물이며 치수가 바뀔 수 있습니다. 설치에는 <a href="https://github.com/dartworklabs/limn-sans/releases/tag/v1.002">영어·기호 1.002 릴리스 패키지</a>의 TTF·WOFF2와 <code>fonts.css</code>를 사용하세요. 배포본은 한글과 core/ext 서브셋을 포함하지 않습니다.</p>
+  <table class="t num" id="files"></table>
+  <pre class="css" id="css"></pre>
+</section>
+<footer>폰트 파일은 <code>make fonts</code>(<code>tools/build_ttf.py</code>)가 <code>limn-font-play.js</code>와 <code>limn-hangul-&lt;w&gt;.js</code>에서 만들고, <code>tools/check_ttf.py</code>가 엔진 데이터와 대조합니다. 저장소에는 넣지 않습니다(빌드 산출물).</footer>
+<script>
+const $=id=>document.getElementById(id),f=n=>+(+n).toFixed(1),WS=[100,200,300,400,500,600,700,800,900];
+const FF=window.LIMN_FONT_FILES||null,ASC=FF?FF.asc:970,DESC=FF?FF.desc:-330,LH=(ASC-DESC)/1000;
+const TXT=["limn에 핀을 꽂아 두면 다시 읽힌다","원고 PDF 3개 · 핀 12개 · Resolve all","Sphinx of black quartz, judge my vow. 0123456789","오늘의 manuscript를 pin it, fix it, done."];
+const FEAT=[
+  {tag:"pnum",label:"pnum 비례 숫자",s:"1,470 · 2026년 9월 7.1",eng:{tnum:false},css:'"pnum"'},
+  {tag:"ss01",label:"ss01 두 층 a g",s:"a page of gallery",eng:{ss01:true},css:'"ss01"'},
+  {tag:"zero",label:"zero 점 있는 0",s:"0 100 2026",eng:{zero:true},css:'"zero"'},
+];
+const esc=s=>s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const KB=n=>n>=1e6?(n/1048576).toFixed(2)+" MB":Math.round(n/1024)+" KB";
+// the engine's line: body, pen advance (a sentinel the data lacks is set as tofu with no kerning, so its x is the pen) and ink range
+function engine(s,w,o={}){
+  const t=LIMN_playset(s,{w,...o}),g=LIMN_playset(s+"\uE000",{w,...o}).glyphs;
+  return {t,end:g[g.length-1].x,ink:t.vb[2],inkL:t.vb[0]};
+}
+function engSvg(e,px,ink){
+  const W=Math.max(e.end,e.inkL+e.ink),h=(ASC-DESC)*px/1000;
+  const body=ink?e.t.body.replace(/fill="#15161a"/g,`fill="${ink}"`):e.t.body;
+  return `<svg class="eng" viewBox="0 ${-ASC} ${f(W)} ${ASC-DESC}" width="${f(W*px/1000)}" height="${f(h)}">${body}</svg>`;
+}
+const fontDiv=(s,w,px,feat)=>`<div class="fnt" style="font-weight:${w};font-size:${px}px;line-height:${LH}${feat?`;font-feature-settings:${feat.replace(/"/g,"&quot;")}`:""}">${esc(s)}</div>`;
+// the browser's line width at 1000 px (= font units): the layout advance, with kerning and features
+const probe=document.createElement("span");probe.className="fnt";probe.style.cssText="position:absolute;left:-99999px;top:0;font-size:1000px;line-height:1.3";
+document.body.appendChild(probe);
+function measure(s,w,feat){
+  probe.style.fontWeight=w;probe.style.fontFeatureSettings=feat||"normal";probe.textContent=s;
+  return probe.getBoundingClientRect().width;
+}
+// pixels: the engine's SVG and the font's fillText, both at PK px per unit on the same origin and baseline;
+// ink = the columns with ink (units), miss = pixels inked in one but not the other / inked in either,
+// far = the same but only pixels more than 1 px from the other's ink. Canvas cannot switch OpenType
+// features, so the feature lines (section 02) are measured by advance only.
+const PK=0.2,PAD=200;
+async function pixels(e,s,w){
+  const Wd=Math.ceil((Math.max(e.end,e.inkL+e.ink)+2*PAD)*PK),Ht=Math.ceil((ASC-DESC)*PK);
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="${-PAD} ${-ASC} ${Wd/PK} ${ASC-DESC}" width="${Wd}" height="${Ht}">${e.t.body}</svg>`;
+  const img=new Image();img.src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(svg);await img.decode();
+  const mask=draw=>{const c=document.createElement("canvas");c.width=Wd;c.height=Ht;const x=c.getContext("2d");draw(x);return x.getImageData(0,0,Wd,Ht).data;};
+  const A=mask(x=>x.drawImage(img,0,0));
+  const B=mask(x=>{x.font=`${w} ${1000*PK}px "Limn Sans"`;x.fontKerning="normal";x.fillStyle="#000";x.fillText(s,PAD*PK,ASC*PK);});
+  const N=Wd*Ht,a=new Uint8Array(N),b=new Uint8Array(N);
+  for(let p=0;p<N;p++){a[p]=A[4*p+3]>127;b[p]=B[4*p+3]>127;}
+  // within 1 px (5 units) of the other's ink: rasterisers differ at edges, a missing pin or a moved glyph does not hide there
+  const near=m=>{const o=new Uint8Array(N);for(let y=0;y<Ht;y++)for(let x=0;x<Wd;x++){const p=y*Wd+x;if(!m[p])continue;for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){const X=x+dx,Y=y+dy;if(X>=0&&Y>=0&&X<Wd&&Y<Ht)o[Y*Wd+X]=1;}}return o;};
+  const na=near(a),nb=near(b);
+  let or=0,xor=0,far=0,a0=1e9,a1=-1,b0=1e9,b1=-1;
+  for(let p=0;p<N;p++){const u=a[p],v=b[p];if(u||v)or++;if(u!==v)xor++;if((u&&!nb[p])||(v&&!na[p]))far++;const col=p%Wd;if(u){a0=Math.min(a0,col);a1=Math.max(a1,col);}if(v){b0=Math.min(b0,col);b1=Math.max(b1,col);}}
+  return {engInk:(a1-a0+1)/PK,fontInk:(b1-b0+1)/PK,dL:(b0-a0)/PK,miss:100*xor/or,far:100*far/or};
+}
+const pct=(a,b)=>100*(a-b)/b,sgn=v=>(v>0?"+":v<0?"−":"±")+Math.abs(v).toFixed(2);
+const REPORT=[];
+async function compute(){
+  REPORT.length=0;
+  for(const w of WS){
+    for(const [i,s] of TXT.entries()){const e=engine(s,w),adv=measure(s,w),px=await pixels(e,s,w);
+      REPORT.push({w,kind:"text",i,s,engAdv:f(e.end),fontAdv:f(adv),dAdv:+pct(adv,e.end).toFixed(3),engInk:f(px.engInk),fontInk:f(px.fontInk),dInk:+pct(px.fontInk,px.engInk).toFixed(3),dLeft:f(px.dL),miss:+px.miss.toFixed(2),far:+px.far.toFixed(2)});}
+    for(const F of FEAT){const e=engine(F.s,w,F.eng),adv=measure(F.s,w,F.css);
+      REPORT.push({w,kind:F.tag,s:F.s,engAdv:f(e.end),fontAdv:f(adv),dAdv:+pct(adv,e.end).toFixed(3)});}
+  }
+  window.LIMN_FONTS_REPORT=REPORT;
+}
+function pairHtml(e,s,w,px,feat,r){
+  const over=$("over").checked;
+  const d=r?`<div class="d${Math.abs(r.dAdv)>1||(r.dInk!=null&&Math.abs(r.dInk)>1)||r.far>0.2?" off":""}">끝 ${sgn(r.dAdv)} %${r.dInk!=null?` · 먹 ${sgn(r.dInk)} %<br>픽셀 차 ${r.miss.toFixed(1)} % · 1 px 밖 ${r.far.toFixed(2)} %`:""}</div>`:`<div class="d"></div>`;
+  return `<div class="pair"><div class="lab"><i>엔진</i><i>폰트</i></div>${d}<div class="rows">${engSvg(e,px,over?"#e8452c":null)}${fontDiv(s,w,px,feat)}</div></div>`;
+}
+function render(){
+  const px=+$("px").value;
+  $("cmp").classList.toggle("over",$("over").checked);
+  $("cmp").innerHTML=WS.map(w=>{const FFw=FF&&FF.files.find(x=>x.w===w);
+    return `<div class="wt"><h3>${w}${FFw?" · "+FFw.name:""}</h3>`+TXT.map((s,i)=>pairHtml(engine(s,w),s,w,px,null,REPORT.find(r=>r.w===w&&r.kind==="text"&&r.i===i))).join("")+`</div>`}).join("");
+  const fw=+$("fw").value;
+  $("feat").classList.toggle("over",$("over").checked);
+  $("feat").innerHTML=`<div class="wt">`+FEAT.map(F=>`<h3>${F.label} · font-feature-settings: ${esc(F.css)}</h3>`+pairHtml(engine(F.s,fw,F.eng),F.s,fw,px,F.css,REPORT.find(r=>r.w===fw&&r.kind===F.tag))).join("")+`</div>`;
+}
+function table(){
+  const c=v=>`<td class="${Math.abs(v)>1?"off":""}">${sgn(v)}</td>`;
+  const head=`<tr><th>굵기</th><th>문장</th><th>엔진 끝</th><th>폰트 끝</th><th>Δ 끝 %</th><th>엔진 먹</th><th>폰트 먹</th><th>Δ 먹 %</th><th>먹 왼끝 Δ</th><th>픽셀 차 %</th><th>1 px 밖 %</th></tr>`;
+  $("tab").innerHTML=head+REPORT.map(r=>`<tr><td>${r.w}</td><td class="l">${r.kind==="text"?esc(r.s):r.kind+" · "+esc(r.s)}</td><td>${r.engAdv}</td><td>${r.fontAdv}</td>${c(r.dAdv)}<td>${r.engInk??"–"}</td><td>${r.fontInk??"–"}</td>${r.dInk!=null?c(r.dInk):"<td>–</td>"}<td>${r.dLeft??"–"}</td>${r.miss!=null?`<td>${r.miss.toFixed(2)}</td><td class="${r.far>0.2?"off":""}">${r.far.toFixed(2)}</td>`:"<td>–</td><td>–</td>"}</tr>`).join("");
+}
+/** Show local development files and CSS, or a release-directed empty state. */
+function files(){
+  if(!FF){$("files").innerHTML=`<tr><td>개발 비교 파일은 make fonts 로 만듭니다. 설치용 1.002는 위 릴리스 링크에서 받으세요.</td></tr>`;return;}
+  $("files").innerHTML=`<tr><th>굵기</th><th>이름</th><th>TTF</th><th>WOFF2</th><th>글리프</th></tr>`+FF.files.map(x=>`<tr><td>${x.w}</td><td class="l">${x.name}</td><td><a href="${x.ttf}" download>${x.ttf.split("/").pop()}</a> · ${KB(x.ttfBytes)}</td><td><a href="${x.woff2}" download>${x.woff2.split("/").pop()}</a> · ${KB(x.woff2Bytes)}</td><td>${x.glyphs.toLocaleString()}</td></tr>`).join("");
+  $("css").textContent=`/* 파일을 CSS 옆 fonts/에 두고 */\n`+FF.files.map(x=>`@font-face { font-family: "Limn Sans"; font-weight: ${x.w}; font-display: swap;\n  src: url("${x.woff2}") format("woff2"); }`).join("\n")+
+    `\n\nbody { font-family: "Limn Sans", sans-serif; line-height: ${LH}; }   /* 줄 상자 = 어센더 ${ASC} + 디센더 ${-DESC}: 모든 글자가 들어감 */\n.proportional { font-variant-numeric: proportional-nums; }   /* 숫자는 기본이 고정폭 */\n.two-storey { font-feature-settings: "ss01"; }   /* 두 층 a g */\n.dotted-zero { font-variant-numeric: slashed-zero; }   /* zero: 점 있는 0 */`;
+}
+/** Describe the loaded development metadata without claiming release coverage. */
+function facts(){
+  const x=FF&&FF.files[0];
+  $("facts").innerHTML=[["Limn Sans",`${FF?"버전 "+FF.version+(FF.rev?" ("+FF.rev+")":""):"make fonts 전"} · 굵기 100–900 · TTF + WOFF2`],
+    ["글리프",x?`${x.glyphs.toLocaleString()} (로컬 개발 빌드: 한글 · 낱자 · 기호 · 대체 글자, 배포본 수치 아님)`:"–"],
+    ["줄 상자",`어센더 ${ASC} · 디센더 ${DESC} · 줄 간격 0 (typo = hhea = win) — 기본 줄 높이 ${LH} em`],
+    ["기능","kern · pnum · tnum · ss01 · zero (로고 림은 파일에 없음)"],
+    ["크기",FF?`WOFF2 ${KB(Math.min(...FF.files.map(x=>x.woff2Bytes)))}–${KB(Math.max(...FF.files.map(x=>x.woff2Bytes)))} · TTF ${KB(Math.min(...FF.files.map(x=>x.ttfBytes)))}–${KB(Math.max(...FF.files.map(x=>x.ttfBytes)))}`:"–"]]
+    .map(([b,s])=>`<li><b>${b}</b><span>${s}</span></li>`).join("");
+}
+facts();files();
+["px","over","fw"].forEach(id=>$(id).addEventListener("input",render));
+Promise.all([LIMN_loadHangul(WS),...WS.map(w=>document.fonts.load(`${w} 40px "Limn Sans"`,"limn 림 0"))]).then(()=>document.fonts.ready).then(()=>{
+  render();return compute();
+}).then(()=>{render();table();window.LIMN_FONTS_READY=true;
+});
+</script>
+</body>
+</html>

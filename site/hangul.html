@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>limn 서체 — 한글 · Development preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="limn-pages.css?v=20261021-release-docs">
+<script src="limn-font.js?v=20260928h1"></script>
+<script src="limn-font-play.js?v=20260928h1"></script>
+<script src="limn-brand.js?v=20260928h1"></script>
+<script src="hangul-measure.js?v=20260928h1"></script>
+<style>
+.ctl{display:flex;flex-wrap:wrap;gap:18px 28px;align-items:center;margin:0 0 20px;font-size:13px}
+.ctl label{display:flex;gap:8px;align-items:center;color:var(--muted)}
+.wf{background:#fff;border-radius:8px;padding:14px 24px;overflow-x:auto}
+.wf .r{display:grid;grid-template-columns:52px 1fr;align-items:center;border-top:1px solid #f0ede7;padding:4px 0}
+.wf .r:first-child{border-top:0}
+.wf .r b{font:500 12px var(--mono);color:var(--muted)}
+.wf svg{max-width:none}
+table.t.num td,table.t.num th{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;padding-right:12px}
+table.t.num td:first-child,table.t.num th:first-child{text-align:left}
+table.t.num td.off{color:var(--ver);font-weight:600}
+table.t.num tr.tgt td{background:#f4f7ff;font-weight:500}
+.lock{display:flex;flex-wrap:wrap;gap:36px 56px;align-items:flex-end;background:#fff;border-radius:8px;padding:28px}
+.lock figure{margin:0;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.lock figcaption{font:11px var(--mono);color:var(--muted)}
+.note{font-size:13px;color:var(--muted);max-width:900px}
+</style>
+</head>
+<body>
+<div class="bar"><nav><a href="index.html">홈</a><a href="bi.html">BI</a><a href="dock.html">앱 아이콘</a><a href="icons.html">작은 아이콘</a><a href="type.html">서체</a><a href="weights.html">굵기</a><b>한글 실험</b><a href="punct.html">구두점</a><a href="symbols.html">특수문자</a><a href="accents.html">악센트</a><a href="spacing.html">자간</a><a href="proof.html">교정쇄</a><a href="compare.html">비교</a><a href="coverage.html">커버리지</a><a href="fonts.html">폰트 파일</a><a href="concept.html">의미</a></nav></div>
+<aside class="release-note" aria-label="Release and preview scope"><strong>개발·연구 미리보기</strong> · 이 화면의 엔진·한글·브랜드 실험은 배포본과 다릅니다.
+<a href="https://github.com/dartworklabs/limn-sans/releases/tag/v1.002">Limn Sans 1.002 받기</a>: 영어·기호 919자, 정적 9굵기(100–900). 한글·로고 글리프는 제외되며, 그리스어·확장 라틴은 언어 QA 대상이 아닙니다.</aside>
+<header>
+  <div><p class="kicker">개발 연구 · 나눔스퀘어라운드 기반</p><h1>한글 실험 미리보기</h1>
+  <p class="lede">이 개발 엔진의 한글은 네이버의 나눔스퀘어라운드(SIL OFL 1.1)를 부모로 삼아, 굵기마다 limn의 라틴에 크기·기준선·획 굵기·간격을 맞춰 짝지었습니다. KS X 1001의 2,350자, 낱자 ㄱ–ㅣ, 라틴에 없는 한국어 문장부호를 담습니다. "Nanum"은 예약 글꼴 이름이라 파생물 어디에도 쓰지 않습니다.</p>
+  <div class="hero" id="hero"></div></div>
+  <ul class="facts" id="facts"></ul>
+</header>
+
+<section class="sec">
+  <h2><span class="no">01</span>짝짓기 규칙</h2>
+  <p class="sub">수치는 폰트 단위(em 1000), 높이는 기준선 위가 +입니다. 음절의 틀(frame)은 교정 문장 한글의 윗끝 10번째 백분위부터 아랫끝 90번째 백분위까지, 곧 가장 깊은 음절들로 잽니다.</p>
+  <ol class="rules">
+    <li><span><b>두 기준점은 획 굵기로 정합니다.</b> 획 120(Quicksand Bold, 브랜드 글꼴) = 나눔스퀘어라운드 EB × 0.8708, 획 68.4 = R × 0.8901 — 섞인 문장에서 한글이 라틴 아래로 삐져나오지 않도록 틀 중심을 두고 5 % 작게 잡은 크기입니다. 굵기 이름이 아니라 획으로 잡으므로, 같은 획에는 같은 한글이 나옵니다.</span></li>
+    <li><span><b>잉크 틀은 모든 굵기에서 같습니다.</b> 라틴이 기준선과 대문자 높이를 먹의 끝으로 지키듯, 음절의 바깥 크기를 굵기마다 같게 두고 획만 안쪽으로 자랍니다. 그래서 받침 없는 음절 바닥은 모든 굵기에서 −3~−6(기준선), 받침 바닥은 −50(디센더처럼), 윗끝은 약 760입니다.</span></li>
+    <li><span><b>틀의 중심은 기준선 위 350 = cap/2.</b> 모든 굵기에서 같습니다.</span></li>
+    <li><span><b>획 = 라틴 획 S × 0.93~0.97.</b> 획 68 이하는 R의 비, 획 120은 EB의 비, 사이는 직선, 그 위로는 0.93까지 줄어듭니다 — 불린 EB가 라틴보다 빨리 어두워져서.</span></li>
+    <li><span><b>가로획 대비 = 라틴의 0.94배 (가는 쪽은 1.0까지).</b> 나눔스퀘어라운드는 가로획이 세로획의 약 0.85라 그대로 두면 limn 라틴 옆에서 가로로 가늘게 읽힙니다(대비 비 0.73~0.97). 한글·라틴을 함께 설계한 네 서체의 전 굵기 중앙값(300 이상 0.93~0.95, 100에서 1.01)에 맞춰, 굵기마다 한글 가로획만 세로 펜으로 굵힙니다(100 +5, 400 +3, 700 +4, 900 −3). 세로획·위치·자간은 그대로, 로고 림은 나눔스퀘어라운드의 획 그대로. <code>LIMN_KO_CONTRAST=0</code>이면 끕니다.</span></li>
+    <li><span><b>가장 가까운 마스터 + 둥근 펜.</b> 네 마스터는 점 구성이 달라(가: 35·36·36·33점) 보간할 수 없습니다. 굵기마다 획이 가장 가까운 마스터를 고르고 나머지는 펜으로 채웁니다. 깎기는 획마다(펜보다 가는 조각은 온전히 남는 만큼만), 불리기는 어떤 흰 공간도 절반 넘게 먹지 않습니다 — 자모 사이, ㄹ의 골, ㅁ·ㅇ의 속공간이 열린 채로 남고 새 속공간은 생기지 않습니다. 펜은 GEOS(shapely)로 돌려 윤곽이 짧은 직선으로 바뀝니다(허용 오차 0.5).</span></li>
+    <li><span><b>자간은 400·700에서 잰 값.</b> 프리텐다드·수트·본고딕·IBM Plex Sans KR에서 음절 사이 흰 폭(두 음절이 함께 먹을 가진 줄마다의 흰 폭 평균)은 자기 라틴 글자 사이 흰 폭의 2.40배(400)·2.26배(700). limn의 라틴 흰 폭에 그 비를 곱하면 획 68.4에서 +6, 획 120에서 +28입니다. 사이는 직선, 밖은 그대로 두고, 펜이 옆 여백을 옮긴 만큼(2 × 펜) 돌려줍니다 — 비를 100까지 늘려 쓰면 −81이 되어 음절이 서로 겹치기 때문입니다.</span></li>
+    <li><span><b>라틴 | 한글 경계는 더하지 않음.</b> 가장 가까운 먹 사이 거리로 재면 참고 서체의 경계 흰 폭은 글자 사이의 1.03배이고 limn은 0.98~1.0배로 이미 맞습니다(줄 평균으로 재면 20~36 좁히라고 나오지만, 그러면 가장 가까운 거리가 어느 참고 서체보다 좁아집니다). 커닝 쌍은 없습니다.</span></li>
+    <li><span><b>림은 나눔스퀘어라운드의 림.</b> ㅣ를 i로 바꿉니다 — 핀 지름 = 줄기 = ㅣ 굵기, 핀 윗끝 = ㅣ 윗끝, 줄기 끝 = ㅣ 끝, 줄기 윗끝은 모든 굵기에서 한 높이(브랜드 글꼴에서 틈이 0.35 × 굵기가 되는 자리). 라틴 i가 x높이와 어센더를 지키고 틈이 나머지를 받듯, 굵어지면 틈이 줄고 줄기 길이는 그대로입니다. 핀은 엔진이 그립니다(로고는 주홍, 본문은 먹).</span></li>
+  </ol>
+</section>
+
+<section class="sec">
+  <h2><span class="no">02</span>굵기별 수치</h2>
+  <p class="sub">만들어진 데이터(<code>limn-hangul-&lt;w&gt;.js</code>)를 다시 재서 얻은 값입니다(<code>tools/hangul_measure.py</code>). 주홍 숫자는 목표 띠 밖. 회색비는 나눔스퀘어라운드 자체 폭 기준이고, 괄호 안은 자간을 넣은 폭 기준입니다.</p>
+  <table class="t num" id="tab"></table>
+  <p class="note" id="refs"></p>
+</section>
+
+<section class="sec">
+  <h2><span class="no">03</span>폭포 — 100에서 900까지</h2>
+  <div class="ctl">
+    <label>크기 <select id="px"><option>18</option><option>28</option><option selected>40</option><option>64</option></select></label>
+    <label><input id="guide" type="checkbox"> 안내선(기준선 · x높이 · cap · 어센더)</label>
+    <label>문장 <select id="txt"></select></label>
+  </div>
+  <div class="wf" id="wf"><p class="note">한글 데이터를 불러오는 중… (굵기마다 약 2 MB)</p></div>
+</section>
+
+<section class="sec">
+  <h2><span class="no">04</span>림 로크업</h2>
+  <p class="sub">위: 워드마크 limn과 림(브랜드 글꼴, 주홍 핀). 아래: 굵기마다 같은 규칙으로 만든 림, 그리고 본문 속 림(먹 핀)과 핀 없는 원래 림.</p>
+  <div class="lock" id="lock"></div>
+</section>
+
+<section class="sec">
+  <h2><span class="no">05</span>없는 글자</h2>
+  <p class="sub">KS X 1001 밖의 음절(뷁 · 똠 · 햏)은 빈 상자로 그립니다 — 건너뛰지 않습니다.</p>
+  <div class="lock" id="tofu"></div>
+</section>
+
+<footer>한글 윤곽: 나눔스퀘어라운드 © NAVER Corporation, SIL Open Font License 1.1(<code>tools/hangul/OFL-NanumSquareRound.txt</code>). 수정본이므로 예약 글꼴 이름(Nanum 등)을 쓰지 않습니다. 데이터는 <code>make hangul</code>, 수치는 <code>make hangul-measure</code>.</footer>
+<script>
+const L=LIMN,C=L.COLOR,f=L.f,$=id=>document.getElementById(id),WS=[100,200,300,400,500,600,700,800,900];
+const M=window.LIMN_HANGUL_MEASURE||null;
+const TXT=["limn에 핀을 꽂아 두면 다시 읽힌다","원고 PDF 3개 · 핀 12개 · Resolve all","오늘의 manuscript를 pin it, fix it, done.","리뷰어 코멘트 v0.3.12 — 2026년 9월 27일","Limn 림 · 림 limn · 타이포그래피 Typography","limn은 원고 PDF 위에 핀을 꽂아 두는 viewer다."];
+$("txt").innerHTML=TXT.map((t,i)=>`<option value="${i}">${t}</option>`).join("");
+function facts(){
+  $("facts").innerHTML=[["부모","나눔스퀘어라운드 L · R · B · EB (NAVER, OFL 1.1)"],["2,350 + 51","KS X 1001 음절 + 낱자 ㄱ–ㅣ + 문장부호 「」『』〈〉《》【】〔〕、。※〜"],
+    ["획 120 · 68.4","EB × 0.8708 · R × 0.8901"],["중심 350","틀의 중심 = cap/2, 모든 굵기"],["림","ㅣ → i, 핀 지름 = ㅣ 굵기, 줄기 윗끝 고정"]]
+    .map(([b,s])=>`<li><b>${b}</b><span>${s}</span></li>`).join("");
+}
+const r=(v,d=0)=>v==null?"–":(+v).toFixed(d);
+function table(){
+  if(!M){$("tab").innerHTML=`<tr><td>make hangul-measure 로 hangul-measure.js를 만든 뒤 다시 여세요.</td></tr>`;return;}
+  const band=(v,lo,hi,d)=>`<td class="${v<lo||v>hi?"off":""}">${r(v,d)}</td>`;
+  const head=`<tr><th>굵기</th><th>부모 · 펜</th><th>k</th><th>dy</th><th>자간</th><th>경계</th><th>획 V/S</th><th>회색비</th><th>음절 높이</th><th>열린 바닥</th><th>받침 바닥</th><th>무게중심</th><th>음절/글자 흰 폭</th></tr>`;
+  const rows=WS.filter(w=>M.weights[w]).map(w=>{const m=M.weights[w],p=m.pair;
+    return `<tr><td>${w}</td><td>${p.master}${p.delta?` ${p.delta>0?"+":""}${r(p.delta,1)}`:""}</td><td>${r(p.k,4)}</td><td>${r(p.dy,1)}</td><td>${m.track>0?"+":""}${m.track}</td><td>${r(m.gapB-m.gapB0,0)}</td>`+
+      band(m["V/S"],.93,.99,3)+`<td class="${m.grey<1.10||m.grey>1.17?"off":""}">${r(m.grey,3)} <span style="color:var(--muted)">(${r(m["grey+t"],3)})</span></td>`+
+      `<td>${r(m.h50)}</td><td>${r(m.open)}</td><td>${r(m.closed)}</td>`+band(m.centroid,350,362,1)+`<td>${r(m.gapH/m.gapL,2)}</td></tr>`}).join("");
+  const tgt=`<tr class="tgt"><td>목표</td><td>—</td><td>0.8708 · 0.8901</td><td>—</td><td>잰 값</td><td>잰 값</td><td>0.93–0.99</td><td>1.10–1.17</td><td>≈ 800 (700)</td><td>≈ −40</td><td>—</td><td>354–359</td><td>${M.ratio?`${r(M.ratio[400],2)} · ${r(M.ratio[700],2)}`:"—"}</td></tr>`;
+  $("tab").innerHTML=head+tgt+rows;
+  if(M.refs) $("refs").innerHTML="참고 서체(자기 라틴 기준): "+M.refs.map(x=>`${x.name} ${x.lw} — 음절/글자 ${r(x.ratio,2)}, 경계/글자 ${r(x.ratioB,2)}`).join(" · ");
+}
+function guides(W,t,h){
+  const [x,y,w,hh]=t.vb,ln=(yy,c)=>`<line x1="${x}" x2="${x+w}" y1="${yy}" y2="${yy}" stroke="${c}" stroke-width="${1000/h}"/>`;
+  return ln(0,"#39f")+ln(-W.xh,"#39f")+ln(-W.cap,"#f90")+ln(-W.asc,"#f6b")+ln(-330,"#ccc");
+}
+function waterfall(){
+  const px=+$("px").value,g=$("guide").checked,s=TXT[+$("txt").value];
+  $("wf").innerHTML=WS.map(w=>{const t=LIMN_playset(s,{w,full:true,pad:20,optical:true,ppu:px/1000,ink:C.ink}),h=Math.round(t.vb[3]*px/1000);
+    return `<div class="r"><b>${w}</b><svg viewBox="${t.vb.join(" ")}" height="${h}" width="${f(t.vb[2]/t.vb[3]*h)}">${g?guides(LIMN_PLAY[w],t,h):""}${t.body}</svg></div>`}).join("");
+}
+function lockup(){
+  const tl=L.wordmark({}),tr=L.rim({}),gap=520,X0=tl.vb[0]+tl.vb[2]+gap-tr.vb[0];
+  const top=Math.min(tl.vb[1],tr.vb[1])-40,vb=[tl.vb[0]-40,top,X0+tr.vb[0]+tr.vb[2]-tl.vb[0]+80,80-top],h=150;
+  const big=`<figure><svg viewBox="${L.vbs(vb)}" height="${h}" width="${f(h*vb[2]/vb[3])}">${tl.body}<g transform="translate(${f(X0)} 0)">${tr.body}</g></svg><figcaption>limn · 림 — 브랜드 글꼴(Quicksand Bold, 획 120), 주홍 핀</figcaption></figure>`;
+  const each=[100,200,300,400,500,600,700,800,900].map(w=>{const t=LIMN_playset("림",{w,app:true,rim:"logo",full:true,pad:30});return `<figure><svg viewBox="${t.vb.join(" ")}" height="120" width="${f(120*t.vb[2]/t.vb[3])}">${t.body}</svg><figcaption>${w} · 핀 r ${t.dots.length?f(t.dots[0][2]):"–"}</figcaption></figure>`}).join("");
+  const txt=["그림을 그린다 — 림 limn","그림을 그린다 — 림 limn"].map((s,i)=>{const t=LIMN_playset(s,{w:700,rim:i?undefined:"logo",full:true,pad:20});return `<figure><svg viewBox="${t.vb.join(" ")}" height="56" width="${f(56*t.vb[2]/t.vb[3])}">${t.body}</svg><figcaption>${i?"본문 속 림 — 원래 음절(기본)":"로고 림을 본문에 (rim: \"logo\")"}</figcaption></figure>`}).join("");
+  $("lock").innerHTML=big+each+txt;
+}
+function tofu(){
+  $("tofu").innerHTML=[400,700].map(w=>{const t=LIMN_playset("한글 뷁 똠 햏 끝",{w,full:true,pad:20});return `<figure><svg viewBox="${t.vb.join(" ")}" height="64" width="${f(64*t.vb[2]/t.vb[3])}">${t.body}</svg><figcaption>${w}</figcaption></figure>`}).join("");
+}
+function hero(){const t=LIMN_playset("limn에 핀을 꽂아 두면 다시 읽힌다",{w:700,full:true,pad:10});$("hero").innerHTML=`<svg viewBox="${t.vb.join(" ")}" width="100%">${t.body}</svg>`}
+facts();table();
+["px","guide","txt"].forEach(id=>$(id).addEventListener("input",waterfall));
+LIMN_loadHangul(WS).then(()=>{hero();waterfall();lockup();tofu();});
+</script>
+</body>
+</html>

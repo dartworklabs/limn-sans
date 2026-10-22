@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>limn 서체 — 구두점·기호 체계 · Development preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="limn-pages.css?v=20261021-release-docs">
+<script src="limn-font.js?v=20260927n1"></script>
+<script src="limn-brand.js?v=20260927n1"></script>
+<script src="punct-data.js?v=20260927n1"></script>
+<script src="limn-font-play.js?v=20260927n1"></script>
+<style>
+.grp{margin:0 0 34px}
+.grp h3{margin:0 0 8px;font:500 12px var(--mono);color:var(--muted)}
+table.cmp{border-collapse:collapse;border-top:1px solid var(--ink)}
+.cmp th{font:11px var(--mono);color:var(--muted);text-align:left;padding:4px 14px 4px 0;white-space:nowrap;font-weight:400;border-bottom:1px solid var(--line)}
+.cmp th b{color:var(--ink);font-weight:500}
+.cmp td{padding:0;border-bottom:1px solid var(--line);border-left:1px solid var(--line)}
+.cmp tr.limn td{background:#fff}
+.cmp tr.limn th{color:var(--ver)}
+.cmp tr.sep th,.cmp tr.sep td{border-bottom:1px solid var(--ink)}
+.cmp svg{display:block}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border-top:1px solid var(--ink)}
+.card{padding:18px 22px 22px 0;display:flex;flex-direction:column;gap:12px;border-bottom:1px solid var(--line)}
+.card:nth-child(even){padding-left:22px;border-left:1px solid var(--line)}
+.card h3{margin:0;font-size:15px}
+.card p{margin:0;color:var(--muted);font-size:13px}
+.run{display:flex;flex-direction:column;gap:14px;border-top:1px solid var(--ink);padding-top:18px}
+.run .row{display:grid;grid-template-columns:88px minmax(0,1fr);gap:18px;align-items:center}
+.run .row>span{font:11px var(--mono);color:var(--muted)}
+.run .row svg{max-width:100%}
+.lines text{font:10px var(--mono);fill:#8b877f}
+.spec td code{white-space:nowrap}
+.spec td:nth-child(2){font:12.5px var(--mono);white-space:nowrap}
+.inrange{color:#2a7a3b}.outrange{color:var(--ver)}
+.mt td,.mt th{font:12px var(--mono);white-space:nowrap}
+.mt td:first-child{font-weight:500}
+.kl{columns:4 220px;font:12px/1.8 var(--mono);color:var(--muted);margin:0;padding:0;list-style:none;max-height:360px;overflow:auto;border-top:1px solid var(--line);padding-top:8px}
+.kl b{color:var(--ink);font-weight:500}
+</style>
+</head>
+<body>
+<div class="bar"><nav><a href="index.html">홈</a><a href="bi.html">BI</a><a href="dock.html">앱 아이콘</a><a href="icons.html">작은 아이콘</a><a href="type.html">서체</a><a href="weights.html">굵기</a><a href="hangul.html">한글 실험</a><b>구두점</b><a href="symbols.html">특수문자</a><a href="accents.html">악센트</a><a href="spacing.html">자간</a><a href="proof.html">교정쇄</a><a href="compare.html">비교</a><a href="coverage.html">커버리지</a><a href="fonts.html">폰트 파일</a><a href="concept.html">의미</a></nav></div>
+
+<aside class="release-note" aria-label="Release and preview scope"><strong>개발·연구 미리보기</strong> · 이 화면의 엔진·한글·브랜드 실험은 배포본과 다릅니다.
+<a href="https://github.com/dartworklabs/limn-sans/releases/tag/v1.002">Limn Sans 1.002 받기</a>: 영어·기호 919자, 정적 9굵기(100–900). 한글·로고 글리프는 제외되며, 그리스어·확장 라틴은 언어 QA 대상이 아닙니다.</aside>
+<header>
+  <div>
+    <p class="kicker">서체 · 구두점과 기호</p>
+    <h1>점은 모두 핀, 획은 모두 S,<br>수학은 한 축 위에</h1>
+    <p class="lede">구두점과 기호는 한 벌입니다. 쉼표는 마침표의 핀에 꼬리를 단 것이고, 곡선 따옴표는 그 쉼표를 들어 올린 것입니다. 느낌표는 i를 180° 돌린 모양입니다. 괄호와 수학 기호는 모두 부모 하이픈의 중심, 곧 하나의 축에 맞춥니다. 높이와 크기는 참고 서체 7종을 실측해 정했고, 모든 값은 XH·CAP·S·PIN_R로 적혀 있어 굵기가 바뀌어도 같은 규칙으로 다시 계산됩니다.</p>
+    <div class="hero" id="hero"></div>
+  </div>
+  <ul class="facts" id="facts"></ul>
+</header>
+
+<section class="sec">
+  <h2><span class="no">01</span>체계 — 모든 높이는 선 하나에 걸린다</h2>
+  <p class="sub">브랜드 그림(Quicksand Bold, 획 120) 기준 폰트 단위(UPM 1000)입니다. 선 이름 옆의 식이 규칙이고, 숫자는 그 결과입니다. 오른쪽 열은 limn의 값과 둥근 참고 서체 6종(Nunito · Varela Round · Comfortaa · Fredoka · M PLUS Rounded 1c · Baloo 2)의 중앙값과 범위, 그리고 부모입니다 — 모두 각 서체 자신의 x높이로 나눈 값으로, 아래 05 측정과 같은 방법입니다.</p>
+  <div id="lines"></div>
+  <table class="t spec" style="margin-top:30px"><thead><tr><th>규칙</th><th>획 120에서</th><th>식</th><th>근거(÷ XH — limn · 참고 6종 중앙값 [범위] · 부모)</th></tr></thead><tbody id="spec"></tbody></table>
+</section>
+
+<section class="sec">
+  <h2><span class="no">02</span>모양</h2>
+  <p class="sub">구두점 넷의 모양과 그 이유입니다. 회색 선은 기준선 · x높이 · 대문자 높이입니다.</p>
+  <div class="cards" id="cards"></div>
+</section>
+
+<section class="sec">
+  <h2><span class="no">03</span>본문에서</h2>
+  <p class="sub">브랜드 그림(<code>limn-font.js</code>)으로 짠 문장입니다. 커닝은 켜져 있습니다.</p>
+  <div class="run" id="run"></div>
+  <h3 style="margin:34px 0 6px">굵기마다 — 같은 규칙, 다른 수치</h3>
+  <p class="sub" style="margin-bottom:14px">놀이터 데이터(<code>limn-font-play.js</code>, 100~900)를 <code>LIMN_playset</code>으로 그렸습니다. 핀은 <code>DOTSPEC</code>에서 다시 그려지므로, 쉼표·따옴표·÷·…의 핀도 굵기마다 제자리를 찾는지 여기서 봅니다.</p>
+  <div class="run" id="weights"></div>
+</section>
+
+<section class="sec">
+  <h2><span class="no">04</span>참고 서체</h2>
+  <p class="sub">글자마다 limn, 그 아래 부모와 참고 서체입니다. 서체마다 x높이를 limn(535)에 맞춰 키웠습니다 — 높이 위치를 비교하기 위해서입니다. 회색 선은 기준선 · x높이 · 대문자 높이, 빨간 점선은 limn의 수학 축입니다.</p>
+  <div id="cmp"></div>
+</section>
+
+<section class="sec">
+  <h2><span class="no">05</span>측정</h2>
+  <p class="sub">limn과 참고 서체를 같은 방법으로 쟀습니다. 칸마다 먹의 윗끝 / 아랫끝을 그 서체 자신의 x높이로 나눈 값입니다(기준선 0, 위가 +). 이 페이지가 윤곽에서 직접 잽니다. limn 값이 둥근 참고 6종의 범위 밖이면 빨강으로 표시했습니다.</p>
+  <div style="overflow-x:auto"><table class="t mt" id="mt"></table></div>
+</section>
+
+<section class="sec">
+  <h2><span class="no">06</span>커닝</h2>
+  <p class="sub" id="ksub"></p>
+  <ul class="kl" id="kl"></ul>
+</section>
+
+<footer>이 페이지의 limn 글자는 <code>limn-font.js</code>와 <code>limn-brand.js</code>에서, 체계의 수치와 참고 서체는 <code>punct-data.js</code>(<code>tools/build_punct_page.py</code>)에서 그립니다. 구두점 규칙은 <code>tools/punct.py</code>. 참고 서체는 모두 SIL Open Font License 1.1이며 비교용으로만 윤곽을 싣습니다. Quicksand © The Quicksand Project Authors — 수정본은 limn으로만 배포합니다.</footer>
+
+<script>
+(function () {
+"use strict";
+const A = LIMN, FA = LIMN_FONT, PD = LIMN_PUNCT, OPT = PD.opt, M = PD.m;
+const C = A.COLOR, f = n => +(+n).toFixed(1), R = FA.pin.r, NS = "http://www.w3.org/2000/svg";
+const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+/* a plain typesetter for any glyph table (limn and the reference fonts): glyph d, adv, pins, kern */
+function ts(F, str, o = {}) {
+  const k = o.k ?? 1, ink = o.ink ?? C.ink, pin = o.pin ?? C.ver, r = F.r ?? R;
+  let x = 0, prev = null, body = "", dots = "";
+  for (const ch of str) {
+    if (ch === " ") { x += F.space ?? 260; prev = null; continue; }
+    const g = F.glyphs[ch]; if (!g) continue;
+    if (prev) x += (F.kern || {})[prev + ch] || 0;
+    if (g.d) body += `<path fill="${ink}" transform="translate(${f(x)} 0)" d="${g.d}"/>`;
+    for (const [px, py] of g.pins || []) dots += `<circle cx="${f(x + px)}" cy="${f(py)}" r="${f(r)}" fill="${pin}"/>`;
+    x += g.adv; prev = ch;
+  }
+  return { body: `<g transform="scale(${k})">${body}${dots}</g>`, w: x * k };
+}
+const refFont = n => { const F = PD.refs[n]; return { ...F, space: F.glyphs[" "] ? F.glyphs[" "].adv : 260, kern: {}, r: 0 }; };
+
+/* one line of type with optional guide lines, y band from `top` to `bot` (font units, y down) */
+function line(F, str, o = {}) {
+  const t = ts(F, str, o), top = o.top ?? -820, bot = o.bot ?? 240, pad = o.pad ?? 40, padL = o.padL ?? pad;
+  const w = Math.max(t.w + pad + padL, o.minw ?? 0), h = bot - top, px = o.h ?? 60;
+  let g = "";
+  for (const [y, c, lab, dash, dy] of o.lines || []) {
+    g += `<line x1="${-padL}" x2="${w - padL}" y1="${f(y)}" y2="${f(y)}" stroke="${c}" stroke-width="${o.lw ?? 3}"${dash ? ` stroke-dasharray="${dash}"` : ""}/>`;
+    if (lab) g += `<text x="${-padL + 10}" y="${f(y - 10 + (dy || 0))}" font-size="${o.fs ?? 36}">${lab}</text>`;
+  }
+  return `<svg class="lines" xmlns="http://www.w3.org/2000/svg" viewBox="${-padL} ${top} ${f(w)} ${h}" width="${f(w * px / h)}" height="${px}">${g}<g transform="translate(${o.dx ?? 0} 0)">${t.body}</g></svg>`;
+}
+const guides = (F, k = 1) => [[0, "#d9d5cc"], [-F.xh * k, "#e6e2da"], [-F.cap * k, "#e6e2da"]];
+const AXL = [-M.AX, "rgba(232,69,44,.55)", "", "10 10"];
+const Fa = { ...FA, r: R };
+
+/* ---------------- measurement: ink top and bottom of each glyph over the font's own x-height ---------------- */
+const RND = ["Nunito", "Varela Round", "Comfortaa", "Fredoka", "M PLUS Rounded 1c", "Baloo 2"];
+const FONTS = [["limn", Fa], ["Quicksand", refFont("Quicksand")], ...RND.map(n => [n, refFont(n)])];
+const MEAS = ".,:;…·!?¡¿'\"‘’“”‚„()[]{}|/\\-–—_+=×÷<>~^*@#$%&";
+const probe = document.createElementNS(NS, "svg");
+probe.setAttribute("style", "position:absolute;left:-9999px;top:0;width:10px;height:10px");
+document.body.append(probe);
+function measure(F, ch) {
+  const g = F.glyphs[ch]; if (!g) return null;
+  let y0 = Infinity, y1 = -Infinity;
+  if (g.d) {
+    const p = document.createElementNS(NS, "path"); p.setAttribute("d", g.d); probe.append(p);
+    const b = p.getBBox(); p.remove();
+    if (b.width > 0 || b.height > 0) { y0 = b.y; y1 = b.y + b.height; }
+  }
+  for (const [, py] of g.pins || []) { y0 = Math.min(y0, py - F.r); y1 = Math.max(y1, py + F.r); }
+  if (!isFinite(y0)) return null;
+  const top = -y0 / F.xh, bot = -y1 / F.xh;
+  return { top, bot, cy: (top + bot) / 2, h: top - bot };
+}
+const ms = {};
+for (const [n, F] of FONTS) { ms[n] = {}; for (const ch of MEAS) ms[n][ch] = measure(F, ch); }
+probe.remove();
+const num = v => typeof v === "number" && isFinite(v);
+const val = (n, ch, key) => ms[n][ch] ? ms[n][ch][key] : undefined;
+const KEYLAB = { top: "윗끝", bot: "아랫끝", cy: "중심", h: "높이" };
+function stat(ch, key) {
+  const vs = RND.map(n => val(n, ch, key)).filter(num).sort((a, b) => a - b);
+  if (!vs.length) return "";
+  const med = vs.length % 2 ? vs[(vs.length - 1) / 2] : (vs[vs.length / 2 - 1] + vs[vs.length / 2]) / 2;
+  const l = val("limn", ch, key), q = val("Quicksand", ch, key);
+  return `${ch} ${KEYLAB[key]}` + (num(l) ? ` — limn ${l.toFixed(2)}` : "") + ` · ${med.toFixed(2)} [${vs[0].toFixed(2)}–${vs[vs.length - 1].toFixed(2)}]` + (num(q) ? ` · 부모 ${q.toFixed(2)}` : "");
+}
+
+/* ---------------- header ---------------- */
+document.getElementById("hero").innerHTML = A.svg(A.typeset("“Pin it,” she said; @limn!"), { h: 64 });
+const facts = [
+  ["핀", `모든 점 = 반지름 ${M.PIN_R}(${(M.PIN_R / M.S).toFixed(3)} S). 쉼표 · 따옴표 · … · ÷ 의 점도 같은 핀`],
+  ["축", `AX ${M.AX} = 부모 하이픈 중심. - – — · + = < > × ÷ ~ 와 괄호 중심`],
+  ["굵기", `획 S ${M.S}, 막대 T ${M.T} = 부모 하이픈 두께. 끝은 전부 둥글게`],
+  ["따옴표선", `QB ${f(M.QB)} — 모든 따옴표의 아랫끝`],
+  ["괄호 띠", `${f(M.BB)} ~ ${f(M.BT)}: 괄호 · | / \\`],
+];
+document.getElementById("facts").innerHTML = facts.map(([b, s]) => `<li><b>${b}</b><span>${s}</span></li>`).join("");
+
+/* ---------------- 01 lines ---------------- */
+const LINES = [
+  [-FA.asc, "#b9b4aa", `ASC ${FA.asc} · QT`, "", -2], [-FA.cap, "#b9b4aa", `CAP ${FA.cap}`, "", 44], [-FA.xo, "#e6e2da"],
+  [-FA.xh, "#b9b4aa", `XH ${FA.xh} · XO ${FA.xo}`, "", 44], [-M.QB, "#6aa0e0", `QB ${f(M.QB)}`, "12 8"], [-M.AX, "rgba(232,69,44,.7)", `AX ${M.AX}`, "12 8"],
+  [0, "#8b877f", "0"], [-M.YB, "#6aa0e0", `YB ${f(M.YB)}`, "12 8", 44], [-M.BT, "#c9a24b", `괄호 ${f(M.BT)}`, "4 8", -30], [-M.BB, "#c9a24b", `괄호 ${f(M.BB)}`, "4 8", 44],
+];
+const LOPT = { lines: LINES, h: 170, top: -860, bot: 260, padL: 900, minw: 6400, lw: 2.5, fs: 64 };
+document.getElementById("lines").innerHTML =
+  line(Fa, "i ! ¡ . , : ; … ? ¿ · ÷", LOPT) + line(Fa, "’ ‘ “ ” ' \" ‚ „ @ # * ^", LOPT) +
+  line(Fa, "( [ { | / \\ } ] ) - – — + = × < > ~", LOPT);
+
+const SPEC = [
+  ["핀 하나", `r ${M.PIN_R}`, "PIN_R (부모의 점 × 1.246)", "마침표 · 콜론 · 쉼표 머리 · 따옴표 머리 · … · ÷ · ! ? ¡ ¿", stat(".", "h")],
+  ["기준선 핀", `중심 ${M.BASE_CY}`, "PIN_R − OSH (o처럼 −10 넘침)", ". , ; ! ? … ‚ „", stat(".", "bot")],
+  ["쉼표 꼬리 끝", `${f(M.YB)}`, "YB = −0.24 XH", ", ; ‚ „", stat(",", "bot")],
+  ["쉼표 높이", `${f(M.COMMA_H)}`, "2 PIN_R − OSH − YB", "", stat(",", "h")],
+  ["곡선 따옴표 핀", `중심 ${M.PIN_CY}`, "i 핀 = XH + GAP + PIN_R (윗끝 = ASC)", "’ ‘ “ ”", stat("’", "top")],
+  ["따옴표선 QB", `${f(M.QB)}`, "PIN_CY + PIN_R − 쉼표 높이", "모든 따옴표의 아랫끝", stat("’", "bot")],
+  ["곧은 따옴표", `${M.QT} ~ ${f(M.QB)}`, "윗끝 QT = i 핀 윗끝(곡선 따옴표와 같은 띠), 폭 S → 0.7 S", "' \"", stat("'", "top")],
+  ["\" 두 획 사이", `${f(0.5 * M.S)}`, "0.5 S", "\"", ""],
+  ["“ ” 핀 사이", `${f(0.45 * M.S)}`, "0.45 S (흰 폭)", "“ ” „", ""],
+  ["느낌표", OPT.excl === "cap" ? `윗끝 ${FA.cap}` : `윗끝 ${FA.asc}`, "i를 180°: S 한 굵기, 둥근 두 끝, 핀과 GAP", "! ¡", stat("!", "top")],
+  ["수학 축 AX", `${M.AX}`, "부모 하이픈 중심 (0.573 XH)", "- – — · + = < > × ÷ ~ · 괄호 중심", stat("+", "cy")],
+  ["막대 굵기 T", `${M.T}`, "부모 하이픈 두께 (≈ S)", "- – — + = × ÷", stat("-", "h")],
+  ["수학 크기", `${f(0.9 * FA.xh)}`, "0.9 XH 정사각", "+ = ÷ (× 는 0.92배)", stat("+", "h")],
+  ["= 사이", `${f(0.75 * M.S)}`, "0.75 S", "=", stat("=", "h")],
+  ["÷ 점", `막대와 ${M.GAP}`, "막대 위아래로 GAP, 핀", "÷", stat("÷", "h")],
+  ["괄호 띠", `${f(M.BB)} ~ ${f(M.BT)}`, "높이 = 부모 괄호, 중심 = AX", "( ) [ ] { } | / \\", stat("(", "cy")],
+  ["/ \\ 기울기", "20°", "세로에서 20°, 굵기 S", "/ \\", ""],
+  ["en 대시", "하이픈 × 1.6", "", "–", ""],
+  ["@", "고리 O 윗끝 ~ −0.25 XH", "a는 limn의 a, 고리는 모든 굵기에서 한 크기, 굵기 0.85 S, 둥근 이음", "@", stat("@", "h")],
+  ["*", "5 팔", "0.75 S, 높이 0.5 CAP, 윗끝 CAP", "*", stat("*", "cy")],
+  ["^", "꺾쇠", "S, 꼭지 CAP, 다리 0.6 XH, 폭 0.8 XH", "^", stat("^", "bot")],
+  ["…", `간격 ${f(3 * M.PIN_R)}`, "3 PIN_R", "…", ""],
+];
+document.getElementById("spec").innerHTML = SPEC.map(([a, b, c, d, e]) => `<tr><td>${a}</td><td>${b}</td><td>${c}${d ? `<br><span style="color:var(--muted)">${d}</span>` : ""}</td><td style="color:var(--muted);font:12px var(--mono)">${e}</td></tr>`).join("");
+
+/* ---------------- 02 shapes ---------------- */
+const G1 = (s, o = {}) => line(Fa, s, { lines: [...guides(FA), ...(o.lines || [])], h: o.h ?? 150, top: o.top ?? -800, bot: o.bot ?? 230, pad: 50, ...o });
+const TX = (s, o = {}) => line(Fa, s, { h: o.h ?? 46, top: -800, bot: 240, pad: 20, ...o });
+const stemX = FA.cap - (M.BASE_CY + M.PIN_R + M.GAP);
+const CARDS = [
+  ["쉼표 — 핀에서 가늘어지는 꼬리", G1(".,;’‘“”", { lines: [[-M.YB, "#cfe0f5"]] }) + TX("Well, pin it; “fix it,” then ‘ship’ it.") + TX("Well, pin it; “fix it,” then ‘ship’ it.", { h: 20 }),
+    "쉼표 머리는 마침표의 핀과 같은 자리 · 같은 크기이고, 꼬리의 오른쪽 가장자리가 핀의 오른쪽 호에서 그대로 이어져 내려오며 가늘어집니다(끝 지름 0.48 S, 둥글게). 핀이 가장 크고 꼬리는 그 그림자처럼 읽힙니다 — Nunito · Fredoka · Baloo와 같은 올챙이 모양. 쉼표 머리는 글자의 일부라 늘 먹색입니다."],
+  ["느낌표 — i를 180° 돌린 것", G1("i!?H!¡", { lines: [[-FA.asc, "#f3c9c0", "", "8 8"]] }) + TX("Hi! Wow!? ¡Hola! pin it!"),
+    `윗끝은 대문자 높이 ${FA.cap}. 세로획 ${f(stemX)} = i 세로획(${FA.xh})의 ${(stemX / FA.xh).toFixed(2)}배입니다. ?·대문자와 같은 높이에서 멈춰 “!?”가 한 높이로 섭니다. 참고 7종 모두 ! 윗끝 = CAP(1.00~1.03).`],
+  ["@ — 바로 선 고리", G1("@a@o", { lines: [AXL] }) + TX("hello@limn.app · @wonjun"),
+    "a는 limn의 a 그대로이고, 고리는 모든 굵기에서 한 크기입니다(윗끝 = O 윗끝, 밑끝 −0.25 XH). 고리는 가족의 펜(o의 대비)으로 굵기 0.85 S, 이음은 둥글게. 참고 서체들의 @와 같은 위상이라 바로 읽힙니다."],
+  ["곧은 따옴표 ' \" — 먹색 쐐기", G1("'\"’”", { lines: [[-M.QB, "#cfe0f5"]] }) + TX("it's \"pin\" 5'10\" ‘ok’"),
+    `곧은 따옴표는 인치 · 피트 · 코드에도 쓰이는 표시라 핀 없이 먹색 쐐기입니다(윗끝 QT ${M.QT}, 폭 S → 0.7 S). 곡선 따옴표(’ ”)만 쉼표를 들어 올린 핀 따옴표이고, 두 벌의 아랫끝은 같은 QB입니다.`],
+];
+document.getElementById("cards").innerHTML = CARDS.map(([t, art, p]) => `<div class="card"><h3>${t}</h3>${art}<p>${p}</p></div>`).join("");
+
+/* ---------------- 03 running text ---------------- */
+const RUN = [
+  "Well, pin it, fix it; then ship it — done.",
+  "“Pins,” she said, ‘are dots.’ It’s 12–18 o’clock…",
+  "Mail hello@limn.app or reply@limn.app!? Really?!",
+  "(a + b) × c = 42 · [x] {y} 3/4 < 5 > 2 ~ 7 ÷ 1",
+  "¡Hola! ¿Qué? 100% & #1 * $5 — a_b | c\\d 'x' \"y\" ^2",
+];
+document.getElementById("run").innerHTML = RUN.map(s =>
+  `<div class="row"><span>44 px</span><div>${A.svg(A.typeset(s, { pad: 30 }), { h: 44 })}</div></div><div class="row"><span>20 px</span><div>${A.svg(A.typeset(s, { pad: 30 }), { h: 20 })}</div></div>`
+).join('<div style="border-top:1px solid var(--line)"></div>');
+
+if (window.LIMN_PLAY && window.LIMN_playset) {
+  const WS = "“Pin it,” she said; ‘fix it’… hello@limn.app ¡Si! (a + b) × c ÷ 2 = 42 · 5'10\" — done!?";
+  document.getElementById("weights").innerHTML = Object.keys(LIMN_PLAY).map(w => {
+    const t = LIMN_playset(WS, { w: +w, pad: 30 });
+    return `<div class="row"><span>${w}</span><div>${A.svg(t, { h: 40 })}</div></div>`;
+  }).join("");
+}
+
+/* ---------------- 04 comparison grid ---------------- */
+const GROUPS = [
+  ["점 · 쉼표 · 느낌표", ".,:;…·!?¡¿"], ["따옴표", "'\"‘’“”‚„`"], ["괄호 · 막대", "()[]{}|/\\"],
+  ["대시 · 밑줄", "-–—_"], ["수학", "+=×÷<>~^"], ["기호", "@#$%&*"],
+];
+const ROWS = [["limn", Fa, 1], ...Object.keys(PD.refs).map(n => [PD.refs[n].credit, refFont(n), FA.xh / PD.refs[n].xh])];
+function cell(F, ch, k) {
+  const g = F.glyphs[ch]; if (!g) return `<td></td>`;
+  const w = Math.max(g.adv * k, 330);
+  const x0 = (w - g.adv * k) / 2;
+  const t = ts({ ...F, kern: {} }, ch, { k });
+  const gl = [[0, "#e2ded6"], [-FA.xh, "#eeeae3"], [-FA.cap, "#eeeae3"]].map(([y, c]) => `<line x1="0" x2="${f(w)}" y1="${y}" y2="${y}" stroke="${c}" stroke-width="5"/>`).join("") +
+    `<line x1="0" x2="${f(w)}" y1="${-M.AX}" y2="${-M.AX}" stroke="rgba(232,69,44,.45)" stroke-width="4" stroke-dasharray="14 12"/>`;
+  return `<td><svg viewBox="0 -880 ${f(w)} 1160" width="${f(w * 104 / 1160)}" height="104">${gl}<g transform="translate(${f(x0)} 0)">${t.body}</g></svg></td>`;
+}
+document.getElementById("cmp").innerHTML = GROUPS.map(([name, chars]) => `<div class="grp"><h3>${name}</h3><div style="overflow-x:auto"><table class="cmp">` +
+  ROWS.map(([lab, F, k], i) => `<tr class="${i === 0 ? "limn sep" : ""}"><th>${i === 0 ? `<b>${lab}</b>` : lab}</th>${[...chars].map(ch => cell(F, ch, k)).join("")}</tr>`).join("") +
+  `</table></div></div>`).join("");
+
+/* ---------------- 05 measurement table ---------------- */
+(() => {
+  const inr = (n, ch, key, v) => {
+    if (n !== "limn") return "";
+    const vs = RND.map(r => val(r, ch, key)).filter(num);
+    if (!vs.length) return "";
+    return v >= Math.min(...vs) - 0.005 && v <= Math.max(...vs) + 0.005 ? "inrange" : "outrange";
+  };
+  const td = (n, ch) => {
+    const m = ms[n][ch]; if (!m) return `<td>–</td>`;
+    return `<td><span class="${inr(n, ch, "top", m.top)}">${m.top.toFixed(2)}</span> / <span class="${inr(n, ch, "bot", m.bot)}">${m.bot.toFixed(2)}</span></td>`;
+  };
+  const cols = FONTS.map(([n]) => n);
+  document.getElementById("mt").innerHTML = `<thead><tr><th>글자</th>${cols.map(n => `<th>${n === "Quicksand" ? "부모" : n}</th>`).join("")}</tr></thead><tbody>` +
+    [...MEAS].map(ch => `<tr><td>${esc(ch)}</td>${cols.map(n => td(n, ch)).join("")}</tr>`).join("") + "</tbody>";
+})();
+
+/* ---------------- 06 kerning ---------------- */
+const PSET = new Set(".,:;!?'\"()[]{}-–—_/\\|@#$%&*+=<>^~`·…¡¿‘’“”‚„×÷");
+const kp = Object.keys(FA.kern).filter(k => [...k].some(c => PSET.has(c))).sort();
+document.getElementById("ksub").textContent = `구두점이 낀 커닝 ${kp.length}쌍(브랜드 그림). 쉼표 · 세미콜론은 마침표 · 콜론의 쌍을 그대로 물려받습니다 — 꼬리는 기준선 아래 왼쪽으로만 나가 윗부분 윤곽이 마침표와 같습니다. limn이 그린 구두점과 이웃 사이 흰 폭이 GAP(${M.GAP})보다 좁고 부모에서는 넓은 쌍은 그 차이만큼 벌립니다.`;
+document.getElementById("kl").innerHTML = kp.map(k => `<li><b>${esc(k)}</b> ${FA.kern[k]}</li>`).join("");
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>limn — 작은 아이콘: 픽셀 격자 · Development preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="limn-pages.css?v=20261021-release-docs">
+<script src="limn-font.js?v=20260929i1"></script>
+<script src="limn-brand.js?v=20260929i1"></script>
+<style>
+canvas.px{display:block;image-rendering:pixelated}
+.size{margin:0 0 44px}.size h3{font:600 17px var(--ui);margin:0 0 2px}
+.cap{font:11.5px var(--mono);color:var(--muted);margin:0 0 14px}
+.grounds{display:flex;flex-wrap:wrap;gap:0}
+.ground{padding:16px 22px 20px;color:var(--ink)}.ground.dk{color:#e9e6e0}
+.gl{font:500 11px var(--mono);opacity:.6;margin-bottom:10px}
+.rows{display:grid;grid-template-columns:44px repeat(2,auto);gap:10px 18px;align-items:start;justify-content:start}
+.rows .h{font:11px var(--mono);opacity:.6}.rows .lab{font-size:12px;padding-top:2px}
+.tabs{display:flex;gap:2px;padding:8px 8px 0;border-radius:10px 10px 0 0;max-width:900px}
+.tab{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:8px 8px 0 0;font-size:12.5px;min-width:200px}
+.tab .fav{width:16px;height:16px;flex:none}
+.chrome{margin:0 0 26px}.chrome .addr{max-width:900px;padding:9px 14px;font:12px var(--mono)}
+.chrome.lt .tabs{background:#dee1e6}.chrome.lt .tab{color:#45474a}.chrome.lt .tab.on{background:#fff;color:#1f1f1f}.chrome.lt .addr{background:#fff;color:#6b6b6b;border-bottom:1px solid #e4e0d8}
+.chrome.dk .tabs{background:#1f2023}.chrome.dk .tab{color:#b9bcc2}.chrome.dk .tab.on{background:#35363a;color:#f1f1f1}.chrome.dk .addr{background:#35363a;color:#9aa0a6}
+.mode{font:500 11px var(--mono);color:var(--muted);margin:22px 0 8px}
+.dock{border-radius:16px;height:112px;position:relative;overflow:hidden;background:linear-gradient(135deg,#f0d9c9,#d7d3e8 55%,#c4d8e7);margin:0 0 18px;max-width:900px}
+.dock.dk{background:linear-gradient(160deg,#1b2338,#2b2540 55%,#10151f)}
+.dock .lbl{position:absolute;left:18px;top:12px;font:600 12px var(--ui);color:rgba(0,0,0,.55)}.dock.dk .lbl{color:rgba(255,255,255,.6)}
+.dock>div{position:absolute;left:60px;bottom:14px;display:flex;gap:6px;align-items:flex-end;padding:5px 7px;border-radius:12px;background:rgba(255,255,255,.32);border:1px solid rgba(255,255,255,.5)}
+.dock.dk>div{background:rgba(40,44,60,.45);border-color:rgba(255,255,255,.14)}
+.slot{display:flex;flex-direction:column;align-items:center;gap:3px}.slot b{font:9px var(--mono);color:rgba(0,0,0,.6);height:10px}.dk .slot b{color:rgba(255,255,255,.7)}
+.ph{display:flex;align-items:center;justify-content:center}.ph i{display:block;width:80.5%;height:80.5%;border-radius:22.5%}
+.ramp{display:flex;gap:22px;align-items:flex-end;flex-wrap:wrap;margin:6px 0 4px}
+.ramp figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:5px}
+.ramp figcaption{font:10.5px var(--mono);color:var(--muted)}
+.rl{font:500 11px var(--mono);color:var(--muted);width:64px;align-self:center}
+.files{display:flex;flex-wrap:wrap;gap:16px 26px;align-items:flex-end}
+.files figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:4px}
+.files img{display:block;image-rendering:pixelated}
+.files figcaption{font:10.5px var(--mono);color:var(--muted)}
+.miss{font:12px var(--mono);color:var(--ver)}
+</style>
+</head>
+<body>
+<div class="bar"><nav><a href="index.html">홈</a><a href="bi.html">BI</a><a href="dock.html">앱 아이콘</a><b>작은 아이콘</b><a href="type.html">서체</a><a href="weights.html">굵기</a><a href="hangul.html">한글 실험</a><a href="punct.html">구두점</a><a href="symbols.html">특수문자</a><a href="accents.html">악센트</a><a href="spacing.html">자간</a><a href="proof.html">교정쇄</a><a href="compare.html">비교</a><a href="coverage.html">커버리지</a><a href="fonts.html">폰트 파일</a><a href="concept.html">의미</a></nav></div>
+<aside class="release-note" aria-label="Release and preview scope"><strong>개발·연구 미리보기</strong> · 이 화면의 엔진·한글·브랜드 실험은 배포본과 다릅니다.
+<a href="https://github.com/dartworklabs/limn-sans/releases/tag/v1.002">Limn Sans 1.002 받기</a>: 영어·기호 919자, 정적 9굵기(100–900). 한글·로고 글리프는 제외되며, 그리스어·확장 라틴은 언어 QA 대상이 아닙니다.</aside>
+<header>
+  <div><p class="kicker">앱 아이콘 · 16 · 20 · 24 · 32px</p><h1>작은 아이콘은 픽셀로 그린다</h1>
+  <p class="lede">1024 그림을 줄이면 16·20px에서 획의 옆선, 발, 핀이 모두 픽셀 사이에 걸려 번집니다. 그래서 이 네 크기는 그 크기의 픽셀 격자 위에 따로 그린 그림입니다. 곧은 모서리는 모두 픽셀 경계에 놓고, 흐림(안티에일리어싱)은 사각형 모서리, 24·32의 핀 테두리, 32의 둥근 획 머리처럼 손으로 정한 곳에만 둡니다. 그 밖의 크기는 1024 그림을 줄입니다.</p></div>
+  <ul class="facts">
+    <li><b>16px</b><span>몸 14 · 획 2 × 6 · 핀 2×2 · 틈 1</span></li>
+    <li><b>20px</b><span>몸 16 · 획 2 × 7 · 핀 2×2 · 틈 1</span></li>
+    <li><b>24px</b><span>몸 20 · 획 2 × 9 · 핀 ⌀3 · 틈 1</span></li>
+    <li><b>32px</b><span>몸 25 · 획 3 × 11, 둥근 머리 · 핀 ⌀4 · 틈 1</span></li>
+    <li><b>그 밖</b><span>1024 그림을 줄임 (40px 이하는 획 1.2s)</span></li>
+  </ul>
+</header>
+
+<section class="sec"><h2><span class="no">01</span>네 크기</h2>
+  <p class="sub">픽셀 그림을 Chromium이 그 크기로 래스터한 것을 그대로 보여 줍니다. 1×는 한 픽셀을 한 픽셀로(고해상도 화면에서는 한 픽셀을 2×2로 키워 표준 해상도 화면과 같은 크기로), 8×는 최근접 이웃으로 키운 것입니다.</p>
+  <div id="cmp"></div>
+</section>
+
+<section class="sec"><h2><span class="no">02</span>브라우저 탭</h2>
+  <p class="sub">탭 파비콘은 앱 아이콘과 다른 그림입니다. Chrome의 밝은 탭은 뼈종이와 색이 거의 같아(ΔE ≈ 8) 여백 있는 뼈종이 타일은 16px 탭에서 사라지고 2 × 9 px의 i만 남습니다. 그래서 파비콘은 정사각을 모서리까지 채운 먹 둥근 사각형(모서리 r 3.5, 32에서 7)에 미색 획과 주 핀을 둔 그림 하나로, 밝은 탭과 어두운 탭에 똑같이 씁니다(<code>LIMN.favicon</code>, <code>LIMN.FAVICON_PX</code>). i는 16 중 10(32 중 20) px이고, 획 기둥은 온전한 픽셀, 핀과 획 사이에는 먹만 있는 줄이 16에서 하나, 32에서 둘입니다. 이 페이지의 탭 파비콘도 이 그림입니다.</p>
+  <div id="favpx"></div>
+  <div id="tabs"></div>
+</section>
+
+<section class="sec"><h2><span class="no">03</span>Dock 크기</h2>
+  <p class="sub">Dock을 가장 작게 줄였을 때(32px)와 크기별 줄. 페이지가 쓰는 기본값 그대로의 <code>icon(px)</code>입니다 — 16 · 20 · 24 · 32는 그림자 없는 픽셀 그림, 그보다 큰 크기는 그림자가 있는 1024 그림입니다. 고해상도 화면에서 <code>icon(16)</code>은 32 그림을 씁니다(<code>px × devicePixelRatio</code>로 고름).</p>
+  <div id="dock"></div>
+</section>
+
+<section class="sec"><h2><span class="no">04</span>규칙과 파일</h2>
+  <table class="t">
+    <thead><tr><th>크기</th><th>몸 (Apple 격자)</th><th>획</th><th>획 ÷ 몸</th><th>핀</th><th>핀 ÷ 획</th><th>i 높이 ÷ 몸</th><th>놓임</th></tr></thead>
+    <tbody>
+      <tr><td>16</td><td>14 (12.9) · 모서리 r 3.5</td><td>2 × 6, 납작</td><td>0.14</td><td>2×2 꽉 참</td><td>1.0</td><td>9 / 14 = 0.64</td><td>가로 가운데, i는 0.5px 위</td></tr>
+      <tr><td>20</td><td>16 (16.1) · r 4</td><td>2 × 7, 납작</td><td>0.13</td><td>2×2 꽉 참</td><td>1.0</td><td>10 / 16 = 0.63</td><td>가로·세로 가운데</td></tr>
+      <tr><td>24</td><td>20 (19.3) · r 5</td><td>2 × 9, 납작</td><td>0.10</td><td>⌀3 원 (테두리 = 덮임 비율)</td><td>1.5</td><td>13 / 20 = 0.65</td><td>가로 가운데, i는 0.5px 위</td></tr>
+      <tr><td>32</td><td>25 (25.8) · r 6</td><td>3 × 11, 머리 [.5 1 .5]</td><td>0.12</td><td>⌀4 원</td><td>1.33</td><td>16 / 25 = 0.64</td><td>i는 몸의 가운데; 몸이 캔버스에서 0.5px 왼쪽 위</td></tr>
+      <tr><td>1024</td><td>824</td><td>76 × 340, 둥근 머리</td><td>0.092</td><td>⌀100</td><td>1.31</td><td>470 / 824 = 0.57</td><td>가운데</td></tr>
+    </tbody>
+  </table>
+  <ul class="rules" style="max-width:1000px;margin-top:26px">
+    <li><span><b>곧은 모서리는 픽셀 경계에.</b> 몸의 네 변, 획의 두 옆선과 발, 2×2 핀은 온전한 픽셀입니다. 흐림은 사각형 모서리(반지름 ≈ 몸 ÷ 4인 원이 덮는 비율, 0.12 아래는 0, 0.9 위는 1), 24·32 핀의 테두리, 32 획의 머리에만 있습니다.</span></li>
+    <li><span><b>획은 가운데.</b> 캔버스가 짝수라 획도 짝수(2)여야 가운데에 섭니다. 32는 획이 2면 1024 그림보다 가늘어지고(0.077) 4면 16보다 굵어져 3을 쓰고, 대신 몸을 25(홀수)로 해 획을 몸의 가운데에 둡니다. 비껴 나는 것은 보이지 않는 캔버스 여백(왼쪽·위 3, 오른쪽·아래 4)입니다.</span></li>
+    <li><span><b>핀과 획 사이는 바탕 한 줄.</b> 핀의 아랫줄과 획의 윗줄 사이에 바탕색 픽셀만 있는 줄이 하나 있습니다(<code>make icons</code>가 확인).</span></li>
+    <li><span><b>i는 조금 길고 조금 위.</b> 작은 크기에서 획이 1024 그림보다 굵어(획 ÷ 몸 0.10–0.14, 큰 그림 0.092) 그대로 줄이면 i가 뭉툭해집니다. 16·24·32는 획을 한 픽셀 길게 해(20은 반올림으로 이미 그 길이) i 높이 ÷ 몸이 네 크기 모두 0.63–0.65입니다. i와 몸의 높이 홀짝이 다르면 i를 0.5px 위에 둡니다.</span></li>
+    <li><span><b>16·20의 핀은 2×2.</b> 제 비율로 줄인 핀은 1.7–1.9px이라 2×2가 맞습니다. 테두리를 흐리게 하면 둥글고 크게 보이지만 1×에서 분홍 테가 번져 주홍이 흐려집니다.</span></li>
+    <li><span><b><code>shape-rendering="crispEdges"</code>는 픽셀 그림 전체에.</b> 픽셀 그림은 온전한 픽셀 사각형(불투명도만 다름)으로만 되어 있어 1:1에서는 안티에일리어싱과 결과가 같고, svg가 소수 픽셀 위치에 놓이면 모든 사각형이 같은 규칙으로 맞춰져 그림이 통째로 옮겨 갈 뿐 두 픽셀에 번지지 않습니다. 줄인 1024 그림에는 쓰지 않습니다(곡선이 계단이 됨).</span></li>
+    <li><span><b>그림자 없음.</b> 이 크기에서 1024 그림의 그림자는 0.2–0.4px이라 몸 아랫변을 흐리게만 합니다. 픽셀 그림은 <code>flat</code>과 상관없이 그림자가 없습니다.</span></li>
+  </ul>
+  <h3 style="margin:34px 0 8px">파일 (<code>make icons</code> → <code>site/icons/</code>)</h3>
+  <p class="sub" style="margin-bottom:14px">크기 16 · 20 · 32 · 40 · 64의 1×와 2×, 뼈종이와 먹. 16@2x는 32 그림, 20@2x 이상과 40 · 64는 1024 그림입니다. <code>favicon-16.png</code> · <code>favicon-32.png</code>는 브라우저 파비콘(먹), <code>favicon.ico</code>는 그 16과 32. <code>apple-touch-icon.png</code>는 뼈종이 180을 모서리까지 꽉 채운 네모(iOS가 모서리를 깎습니다). SVG는 벡터 아이콘(<code>limn-icon-&lt;바탕&gt;.svg</code>)과 Limn 앱이 인라인하는 그림 — 그 크기의 광학 보정을 한 아이콘 14 · 16, 높이 20의 워드마크 — 입니다. <code>SHA256SUMS</code>로 다른 곳의 사본을 이 빌드와 대조합니다. 빌드 산출물이라 저장소에 넣지 않습니다.</p>
+  <div id="files"></div>
+</section>
+<footer>그림은 모두 <code>limn-brand.js</code>의 <code>LIMN.icon()</code>(픽셀 그림은 <code>LIMN.ICON_PX</code>, <code>LIMN.iconPixels()</code>)에서 나옵니다.</footer>
+<script>
+const L = LIMN, $ = id => document.getElementById(id);
+const DPR = window.devicePixelRatio || 1;
+const SIZES = [16, 20, 24, 32];
+const pixel = (n, theme) => L.icon(n, { dpr: 1, theme });            // the drawing made for n device pixels
+const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html !== undefined) e.innerHTML = html; return e; };
+
+// Chromium rasterises the svg at n × n; views scale that canvas with nearest neighbour
+async function raster(svg, n) {
+  const img = new Image();
+  img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+  await img.decode();
+  const c = document.createElement("canvas"); c.width = c.height = n;
+  c.getContext("2d").drawImage(img, 0, 0, n, n);
+  return c;
+}
+function view(src, z) {
+  const n = src.width, c = document.createElement("canvas"); c.width = c.height = n;
+  c.getContext("2d").drawImage(src, 0, 0); c.className = "px"; c.style.width = c.style.height = `${n * z}px`;
+  return c;
+}
+
+async function cmp() {
+  const out = $("cmp");
+  for (const n of SIZES) {
+    const box = el("div", "size");
+    box.append(el("h3", "", `${n} px`), el("p", "cap", document.querySelector(`.facts li:nth-child(${SIZES.indexOf(n) + 1}) span`).textContent));
+    const gr = el("div", "grounds");
+    for (const [bg, name, dk] of [["#fbfaf7", "밝은 화면", false], ["#1d1d1f", "어두운 화면", true]]) {
+      const g = el("div", "ground" + (dk ? " dk" : "")); g.style.background = bg;
+      const t = el("div", "rows");
+      t.append(el("div", "h", ""), ...["1×", "8×"].map(h => el("div", "h", h)));
+      for (const [th, tn] of [["light", "뼈종이"], ["dark", "먹"]]) {
+        const a = await raster(pixel(n, th), n);
+        t.append(el("div", "lab", tn), view(a, 1), view(a, 8));
+      }
+      g.append(el("div", "gl", name), t); gr.append(g);
+    }
+    box.append(gr); out.append(box);
+  }
+}
+
+// the favicon drawings at 16 and 32 device pixels, 1× and 8×, on a light and a dark tab ground
+async function favpx() {
+  const out = $("favpx"), gr = el("div", "grounds");
+  for (const [bg, name, dk] of [["#ffffff", "밝은 탭", false], ["#35363a", "어두운 탭", true]]) {
+    const g = el("div", "ground" + (dk ? " dk" : "")); g.style.background = bg;
+    const t = el("div", "rows");
+    t.append(el("div", "h", ""), ...["1×", "8×"].map(h => el("div", "h", h)));
+    for (const n of [16, 32]) { const a = await raster(L.favicon(n, { dpr: 1 }), n); t.append(el("div", "lab", `${n}`), view(a, 1), view(a, 8)); }
+    g.append(el("div", "gl", name), t); gr.append(g);
+  }
+  out.append(gr);
+}
+
+// the favicon: canvas at 16 device pixels shown at 16 css px (as on a 1× screen), or the svg as this screen draws it
+async function fav(native) {
+  const svg = native ? L.favicon(16) : L.favicon(16, { dpr: 1 });
+  if (native) { const s = el("span", "fav", svg); s.firstChild.style.display = "block"; return s; }
+  const c = view(await raster(svg, 16), 1); c.classList.add("fav"); return c;
+}
+async function tabs() {
+  const out = $("tabs");
+  for (const native of [false, true]) {
+    out.append(el("div", "mode", native ? `이 화면 그대로 (devicePixelRatio ${DPR})` : "1× 화면 (16 픽셀 그대로)"));
+    for (const dk of [false, true]) {
+      const ch = el("div", "chrome " + (dk ? "dk" : "lt")), ts = el("div", "tabs");
+      const list = ["limn — Example", "limn — Demo"];
+      for (const [i, label] of list.entries()) {
+        const t = el("div", "tab" + (i === 0 ? " on" : "")); t.append(await fav(native), el("span", "", label)); ts.append(t);
+      }
+      ch.append(ts, el("div", "addr", "https://example.com/limn/demo")); out.append(ch);
+    }
+  }
+}
+
+const PH = ["#e8e8ea", "#3a7bd5", "#8e8e93", "#34c759", "#ff9f0a"];
+function ph(c, n) { const d = el("div", "ph"); d.style.width = d.style.height = `${n}px`; const i = el("i"); i.style.background = c; d.append(i); return d; }
+// Dock and size rows: icon() as pages use it (with its drop shadow; the pixel drawings have none)
+async function iconEl(th, n, native) {
+  const svg = L.icon(n, native ? { theme: th } : { dpr: 1, theme: th });
+  return native ? el("div", "", svg) : view(await raster(svg, n), 1);
+}
+async function dock() {
+  const out = $("dock"), n = 32;
+  for (const native of [false, true]) {
+    out.append(el("div", "mode", native ? `Dock 32 — 이 화면 그대로 (devicePixelRatio ${DPR})` : "Dock 32 — 1× 화면 (32 픽셀 그대로)"));
+    for (const dk of [false, true]) {
+      const th = dk ? "dark" : "light", d = el("div", "dock" + (dk ? " dk" : "")), row = el("div");
+      d.append(el("span", "lbl", dk ? "어두운 배경화면 · 먹 아이콘" : "밝은 배경화면 · 뼈종이 아이콘"));
+      const slot = (node, tag) => { const s = el("div", "slot"); s.append(node, el("b", "", tag)); return s; };
+      row.append(slot(ph(PH[0], n), ""), slot(ph(PH[1], n), ""), slot(await iconEl(th, n, native), "limn"), slot(ph(PH[3], n), ""), slot(ph(PH[4], n), ""));
+      d.append(row); out.append(d);
+    }
+  }
+  const sizes = [16, 20, 24, 32, 40, 48, 64, 128];
+  for (const native of [false, true]) {
+    out.append(el("div", "mode", native ? `크기별 — 이 화면 그대로 (devicePixelRatio ${DPR})` : "크기별 — 1× 화면"));
+    for (const [th, tn] of [["light", "뼈종이"], ["dark", "먹"]]) {
+      const r = el("div", "ramp"); r.append(el("span", "rl", tn));
+      for (const s of sizes) { const f = el("figure"); f.append(await iconEl(th, s, native), el("figcaption", "", s)); r.append(f); }
+      out.append(r);
+    }
+  }
+}
+
+function files() {
+  const out = $("files"), wrap = el("div", "files");
+  const names = [];
+  for (const th of ["light", "dark"]) for (const s of [16, 20, 32, 40, 64]) names.push([`limn-icon-${th}-${s}.png`, s], [`limn-icon-${th}-${s}@2x.png`, s * 2]);
+  names.push(["favicon-16.png", 16], ["favicon-32.png", 32], ["apple-touch-icon.png", 180]);
+  // the SVGs at the size they are made for (the wordmark is 20 px tall)
+  for (const th of ["light", "dark"]) names.push([`limn-icon-${th}.svg`, 64], [`limn-icon-${th}-14.svg`, 14], [`limn-icon-${th}-16.svg`, 16], [`limn-wordmark-${th}-20.svg`, 0, 20]);
+  let missing = 0;
+  for (const [f, n, h] of names) {
+    const fig = el("figure"), img = el("img"); if (n) img.width = img.height = n; else img.height = h; img.alt = f; img.src = `icons/${f}`;
+    if (f.startsWith("limn-wordmark-dark")) img.style.background = L.COLOR.ink;   // 미색 strokes, no ground of its own
+    img.onerror = () => { fig.remove(); if (!missing++) out.prepend(el("p", "miss", "site/icons/가 없습니다 — make icons")); };
+    fig.append(img, el("figcaption", "", f.replace("limn-icon-", ""))); wrap.append(fig);
+  }
+  for (const [f, cap] of [["favicon.ico", "파비콘 16 + 32"], ["SHA256SUMS", "sha256"]]) {
+    const fig = el("figure"); fig.append(el("div", "", `<a href="icons/${f}">${f}</a>`), el("figcaption", "", cap)); wrap.append(fig);
+  }
+  out.append(wrap);
+}
+
+// this tab's own favicon: the favicon drawings, 16 and 32
+async function tabIcon() {
+  for (const n of [16, 32]) {
+    const l = document.createElement("link"); l.rel = "icon"; l.sizes = `${n}x${n}`; l.type = "image/png";
+    l.href = (await raster(L.favicon(n, { dpr: 1 }), n)).toDataURL("image/png"); document.head.append(l);
+  }
+}
+
+(async () => {
+  await tabIcon(); await cmp(); await favpx(); await tabs(); await dock(); files();
+  window.LIMN_ICONS_READY = true;
+})();
+</script>
+</body>
+</html>

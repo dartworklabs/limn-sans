@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>limn — 악센트 글자 · Development preview</title>
+<link rel="stylesheet" href="limn-pages.css?v=20261021-release-docs">
+<script src="limn-font.js?v=20260927n1"></script>
+<script src="limn-font-play.js?v=20260927n1"></script>
+<script src="limn-brand.js?v=20260927n1"></script>
+<style>
+@font-face{font-family:"QS";src:url("refs/Quicksand.ttf") format("truetype");font-weight:300 700}
+@font-face{font-family:"NU";src:url("refs/Nunito.ttf") format("truetype");font-weight:200 1000}
+@font-face{font-family:"FR";src:url("refs/Fredoka.ttf") format("truetype");font-weight:300 700}
+.ctl{display:flex;flex-wrap:wrap;gap:18px 28px;align-items:center;margin:0 0 22px;font-size:13px}
+.ctl label{display:flex;gap:8px;align-items:center;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(236px,1fr));gap:8px}
+.card{background:#fff;border-radius:6px;padding:6px 8px 4px}
+.card .lab{display:flex;justify-content:space-between;font:500 11px var(--mono);color:var(--muted)}
+.card .lab b{color:var(--ink);font-size:13px}
+.card .row{display:flex;gap:2px;align-items:flex-end}
+.card svg{max-width:none}
+.guide{stroke:#e8452c;stroke-opacity:.18;stroke-width:3}
+.text{background:#fff;border-radius:8px;padding:16px 22px;display:flex;flex-direction:column;gap:6px;overflow:hidden}
+.text svg{max-width:none}
+.lang{font:500 11px var(--mono);color:var(--muted);margin:14px 0 4px}
+.cmp{background:#fff;border-radius:8px;padding:16px 22px;overflow:hidden}
+.cmp .r{display:grid;grid-template-columns:150px 1fr;align-items:center;border-top:1px solid var(--line);padding:6px 0}
+.cmp .r:first-child{border-top:0}
+.cmp .n{font:500 12px var(--mono);color:var(--muted)}
+.cmp .t{font-size:60px;line-height:1.35;white-space:nowrap}
+table.m{border-collapse:collapse;font-size:13px;margin:6px 0 20px}
+table.m td,table.m th{border-top:1px solid var(--line);padding:6px 14px 6px 0;text-align:left;vertical-align:top}
+table.m th{font-weight:600}
+table.m td.v{font-family:var(--mono);white-space:nowrap}
+.cov{font-size:22px;line-height:1.6;word-break:break-all;background:#fff;border-radius:8px;padding:12px 18px}
+.warn{color:#a32a14}
+</style>
+</head>
+<body>
+<div class="bar"><nav><a href="index.html">홈</a><a href="bi.html">BI</a><a href="dock.html">앱 아이콘</a><a href="icons.html">작은 아이콘</a><a href="type.html">서체</a><a href="weights.html">굵기</a><a href="hangul.html">한글 실험</a><a href="punct.html">구두점</a><a href="symbols.html">특수문자</a><b>악센트</b><a href="spacing.html">자간</a><a href="proof.html">교정쇄</a><a href="compare.html">비교</a><a href="coverage.html">커버리지</a><a href="fonts.html">폰트 파일</a><a href="concept.html">의미</a></nav></div>
+<aside class="release-note" aria-label="Release and preview scope"><strong>개발·연구 미리보기</strong> · 이 화면의 엔진·한글·브랜드 실험은 배포본과 다릅니다.
+<a href="https://github.com/dartworklabs/limn-sans/releases/tag/v1.002">Limn Sans 1.002 받기</a>: 영어·기호 919자, 정적 9굵기(100–900). 한글·로고 글리프는 제외되며, 그리스어·확장 라틴은 언어 QA 대상이 아닙니다.</aside>
+<header>
+  <div><p class="kicker">서체 · 악센트</p><h1>악센트 글자</h1>
+  <p class="lede">언어 QA 전인 개발 글자 표본입니다. 라틴-1 보충(À–ÿ), 라틴 확장-A 전부, 그리고 Google Fonts의 GF Latin Core 글자 전부입니다. 글자 몸은 limn의 기본 글자(어깨 없는 n, 부류 옆 여백, 대칭 v w x y z …)이고, 부호는 limn의 규칙으로 그립니다. 점 부호는 핀, 나머지는 둥근 끝의 단선입니다. 모든 치수는 빌드할 때 글자에서 읽으므로 굵기마다 따라갑니다(<code>tools/accents.py</code>).</p></div>
+  <ul class="facts" id="facts"></ul>
+</header>
+
+<section class="sec">
+  <h2><span class="no">01</span>부호 규칙</h2>
+  <p class="sub">700 기준 폰트 단위(UPM 1000)입니다. 획 부호의 뼈대 길이·각도는 Quicksand 700, Nunito 800, M PLUS Rounded 1c Bold, Fredoka 600의 중앙값으로 정했고, 부모처럼 모든 굵기에서 같습니다. 굵기마다 바뀌는 값은 아래 표에서 이 페이지가 데이터로 다시 읽습니다.</p>
+  <table class="m">
+    <tr><th>부호</th><th>규칙</th><th>근거</th></tr>
+    <tr><td>¨ ˙ (ä ë ï ö ü ÿ ė ż İ Ÿ …)</td><td>핀. 크기 하나(r 78.5). 두 핀 사이 흰 틈 = GAP 48(중심 간격 205)</td><td>Quicksand의 분음 점은 i 점과 같은 크기(r 61.5 vs 63), 같은 높이(아랫끝 600 = x높이 + 65). 두 점 중심 간격 199</td></tr>
+    <tr><td>소문자 부호의 높이</td><td>모든 부호가 i 핀의 아랫선(x높이 + GAP = 583)에 섬. 점 부호는 i 핀 그 자리(DOTSPEC "i", 윗끝 = 어센더 740)</td><td>참고 서체의 부호 아랫끝: x높이 + 34(Quicksand) · 44(Nunito) · 70(M PLUS) — 중앙값 ≈ GAP</td></tr>
+    <tr><td>대문자·어센더(ĺ ĥ)</td><td>대문자 높이 + 0.75 GAP(36)에 서고, 눕힌 꼴: 양음 50° → 37°, 곡절 37° → 30°, 단음 깊이 84 → 66, 물결 높이 81 → 64. 대문자 핀은 DOTSPEC "mid", 중심 = 700 + 36 + 78.5</td><td>Quicksand .case 양음 52.5° → 35.8°, Nunito 58.8° → 50.7°</td></tr>
+    <tr><td>획 굵기</td><td>부모 매크론(U+0304)의 두께 = 89(0.74s). 100에서 21(1.17s), 900에서 130(0.65s)</td><td>부호는 줄기보다 가벼움: Quicksand 0.74s, M PLUS 0.69s, Nunito ≈ 0.7s</td></tr>
+    <tr><td>´ `</td><td>길이 140, 50°(대문자 37°). 아래 끝이 글자의 시각 중심 위에 섬(` 은 거울)</td><td>뼈대 길이 131 · 157 · 145, 각도 52.5 · 58.8 · 38.8. 부호 중심은 글자 중심보다 오른쪽 +57 · +76 · +18</td></tr>
+    <tr><td>ˆ ˇ</td><td>두 팔 138, 37°(대문자 30°), 둥근 이음</td><td>바깥 폭 268 · 309 · 379, 높이 147 · 236 · 173</td></tr>
+    <tr><td>˘</td><td>반타원 폭 250, 깊이 84(대문자 66)</td><td>327 × 148 · 340 × 205 · 395 × 173</td></tr>
+    <tr><td>¯ ˜</td><td>¯ 길이 255(대문자 265), ˜ 한 주기 308 × 81(대문자 64). 둘 다 핀 중심선(661.5)에 가운데</td><td>매크론 중심 645 · 653 · 668, 물결 중심 670 · 663 · 665</td></tr>
+    <tr><td>˝</td><td>양음 두 개, 길이 110, 50°(대문자 40°), 아래 끝 간격 180</td><td>간격 183 · 161 · 207</td></tr>
+    <tr><td>˚</td><td>고리로 남김: 부모 고리(U+030A)의 바깥·안 반지름을 재서 참 원으로. 부호선에 섬(Å도 꼭짓점과 떨어짐)</td><td>Quicksand는 Å의 고리를 꼭짓점에 붙이고, Nunito·Fredoka는 띄움</td></tr>
+    <tr><td>¸ ˛</td><td>¸ 글자 바닥 안에서 내려와 오른쪽으로 도는 갈고리(−153까지). ˛ 글자 바닥 오른쪽 끝에서 왼쪽으로 휘어 오른쪽으로 끝나는 갈고리(−160까지)</td><td>Quicksand ¸ −151, Nunito ˛ −197</td></tr>
+    <tr><td>쉼표 아래(ș ț ķ ļ ņ ŗ Ģ …), ģ</td><td>limn의 쉼표 그대로(머리는 먹색). 머리 윗끝이 기준선 아래 GAP. ģ는 limn의 ‘를 부호선에</td><td>Quicksand도 쉼표를 그대로 씀(U+0327 라트비아 글자 포함)</td></tr>
+    <tr><td>ď ľ ť Ľ</td><td>limn의 ’를 따옴표 높이 그대로, 줄기와 흰 틈 GAP. ť는 가로획 위로 올림</td><td>Quicksand의 대체 반점(uni030C.alt)도 쉼표 모양</td></tr>
+    <tr><td>i j</td><td>점 없는 줄기 + 부호(부호가 핀을 대신함). ï는 두 핀. į는 핀 + 오고넥</td><td>분음 부호는 뜻을 가름(naïf ≠ naif)</td></tr>
+    <tr><td>가로 위치</td><td>부호 아래 x높이의 윗 1/4에 있는 잉크의 가운데 = 시각 중심(i j l h는 줄기, n은 아치, A는 꼭짓점). a g는 속공간(볼)의 가운데. 아래 부호는 아래 1/5의 가운데</td><td></td></tr>
+    <tr><td>간격</td><td>기본 글자의 폭 그대로. é는 e의 커닝 짝을 물려받음(ď ľ ť의 오른쪽은 ’, ĳ는 i|j, œ는 o|e). 그 뒤 부호가 이웃 윤곽에 핀은 65, 획은 1.25 GAP(60)보다 가까우면 모자란 만큼 벌림</td><td>build_font의 핀 커닝과 같은 방식(실제 윤곽 거리)</td></tr>
+  </table>
+  <table class="m" id="live"></table>
+</section>
+
+<section class="sec">
+  <h2><span class="no">02</span>악센트 글자 전부 — 100 · 700 · 900</h2>
+  <p class="sub">옅은 주홍 선은 기준선·x높이·대문자 높이·어센더입니다. 핀은 기본이 먹색이고, 아래 스위치로 앱의 주홍 핀을 켜면 어느 점이 핀인지 보입니다.</p>
+  <div class="ctl"><label><input id="app" type="checkbox"> 주홍 핀(limn 앱)</label><label><input id="guides" type="checkbox" checked> 기준선</label></div>
+  <div id="grids"></div>
+</section>
+
+<section class="sec">
+  <h2><span class="no">03</span>문장 — 일곱 언어, 100 · 400 · 700 · 900</h2>
+  <p class="sub">짧은 문장을 직접 지었습니다. 커닝은 켜져 있고(기본 글자 짝 + 부호 여백), 없는 글자는 빈 상자로 보입니다.</p>
+  <p id="miss" class="warn"></p>
+  <div id="texts"></div>
+</section>
+
+<section class="sec">
+  <h2><span class="no">04</span>부모와 둥근 참고 서체</h2>
+  <p class="sub">같은 글줄을 limn 700(이 데이터로 조판), Quicksand 700, Nunito 800, Fredoka 600(각 서체 파일, 같은 em 60px)으로 씁니다.</p>
+  <div id="cmp"></div>
+</section>
+
+<section class="sec">
+  <h2><span class="no">05</span>짝 점검</h2>
+  <p class="sub">부호가 이웃 글자에 닿기 쉬운 짝입니다. 부호 여백 규칙이 벌린 만큼이 커닝에 들어 있습니다.</p>
+  <div id="pairs"></div>
+</section>
+
+<footer>조판은 <code>LIMN_playset</code>(서체 페이지 "직접 써보기"와 같은 엔진), 데이터는 <code>limn-font-play.js</code>(100~900)입니다. 참고 서체는 SIL OFL 파일을 이 페이지에서만 불러 씁니다.</footer>
+
+<script>
+const P = window.LIMN_PLAY;
+const LATIN1 = [...Array(0x100 - 0xC0).keys()].map(i => String.fromCharCode(0xC0 + i)).filter(c => c !== "×" && c !== "÷");
+const EXTA = [...Array(0x80).keys()].map(i => String.fromCharCode(0x100 + i));
+const EXTRA = [..."ȘșȚțȷẀẁẂẃẄẅẞỲỳ"];
+const SPACING = [..."¨´¯¸ˆˇ˘˙˚˛˜˝"];
+const W7 = P[700];
+const has = c => !!W7.glyphs[c];
+let APP = false, GUIDES = true;
+
+function glyphSvg(ch, w, h) {
+  const W = P[w], r = LIMN_playset(ch, { w, app: APP, pad: 0 });
+  const x0 = Math.min(0, r.vb[0]) - 30, x1 = Math.max(r.vb[0] + r.vb[2], W.glyphs[ch] ? W.glyphs[ch].adv : 0) + 30;
+  const top = -1080, bot = 330, k = h / (bot - top);
+  const g = GUIDES ? [0, -W.xh, -W.cap, -W.asc].map(y => `<line class="guide" x1="${x0}" x2="${x1}" y1="${y}" y2="${y}"/>`).join("") : "";
+  return `<svg viewBox="${x0} ${top} ${x1 - x0} ${bot - top}" width="${((x1 - x0) * k).toFixed(1)}" height="${h}">${g}${r.body}</svg>`;
+}
+function lineSvg(str, c, em) {
+  const r = LIMN_playset(str, { pad: 20, ...c }), k = em / 1000;
+  return `<svg viewBox="${r.vb.join(" ")}" width="${(r.vb[2] * k).toFixed(1)}" height="${(r.vb[3] * k).toFixed(1)}">${r.body}</svg>`;
+}
+function grids() {
+  const groups = [["라틴-1 보충", LATIN1], ["라틴 확장-A", EXTA], ["GF Latin Core 나머지", EXTRA], ["띄어 쓰는 부호", SPACING]];
+  let html = "";
+  for (const [name, list] of groups) {
+    const got = list.filter(has), miss = list.filter(c => !has(c));
+    html += `<h3 style="margin:26px 0 10px">${name} — ${got.length}자${miss.length ? ` <span class="warn">(없음: ${miss.join(" ")})</span>` : ""}</h3><div class="grid">`;
+    for (const c of got) {
+      html += `<div class="card"><div class="lab"><b>${c}</b><span>U+${c.codePointAt(0).toString(16).toUpperCase().padStart(4, "0")}</span></div><div class="row">${[100, 700, 900].map(w => glyphSvg(c, w, 96)).join("")}</div></div>`;
+    }
+    html += "</div>";
+  }
+  document.getElementById("grids").innerHTML = html;
+}
+const TEXTS = [
+  ["프랑스어", "Où est la fenêtre ? Noël à l’île, ça coûte cher, naïf garçon."],
+  ["독일어", "Die schöne Größe der Straße überrascht Jürgen. Äpfel für Özlem."],
+  ["스페인어", "¿Qué pasó? ¡El niño comió piña en España, señor Muñoz!"],
+  ["포르투갈어", "A avó põe pães à mesa; não há coração sem ação."],
+  ["폴란드어", "Łódź płynie, a żółw śpi pod gęstą jabłonią. Źle? Świetnie!"],
+  ["체코어", "Kůň běží přes řeku, ďábel čte ódy a ťuká na dvůr."],
+  ["터키어", "İstanbul’da güneş doğuyor; ağaçlar ışık içinde, çocuklar şarkı söylüyor."],
+];
+function texts() {
+  let html = "", missing = new Set();
+  for (const [lang, s] of TEXTS) {
+    for (const c of s) if (c !== " " && !has(c)) missing.add(c);
+    html += `<p class="lang">${lang}</p><div class="text">${[100, 400, 700, 900].map(w => lineSvg(s, { w, app: APP }, 34)).join("")}</div>`;
+  }
+  document.getElementById("texts").innerHTML = html;
+  document.getElementById("miss").textContent = missing.size ? "없는 글자: " + [...missing].join(" ") : "";
+}
+const CMP = "Àé ïõ Çß Ñø Łż Ğşİ Ťď Ůő Åå Ææ Œœ";
+function cmp() {
+  const rows = [["limn 700", lineSvg(CMP, { w: 700, app: APP, pad: 0 }, 60)],
+    ["Quicksand 700", `<div class="t" style="font-family:QS;font-weight:700">${CMP}</div>`],
+    ["Nunito 800", `<div class="t" style="font-family:NU;font-weight:800">${CMP}</div>`],
+    ["Fredoka 600", `<div class="t" style="font-family:FR;font-weight:600">${CMP}</div>`]];
+  document.getElementById("cmp").innerHTML = `<div class="cmp">${rows.map(([n, t]) => `<div class="r"><span class="n">${n}</span><div>${t}</div></div>`).join("")}</div>`;
+}
+const PAIRS = ["Té Tá Vá Wé Yó fé fï lï ìl îl Ło łó łv Ąj ąj ęg", "ďa ľa ťa Ľa ŀl ĳs ĲM ŉ Æsop Œuvre ßen Þór", "naïve Noël Zoë Citroën maïs égoïste", "ÉTÉ ÀÎÔ ÜBER ŽŠČ ÅNGSTRÖM İĞŞ"];
+function pairs() {
+  document.getElementById("pairs").innerHTML = `<div class="text">${PAIRS.map(s => [400, 700, 900].map(w => lineSvg(s, { w, app: APP }, 44)).join("")).join("")}</div>`;
+}
+function facts() {
+  const all = [...LATIN1, ...EXTA, ...EXTRA], sp = SPACING.filter(has);
+  const got = all.filter(has);
+  document.getElementById("facts").innerHTML = [
+    ["글자", `${got.length} / ${all.length} (라틴-1 ${LATIN1.filter(has).length}, 확장-A ${EXTA.filter(has).length}, 그 밖 ${EXTRA.filter(has).length})`],
+    ["부호", `${sp.length} (띄어 쓰는 부호)`],
+    ["기준", "GF Latin Core의 글자 전부 + 확장-A 전부"],
+    ["핀", "¨ ˙ ŀ Ŀ İ — i 핀과 같은 크기·높이"],
+  ].map(([a, b]) => `<li><b>${a}</b><span>${b}</span></li>`).join("");
+  let t = "<tr><th>굵기</th><th>s</th><th>획 부호 굵기</th><th>핀 r</th><th>GAP</th><th>소문자 부호선</th><th>대문자 부호선</th></tr>";
+  for (const w of [100, 400, 700, 900]) {
+    const W = P[w], mb = W.glyphs["¯"] ? W.glyphs["¯"].box : null, mw = mb ? mb[3] - mb[1] : NaN;
+    t += `<tr><td class="v">${w}</td><td class="v">${W.s.toFixed(0)}</td><td class="v">${mw.toFixed(0)} (${(mw / W.s).toFixed(2)}s)</td><td class="v">${W.pin.r.toFixed(1)}</td><td class="v">${W.pin.gap.toFixed(1)}</td><td class="v">${(W.xh + W.pin.gap).toFixed(0)}</td><td class="v">${(W.cap + 0.75 * W.pin.gap).toFixed(0)}</td></tr>`;
+  }
+  document.getElementById("live").innerHTML = t;
+}
+function all() { grids(); texts(); cmp(); pairs(); }
+document.getElementById("app").onchange = e => { APP = e.target.checked; all(); };
+document.getElementById("guides").onchange = e => { GUIDES = e.target.checked; grids(); };
+facts(); all();
+</script>
+</body>
+</html>
