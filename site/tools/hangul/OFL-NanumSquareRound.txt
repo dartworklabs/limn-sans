@@ -1,7 +1,7 @@
 NanumSquareRound (나눔스퀘어라운드) — source of Limn Sans' supplemental symbols and the U+3000 advance
 ==============================================================================================
 
-Use       The Limn Sans 1.001 release contains no Hangul. Its 54 supplemental symbol characters and the
+Use       Limn Sans' public releases contain no Hangul. Their 54 supplemental symbol characters and the
           advance width of U+3000 (819 font units) come from NanumSquareRound. The unreleased development
           profile also derives its experimental Hangul from this font.
 Files     NanumSquareRoundL.ttf, NanumSquareRoundR.ttf, NanumSquareRoundB.ttf, NanumSquareRoundEB.ttf

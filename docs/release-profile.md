@@ -5,9 +5,10 @@ excluding Hangul. The original `latin-symbols` release is version 1.000; version
 1.001 was the stable combining-attachment correction described
 [here](combining-attachment.md), and version 1.002 is the current stable release.
 The default `full` bilingual developer profile remains 0.100 and is
-unsupported for public release. [Version 1.000 is published](https://github.com/dartworklabs/limn-sans/releases/tag/v1.000)
-from commit `24fbc8e85c28907aec709db707db44f9126f467a`.
-Its final manifest records 918 Unicode codepoints and 932 glyphs per face, with
+unsupported for public release. Versions 1.000 and 1.001 were built before this
+repository was published and are not distributed here;
+[v1.002 is the only published release](https://github.com/dartworklabs/limn-sans/releases/tag/v1.002).
+The 1.000 manifest recorded 918 Unicode codepoints and 932 glyphs per face, with
 nine static weights, nine hinted TTFs and nine whole WOFF2s; 1.001 holds those
 counts and 1.002 adds U+25CC DOTTED CIRCLE, so the current package is 919 and 933.
 English and supported
@@ -121,15 +122,35 @@ outlines, spaces and advances are checked in final font readback; the Latin audi
 does not claim the supplemental symbols passed its Latin-specific geometry rules.
 The unchanged ₑ 800→900 area decrease (~1.06%) remains informational.
 
-fontbakery 1.1.0 is not a gate in this repository, but 1.002 is clean under it:
-`check-universal` and `check-googlefonts` both exit 0 with no ERROR, FATAL or FAIL.
-Two of the surviving warnings are expected and must not be "fixed":
-`googlefonts/license/OFL_body_text` wants only the first line of `OFL.txt` changed,
-while this font is a derivative of two OFL fonts and OFL 1.1 §1 requires carrying
-both upstream notices; `googlefonts/name/rfn` reports the upstream reserved names
-and says itself that they differ from the family name, "which is fine". The rest
-are Google Fonts packaging items (`lacks-meta-table`, `lacks-article`, an
-unregistered `achVendID`) that belong to an onboarding submission, not to the font.
+fontbakery 1.1.0 is not a gate in this repository. Run on the nine release TTFs
+with the three OFL notices beside them, 1.002 exits 0 under both `check-universal`
+and `check-googlefonts` with no ERROR, FATAL or FAIL. It does leave warnings:
+45 of them across five checks under `check-universal`, and 130 across fifteen
+under `check-googlefonts`. They fall into four groups, and the last group is not
+resolved.
+
+Expected, and not to be "fixed": `googlefonts/license/OFL_body_text` wants only
+the first line of `OFL.txt` changed, while this font is a derivative of two OFL
+fonts and OFL 1.1 §1 requires carrying both upstream notices; `googlefonts/name/rfn`
+reports the upstream reserved names and says itself that they differ from the
+family name, "which is fine".
+
+Google Fonts onboarding packaging rather than properties of the font:
+`googlefonts/article/images`, `googlefonts/meta/script_lang_tags`,
+`googlefonts/vendor_id`, `googlefonts/metadata/unreachable_subsetting` and
+`googlefonts/glyphsets/shape_languages`. They ask for an ARTICLE, a `meta` table,
+a registered vendor ID, `METADATA.pb` subset declarations and auxiliary
+orthography coverage — all parts of a submission this repository does not make.
+
+Consequences of the declared scope: `cjk_not_enough_glyphs` (five CJK
+compatibility glyphs and no Hangul, by design), `soft_hyphen`, `soft_dotted`,
+`alt_caron` (the caron glyphs are decomposed, so the check cannot inspect them),
+`math_signs_width` and `contour_count`.
+
+Open outline findings: `outline_semi_vertical` on all nine faces, for `a.ss01`
+and `uni1E9E`, and `outline_jaggy_segments` on four faces, for `one.pnum`. These
+are real and unfixed in 1.002. They are named here so the groups above are not
+read as "everything else passed".
 
 `make quality` and `make test` are CI gates (`.github/workflows/test.yml`).
 `make fonts-release` performs build and profile-aware readback locally; the glyph

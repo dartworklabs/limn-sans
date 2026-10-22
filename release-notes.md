@@ -51,6 +51,7 @@ The provenance binds the clean source commit, every input by SHA-256 and the
 export runtime. Ten of the eleven inputs are the ones 1.001 accepted; the Latin
 producer `limn-font-play.js` is rebuilt, because admitting a codepoint re-opens it.
 
-This repository is published as a single squashed commit. Revisions and issue
-numbers cited in its documents identify the private development history, not
-links a reader can follow; the provenance manifest is what a reader can check.
+This repository begins at a single squashed snapshot commit; anything after it is
+ordinary public history. Revisions and issue numbers cited in its documents
+identify the private development history, not links a reader can follow; the
+provenance manifest is what a reader can check.
