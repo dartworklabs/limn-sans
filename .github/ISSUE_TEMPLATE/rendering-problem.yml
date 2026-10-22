@@ -1,0 +1,76 @@
+name: Rendering or glyph problem
+description: A character draws wrong, spaces wrong, or does not appear at all.
+labels: ["rendering"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Most reports are about one character in one place, so the four answers below
+        are what settle them: **which character, which release, where you saw it, and
+        what you expected instead**.
+
+        Two things are known and do not need a report. Hangul is not in this family at
+        all; the release covers English and supported symbols, and Greek and extended
+        Latin ship without language QA. Deep or mixed combining-mark stacks can differ
+        between engines, and positioned accents can exceed the fixed 970/−330 line box
+        and clip in a tight container.
+  - type: input
+    id: characters
+    attributes:
+      label: Which characters
+      description: >
+        Paste the actual characters, and their codepoints if you have them. For a
+        spacing problem paste the whole sequence, not one character.
+      placeholder: "ẍ  (x U+0078 + U+0308), or “fi” in LimnSans-Black"
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version and file
+      description: >
+        From the release ZIP's name and the file you installed. `fonts.json` in the
+        package also records the version.
+      placeholder: "1.002, LimnSans-Regular.ttf"
+    validations:
+      required: true
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where you saw it
+      multiple: true
+      options:
+        - macOS, a desktop app
+        - macOS, a browser
+        - Windows, a desktop app
+        - Windows, a browser
+        - Linux
+        - iOS or Android
+        - Somewhere else
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Which OS version and which app or browser
+      placeholder: "macOS 15.2, Safari 18.2 — or Windows 11, Word 2024"
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you saw, and what you expected
+      description: >
+        A screenshot is worth more than a description here. If you can, show the same
+        text in another font so the difference is visible.
+    validations:
+      required: true
+  - type: textarea
+    id: features
+    attributes:
+      label: OpenType features in play
+      description: >
+        Only if relevant. The family carries `kern`, `ccmp`, `mark`, `mkmk`, and the
+        optional `ss01` (double-storey a/g), `zero` (dotted zero), `pnum` and `tnum`.
+        Figures are tabular by default.
+      placeholder: "font-feature-settings: \"ss01\" 1"
