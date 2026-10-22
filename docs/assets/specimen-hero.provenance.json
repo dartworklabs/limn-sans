@@ -1,17 +1,17 @@
 {
   "release": "https://github.com/dartworklabs/limn-sans/releases/tag/v1.002",
-  "releaseRev": "2dc8684",
-  "manifestSHA256": "ea2a6594a777ee34b63b6d4e30ee51fb50f764ef366fae62d729134694713c20",
+  "releaseRev": "7e3ce58",
+  "manifestSHA256": "1fe648c32764df2929fbeebc28b0f125f4c50ea3a5ddefd1a8bdbf7ad144debf",
   "ttfSHA256": {
-    "LimnSans-Thin.ttf": "a069a673d76f29b06dd6e5161cc4581e8b6d9039815b4f9e813bb8c05c103dbc",
-    "LimnSans-ExtraLight.ttf": "f1a86730b1a7e57cde00024a320c18e20fd156681623344e2af0f4d9bc8ba4ef",
-    "LimnSans-Light.ttf": "2155cbea888cdadf859771031a92435941bb384d2bc50ea570588b72e3203024",
-    "LimnSans-Regular.ttf": "36ff799a13df9afb2d99678a5939700d676f988a8a2a81f75897d2977540924c",
-    "LimnSans-Medium.ttf": "615675f2ed2c04a01380b951412a5c1e5ef1fd62afa2c24c76c5d78cc534eae3",
-    "LimnSans-SemiBold.ttf": "b82874947a0741517cff76fac1c2be18edbe26adf89fdaaf779b4964176ef322",
-    "LimnSans-Bold.ttf": "e90f9b922cbaf818f1678c25e68e4712cb201ccd0b2d86339d11c0751620edbf",
-    "LimnSans-ExtraBold.ttf": "6714eef4aaeea4e21192baab2dda2116b54ccf8de183993a4da538d574003721",
-    "LimnSans-Black.ttf": "d1a028f51d6a9e7043432c9164fb291bbf1e115c0595c859b2b2742201ddc11f"
+    "LimnSans-Thin.ttf": "0eecd389bd9e2a3aaac99604c6846c758079296f35ec5500e0902764848146ba",
+    "LimnSans-ExtraLight.ttf": "d226b8b61a9e9665a8af2d0081676fe58f4caa27b4e0586e7f1842a99a80959c",
+    "LimnSans-Light.ttf": "ed57e05d7c69b9f1a74238925a6d4fd8eedb6516fff7854a9bd78a448ff14537",
+    "LimnSans-Regular.ttf": "967ba45466a395ea6d427972d71ee70a8e7b2bd9fc3b3aed74682b4d67a7322e",
+    "LimnSans-Medium.ttf": "ddf9f557db388c1f4be8911a502c8be491972b4d0d93d08f330e9187dfb1855f",
+    "LimnSans-SemiBold.ttf": "39a376e912bf4bd7de2df06a1ebc18bab40cabed365d8b1273fb8406be3e039f",
+    "LimnSans-Bold.ttf": "27a457ada3ba4f57cf6132a932c23cf10173de1d8e81f0abfc176d3d124eb20a",
+    "LimnSans-ExtraBold.ttf": "38c2b3e8f85282c1c72ae04e7f13e969495f59a10f3069b481e93d232dbae680",
+    "LimnSans-Black.ttf": "e3beaaa85f0c2e27187831710e858282f863f880bd3e88a30358e920448d7aad"
   },
   "renderer": "HarfBuzz shaping + FontTools SVGPathPen; no installed fonts or fallback",
   "canvas": [
@@ -118,5 +118,5 @@
       "y": 621
     }
   ],
-  "svgSHA256": "8fe3aa5909f6229664aab7cf6de59e647385c45eea44d3ced79c1b4cc13c09a2"
+  "svgSHA256": "ac91314d4bf51a2e37a8aaea7e43708434d30c4ac4b80125691c9707fddfa3cb"
 }
