@@ -101,5 +101,8 @@ fit the box still holds; arbitrary positioned clusters cannot fit a finite box.
 Measure finite-probe bounds and actual multiline/PDF clipping and overlap. A
 demonstrated unacceptable representative case requires a separately justified
 minimum exception, not silent geometry, inventory or metric changes. Greek and
-extended Latin retain their existing language-QA limitation. Windows and physical
-mobile/iOS remain untested, and Windows testing is deferred.
+extended Latin retain their existing language-QA limitation. At the time of the
+1.001 correction, Windows and physical mobile/iOS were untested, with Windows
+testing deferred. The released 1.002 files later passed finite Windows WPF and Edge
+checks on 2026-11-04; see the [Windows validation report](windows-validation.md).
+Physical mobile/iOS remains untested.

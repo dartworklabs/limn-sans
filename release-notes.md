@@ -42,8 +42,14 @@ Known limits: synthetic deep or mixed attached/free stacks can differ between
 engines; positioned accents can exceed the fixed 970/−330 line box and clip in
 constrained containers. Combining lowercase drawings differ from flatter
 precomposed capitals. The unchanged ₑ 800→900 ink-area decrease (~1.06%) remains
-informational. Windows is explicitly deferred; physical mobile/iOS and persistent
-Font Book/Office installation are untested.
+informational. At release time, Windows testing was deferred; physical mobile/iOS
+and persistent Font Book/Office installation were untested.
+
+Post-release validation update, 2026-11-04: the released 1.002 files passed finite
+Windows WPF and Edge checks on SurfaceStudio. See the
+[Windows validation report](docs/windows-validation.md) for scope and limits.
+Physical mobile/iOS and persistent Font Book/Office installation remain untested.
+The published ZIP, its bundled documentation and its provenance are unchanged.
 
 Download `LimnSans-1.002.zip`. Verify it and `LimnSans-1.002-provenance.json`
 against the outer `SHA256SUMS`; the ZIP includes its own per-file `SHA256SUMS`.

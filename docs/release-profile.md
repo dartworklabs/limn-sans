@@ -33,7 +33,9 @@ changes no glyph geometry: it retains all accepted producer hashes and glyph dat
 while adding source-derived `mark`/`mkmk` attachment and contextual dot replacement.
 Existing 1.000 output and release assets are never overwritten. The correction was
 accepted after source, binary, consumer and same-scale rendered before/after review,
-and stable packaging reuses that accepted layout. Windows testing is explicitly deferred.
+and stable packaging reuses that accepted layout. Windows testing was deferred
+when 1.001 was accepted; the later [1.002 Windows validation](windows-validation.md)
+was completed on 2026-11-04.
 
 Version 1.002 is a licence-metadata correction on top of that accepted 1.001
 layout, plus one admitted codepoint. Outlines, metrics, kerning and hinting are
@@ -200,5 +202,6 @@ through exact layout-table identity rather than a new browser qualification.
 
 Synthetic deep/mixed attached/free stacks can retain engine-dependent placement.
 Positioned accents can exceed the unchanged 970/−330 metrics and clip in constrained
-containers. Windows is deferred; physical mobile/iOS and persistent Font Book/Office
-installation are untested.
+containers. The released 1.002 files passed finite Windows WPF and Edge checks
+on SurfaceStudio on 2026-11-04; see the [Windows validation report](windows-validation.md).
+Physical mobile/iOS and persistent Font Book/Office installation are untested.
