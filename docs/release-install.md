@@ -45,8 +45,13 @@ and avoid clipping containers when using combining sequences.
 Validation covers a finite corpus in Safari, Chrome and Firefox at desktop and
 mobile viewport sizes, native CoreText, process-scoped macOS font selection and
 PDF readback. This does not establish arbitrary multi-mark or language support.
-Windows testing is deferred. Physical mobile/iOS and persistent Font Book/Office
-installation have not been tested.
+On 2026-11-04, the released 1.002 files also passed finite checks on SurfaceStudio
+(Windows 11 Home 10.0.26300): per-user TTF installation and WPF family selection,
+and explicit WOFF2 loading in Windows Edge. See the
+[Windows validation report](windows-validation.md) for scope and limits. Physical
+mobile/iOS and persistent Font Book/Office installation have not been tested.
+This dated update applies to the live guide; the guide inside the released ZIP
+remains unchanged.
 
 The release excludes all Hangul syllables, jamo, extended/halfwidth jamo, Hangul
 marks and the pinned 림 trademark logo. English and the supported symbols are the

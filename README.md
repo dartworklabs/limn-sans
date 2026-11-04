@@ -79,8 +79,10 @@ below-accented i contexts. See the [attachment correction and validation](docs/c
 
 Synthetic deep or mixed attached/free mark stacks can differ between engines.
 Positioned accents can exceed the fixed 970/−330 line box and clip in constrained
-containers. Greek and extended Latin have no language QA; Windows is deferred,
-and physical mobile/iOS and persistent Font Book/Office installation are untested.
+containers. Greek and extended Latin have no language QA. On 2026-11-04, all nine
+released faces passed finite Windows WPF and Edge checks on SurfaceStudio; see the
+[Windows validation report](docs/windows-validation.md) for evidence and limits.
+Physical mobile/iOS and persistent Font Book/Office installation are untested.
 Versions 1.000 and 1.001 were built before this repository was published and are
 not distributed here; both are superseded by 1.002, and 1.000 additionally has the
 combining-sequence spacing defect. Their manifests remain immutable, and 1.002's
